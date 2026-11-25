@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สรุป พ.ร.บ.ตำรวจแห่งชาติ พ.ศ. 2565 — ชีทอ่านสอบ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#152238;
+  --navy-2:#1e3151;
+  --paper:#f6f3ec;
+  --paper-2:#eeeadf;
+  --ink:#20242b;
+  --ink-soft:#565b66;
+  --brass:#a67c2e;
+  --brass-light:#c99a44;
+  --rule:#dcd5c4;
+  --star:#a67c2e;
+  --tag-red:#8a3b34;
+  --card:#ffffff;
+  --shadow: 0 1px 2px rgba(21,34,56,.06);
+  --maxw: 700px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Sarabun',sans-serif;
+  font-weight:400;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Noto Serif Thai',serif;
+  color:var(--navy);
+  line-height:1.35;
+  font-weight:700;
+  letter-spacing:.1px;
+}
+::selection{ background:#e3d3a8; }
+
+/* ---------- layout shell ---------- */
+.shell{
+  display:grid;
+  grid-template-columns: 300px minmax(0,1fr);
+  min-height:100vh;
+}
+.sidebar{
+  background:var(--navy);
+  color:#dfe4ee;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  padding:28px 0 40px;
+  border-right:1px solid #0c1526;
+}
+.sidebar::-webkit-scrollbar{width:8px;}
+.sidebar::-webkit-scrollbar-thumb{background:#324566;border-radius:4px;}
+.brand{
+  padding:0 24px 20px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:18px;
+}
+.brand .badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(155deg,var(--brass-light),var(--brass));
+  color:var(--navy);font-family:'Noto Serif Thai',serif;font-weight:800;font-size:15px;
+  margin-bottom:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.brand h1{
+  font-size:17px;color:#fff;margin:0 0 4px;line-height:1.4;
+}
+.brand p{
+  margin:0;font-size:12.5px;color:#98a3ba;
+}
+.search-wrap{padding:0 24px 16px;}
+.search-wrap input{
+  width:100%;padding:9px 12px;border-radius:8px;border:1px solid #324566;
+  background:#0f1b30;color:#e8ecf3;font-family:'Sarabun',sans-serif;font-size:13.5px;
+  outline:none;
+}
+.search-wrap input::placeholder{color:#6c7893;}
+.search-wrap input:focus{border-color:var(--brass-light);}
+
+.nav-group{padding:0 12px;margin-bottom:6px;}
+.nav-group-title{
+  font-size:11px;letter-spacing:.03em;color:#7d89a3;
+  padding:14px 12px 6px;font-weight:600;
+}
+.nav-group ul{list-style:none;margin:0;padding:0;}
+.nav-group li a{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 12px;border-radius:7px;
+  color:#c3cbdc;text-decoration:none;font-size:13.5px;
+  transition:background .15s, color .15s;
+}
+.nav-group li a .n{
+  flex:0 0 auto;width:20px;height:20px;border-radius:5px;
+  background:#25324d;color:#9fadc6;font-size:11px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-group li a:hover{background:#22314f;color:#fff;}
+.nav-group li a.active{background:#2a3c5f;color:#fff;}
+.nav-group li a.active .n{background:var(--brass);color:var(--navy);}
+.nav-group li a.summary-link{font-style:normal;color:#e8d29a;}
+.nav-hidden{display:none !important;}
+
+/* ---------- main ---------- */
+main{
+  padding: 56px 40px 120px;
+  max-width: 980px;
+}
+.hero{
+  max-width:var(--maxw);
+  margin-bottom:52px;
+}
+.hero .kicker{
+  font-size:13px;color:var(--brass);font-weight:600;
+  margin-bottom:10px;
+}
+.hero h1{
+  font-size:34px;margin:0 0 16px;
+}
+.hero blockquote{
+  margin:0;padding:16px 20px;
+  background:var(--card);border-left:3px solid var(--brass);
+  border-radius:2px;
+  font-size:15px;color:var(--ink-soft);
+  box-shadow:var(--shadow);
+}
+.hero blockquote p{margin:0;}
+
+.sec{
+  max-width:var(--maxw);
+  padding-top:44px;
+  margin-top:0;
+  border-top:1px solid var(--rule);
+  scroll-margin-top:24px;
+}
+.sec:first-of-type{border-top:none;}
+.sec h2{
+  font-size:22px;
+  margin:0 0 18px;
+  display:flex;align-items:baseline;gap:10px;
+}
+.sec h3{
+  font-size:17px;color:var(--navy-2);
+  margin:26px 0 10px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--rule);
+}
+.sec p{margin:0 0 14px;color:var(--ink);}
+.sec ul, .sec ol{margin:0 0 16px;padding-left:22px;}
+.sec li{margin-bottom:6px;}
+.sec ol{color:var(--ink);}
+.sec strong{color:var(--navy);font-weight:700;}
+.sec blockquote{
+  margin:16px 0;padding:12px 16px;
+  background:#fbf8f1;border-left:3px solid var(--rule);
+  color:var(--ink-soft);font-size:14.5px;border-radius:2px;
+}
+.stars{
+  color:var(--star);letter-spacing:1px;font-size:10px;vertical-align:2px;
+}
+
+table{
+  width:100%;border-collapse:collapse;margin:8px 0 22px;
+  background:var(--card);box-shadow:var(--shadow);border-radius:8px;overflow:hidden;
+  font-size:14.5px;
+}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--rule);}
+th{
+  background:var(--navy);color:#fff;font-family:'Noto Serif Thai',serif;font-weight:600;
+  font-size:13.5px;
+}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:#faf8f2;}
+td strong{color:var(--tag-red);}
+
+.golden-table td:last-child, .golden-table th:last-child{
+  text-align:right;font-family:'Sarabun',sans-serif;
+}
+.golden-table td strong{color:var(--brass);font-weight:700;}
+
+/* fab quick nav */
+.fab{
+  position:fixed;right:26px;bottom:26px;
+  background:var(--navy);color:#fff;border:none;
+  padding:12px 18px;border-radius:30px;
+  font-family:'Sarabun',sans-serif;font-size:13.5px;font-weight:600;
+  box-shadow:0 6px 18px rgba(21,34,56,.35);cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+}
+.fab:hover{background:var(--navy-2);}
+
+.footer-note{
+  max-width:var(--maxw);margin-top:60px;padding-top:24px;
+  border-top:1px solid var(--rule);color:var(--ink-soft);font-size:13px;
+}
+
+@media (max-width: 880px){
+  .shell{grid-template-columns:1fr;}
+  .sidebar{
+    position:static;height:auto;max-height:70vh;
+  }
+  main{padding:32px 20px 100px;}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="badge">ตร.</div>
+      <h1>พ.ร.บ.ตำรวจแห่งชาติ<br>พ.ศ. 2565</h1>
+      <p>ชีทอ่านสอบ · มาตรา 1–181</p>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="navSearch" placeholder="ค้นหาหัวข้อ, มาตรา...">
+    </div>
+    <div id="navGroups">
+<div class="nav-group"><div class="nav-group-title">บทนำ &amp; โครงสร้างพื้นฐาน</div><ul>
+<li><a href="#1" data-target="1"><span class="n">1</span>เรื่องพื้นฐานที่ต้องจำก่อน</a></li>
+<li><a href="#2-3" data-target="2-3"><span class="n">2</span>มาตรา 3 — กฎหมายเดิมที่ถูกยกเลิก</a></li>
+<li><a href="#3-4" data-target="3-4"><span class="n">3</span>มาตรา 4 — คำนิยาม</a></li>
+<li><a href="#4-5" data-target="4-5"><span class="n">4</span>มาตรา 5 — ผู้รักษาการ</a></li>
+<li><a href="#5-69" data-target="5-69"><span class="n">5</span>มาตรา 6–9 — สำนักงานตำรวจแห่งชาติ</a></li>
+<li><a href="#6-1013" data-target="6-1013"><span class="n">6</span>การจัดโครงสร้าง สตช. มาตรา 10–13</a></li>
+<li><a href="#7-1421" data-target="7-1421"><span class="n">7</span>ก.ต.ช. มาตรา 14–21</a></li>
+<li><a href="#8-2232" data-target="8-2232"><span class="n">8</span>ก.ตร. มาตรา 22–32</a></li>
+<li><a href="#9-23" data-target="9-23"><span class="n">9</span>มาตรา 23 — อำนาจ ก.ตร.</a></li>
+<li><a href="#10-3342" data-target="10-3342"><span class="n">10</span>ก.พ.ค.ตร. มาตรา 33–42</a></li>
+<li><a href="#11-40" data-target="11-40"><span class="n">11</span>มาตรา 40 — อำนาจ ก.พ.ค.ตร.</a></li>
+<li><a href="#12-4353" data-target="12-4353"><span class="n">12</span>ก.ร.ตร. มาตรา 43–53</a></li>
+<li><a href="#13-5459" data-target="13-5459"><span class="n">13</span>ยศตำรวจ มาตรา 54–59</a></li>
+</ul></div>
+<div class="nav-group"><div class="nav-group-title">ก.ต.ช. — นโยบายตำรวจ</div><ul>
+<li><a href="#14-60" data-target="14-60"><span class="n">14</span>ระบบคุณธรรม มาตรา 60</a></li>
+<li><a href="#15-61" data-target="15-61"><span class="n">15</span>กลุ่มสายงาน มาตรา 61</a></li>
+<li><a href="#16-62" data-target="16-62"><span class="n">16</span>ตำแหน่งตำรวจที่มียศ มาตรา 62</a></li>
+<li><a href="#17-71" data-target="17-71"><span class="n">17</span>คุณสมบัติผู้เข้ารับราชการ มาตรา 71</a></li>
+<li><a href="#18-7276" data-target="18-7276"><span class="n">18</span>การบรรจุและทดลองงาน มาตรา 72–76</a></li>
+<li><a href="#19-77" data-target="19-77"><span class="n">19</span>มาตรา 77 — คุณสมบัติตามระดับตำแหน่ง</a></li>
+<li><a href="#20-7881" data-target="20-7881"><span class="n">20</span>มาตรา 78–81 — ใครมีอำนาจแต่งตั้ง</a></li>
+<li><a href="#21-82" data-target="21-82"><span class="n">21</span>มาตรา 82 — หลักอาวุโสกับความสามารถ</a></li>
+</ul></div>
+<div class="nav-group"><div class="nav-group-title">ก.ตร. — บริหารบุคคล</div><ul>
+<li><a href="#22-8385" data-target="22-8385"><span class="n">22</span>มาตรา 83–85</a></li>
+<li><a href="#23-87" data-target="23-87"><span class="n">23</span>มาตรา 87 — ร้องทุกข์เรื่องแต่งตั้ง</a></li>
+<li><a href="#24-88" data-target="24-88"><span class="n">24</span>มาตรา 88</a></li>
+<li><a href="#25-8997" data-target="25-8997"><span class="n">25</span>มาตรา 89–97 — เงินเดือน/การบริหาร</a></li>
+<li><a href="#26-9194" data-target="26-9194"><span class="n">26</span>มาตรา 91–94</a></li>
+<li><a href="#27-93" data-target="27-93"><span class="n">27</span>มาตรา 93 — การโอนตำรวจ</a></li>
+<li><a href="#28-95" data-target="28-95"><span class="n">28</span>มาตรา 95 — เลื่อนเงินเดือน</a></li>
+<li><a href="#29-9697" data-target="29-9697"><span class="n">29</span>มาตรา 96–97</a></li>
+<li><a href="#30-98104" data-target="30-98104"><span class="n">30</span>มาตรา 98–104 — เงินเดือน</a></li>
+<li><a href="#31-100" data-target="31-100"><span class="n">31</span>มาตรา 100</a></li>
+<li><a href="#32-105" data-target="32-105"><span class="n">32</span>มาตรา 105 — รักษาราชการแทน</a></li>
+</ul></div>
+<div class="nav-group"><div class="nav-group-title">ก.พ.ค.ตร. — พิทักษ์คุณธรรม</div><ul>
+<li><a href="#33-107" data-target="33-107"><span class="n">33</span>มาตรา 107 — การมอบอำนาจ</a></li>
+<li><a href="#34-110116" data-target="34-110116"><span class="n">34</span>วินัย มาตรา 110–116</a></li>
+<li><a href="#35-111-18" data-target="35-111-18"><span class="n">35</span>มาตรา 111 — ข้อปฏิบัติ/ข้อห้าม 18 ข้อ</a></li>
+<li><a href="#36-112" data-target="36-112"><span class="n">36</span>มาตรา 112 — วินัยอย่างร้ายแรง</a></li>
+<li><a href="#37-113114" data-target="37-113114"><span class="n">37</span>มาตรา 113–114</a></li>
+<li><a href="#38-115-7" data-target="38-115-7"><span class="n">38</span>มาตรา 115 — โทษทางวินัย 7 สถาน</a></li>
+<li><a href="#39-117125" data-target="39-117125"><span class="n">39</span>การดำเนินการทางวินัย มาตรา 117–125</a></li>
+<li><a href="#40-120" data-target="40-120"><span class="n">40</span>มาตรา 120 — ระยะเวลาสำคัญ</a></li>
+<li><a href="#41-121122" data-target="41-121122"><span class="n">41</span>มาตรา 121–122 — คดีอาญากับวินัย</a></li>
+<li><a href="#42-123" data-target="42-123"><span class="n">42</span>มาตรา 123 — กักตัวระหว่างสอบสวน</a></li>
+</ul></div>
+<div class="nav-group"><div class="nav-group-title">ก.ร.ตร. — ร้องเรียนตำรวจ</div><ul>
+<li><a href="#43-124" data-target="43-124"><span class="n">43</span>มาตรา 124 — วินัยไม่ร้ายแรง</a></li>
+<li><a href="#44-125" data-target="44-125"><span class="n">44</span>มาตรา 125 — วินัยร้ายแรง</a></li>
+<li><a href="#45-126130" data-target="45-126130"><span class="n">45</span>มาตรา 126–130</a></li>
+<li><a href="#46-131" data-target="46-131"><span class="n">46</span>มาตรา 131 — พักราชการ/ออกจากราชการไว้ก่อน</a></li>
+<li><a href="#47-133139" data-target="47-133139"><span class="n">47</span>มาตรา 133–139 — การออกจากราชการ</a></li>
+<li><a href="#48-135" data-target="48-135"><span class="n">48</span>มาตรา 135 — การลาออก</a></li>
+<li><a href="#49-136139" data-target="49-136139"><span class="n">49</span>มาตรา 136–139</a></li>
+<li><a href="#50-140" data-target="50-140"><span class="n">50</span>มาตรา 140 — ตำแหน่งระดับสูง</a></li>
+<li><a href="#51-141" data-target="51-141"><span class="n">51</span>มาตรา 141 — การอุทธรณ์</a></li>
+<li><a href="#52" data-target="52"><span class="n">52</span>ระยะเวลาการพิจารณาอุทธรณ์</a></li>
+<li><a href="#53-142146" data-target="53-142146"><span class="n">53</span>มาตรา 142–146</a></li>
+</ul></div>
+<div class="nav-group"><div class="nav-group-title">ยศ ชั้น และระบบคุณธรรม</div><ul>
+<li><a href="#54-147150" data-target="54-147150"><span class="n">54</span>การร้องทุกข์ มาตรา 147–150</a></li>
+<li><a href="#55-151155" data-target="55-151155"><span class="n">55</span>เครื่องแบบตำรวจ มาตรา 151–155</a></li>
+<li><a href="#56-156161" data-target="56-156161"><span class="n">56</span>กองทุน มาตรา 156–161</a></li>
+<li><a href="#57-159" data-target="57-159"><span class="n">57</span>มาตรา 159 — คณะกรรมการบริหารกองทุน</a></li>
+<li><a href="#58-160161" data-target="58-160161"><span class="n">58</span>มาตรา 160–161</a></li>
+<li><a href="#59-162181" data-target="59-162181"><span class="n">59</span>บทเฉพาะกาล มาตรา 162–181</a></li>
+<li><a href="#60-165" data-target="60-165"><span class="n">60</span>มาตรา 165 — โอนภารกิจทรัพยากรธรรมชาติ</a></li>
+<li><a href="#61-166" data-target="61-166"><span class="n">61</span>มาตรา 166 — ภารกิจอนุญาต/จดทะเบียน</a></li>
+</ul></div>
+<div class="nav-group"><div class="nav-group-title">บรรจุ แต่งตั้ง โยกย้าย</div><ul>
+<li><a href="#62-168" data-target="62-168"><span class="n">62</span>มาตรา 168 — กรอบกำลังพล</a></li>
+<li><a href="#63-169171" data-target="63-169171"><span class="n">63</span>มาตรา 169–171</a></li>
+<li><a href="#64-172" data-target="64-172"><span class="n">64</span>มาตรา 172 — ก.ต.ช. ช่วงเริ่มแรก</a></li>
+<li><a href="#65-173" data-target="65-173"><span class="n">65</span>มาตรา 173 — ก.ตร. ช่วงเริ่มแรก</a></li>
+<li><a href="#66-174" data-target="66-174"><span class="n">66</span>มาตรา 174 — จัดกลุ่มสายงาน</a></li>
+<li><a href="#67-175" data-target="67-175"><span class="n">67</span>มาตรา 175</a></li>
+<li><a href="#68-176" data-target="68-176"><span class="n">68</span>มาตรา 176</a></li>
+<li><a href="#69-177" data-target="69-177"><span class="n">69</span>มาตรา 177</a></li>
+<li><a href="#70-178" data-target="70-178"><span class="n">70</span>มาตรา 178</a></li>
+<li><a href="#71-179" data-target="71-179"><span class="n">71</span>มาตรา 179</a></li>
+<li><a href="#72-180" data-target="72-180"><span class="n">72</span>มาตรา 180 — วินัยค้างจากกฎหมายเดิม</a></li>
+<li><a href="#73-181" data-target="73-181"><span class="n">73</span>มาตรา 181 — อุทธรณ์/ร้องทุกข์ค้างเดิม</a></li>
+</ul></div>
+<div class="nav-group"><div class="nav-group-title">สรุปท้ายเล่ม</div><ul>
+<li><a href="#_1" data-target="_1" class="summary-link">🧠 ตาราง "ตัวเลขทองคำ" ที่ต้องจำก่อนเข้าห้องสอบ</a></li>
+<li><a href="#15_1" data-target="15_1" class="summary-link">🔥 15 เรื่องที่แนะนำให้ท่องก่อนสอบ</a></li>
+<li><a href="#_2" data-target="_2" class="summary-link">⚠️ จุดที่ต้องระวังมากในการทำข้อสอบ</a></li>
+</ul></div>    </div>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <h1 id="2565">📚 สรุป พ.ร.บ.ตำรวจแห่งชาติ พ.ศ. 2565 สำหรับอ่านสอบ</h1>
+<blockquote>
+<p><strong>ภาพรวม:</strong> พ.ร.บ. นี้มีสาระสำคัญเกี่ยวกับโครงสร้างสำนักงานตำรวจแห่งชาติ การบริหารงานบุคคล ระบบคุณธรรม การแต่งตั้งโยกย้าย การร้องเรียน/ร้องทุกข์ วินัย การออกจากราชการ เครื่องแบบ และกองทุน โดยมุ่งให้ตำรวจทำงานอย่างมีประสิทธิภาพ เป็นธรรม และเป็นอิสระตามวิชาชีพ</p>
+</blockquote>
+
+    </div>
+
+    <section class="sec" id="1"><h2 id="1">1. เรื่องพื้นฐานที่ต้องจำก่อน</h2>
+<h3 id="1_1">มาตรา 1 — ชื่อกฎหมาย</h3>
+<p>เรียกว่า <strong>"พระราชบัญญัติตำรวจแห่งชาติ พ.ศ. ๒๕๖๕"</strong></p>
+<h3 id="2">มาตรา 2 — วันใช้บังคับ <span class="stars" data-n="1">●</span></h3>
+<p>กฎหมายใช้บังคับ <strong>ตั้งแต่วันถัดจากวันประกาศในราชกิจจานุเบกษา</strong></p>
+<p>ประกาศในราชกิจจานุเบกษา <strong>16 ตุลาคม 2565</strong></p>
+<p>ดังนั้นใช้บังคับตั้งแต่ <strong>17 ตุลาคม 2565</strong></p>
+</section>
+<section class="sec" id="2-3"><h2 id="2-3">2. มาตรา 3 — กฎหมายเดิมที่ถูกยกเลิก <span class="stars" data-n="3">●●●</span></h2>
+<p>พ.ร.บ. 2565 ยกเลิกกฎหมาย/คำสั่งเดิม <strong>11 รายการ</strong></p>
+<ol>
+<li>พ.ร.บ.ตำรวจแห่งชาติ พ.ศ. 2547</li>
+<li>พ.ร.บ.ตำรวจแห่งชาติ (ฉบับที่ 2) พ.ศ. 2554</li>
+<li>พ.ร.บ.ตำรวจแห่งชาติ (ฉบับที่ 3) พ.ศ. 2558</li>
+<li>พ.ร.บ.ตำรวจแห่งชาติ (ฉบับที่ 4) พ.ศ. 2562</li>
+<li>ประกาศ คสช. ฉบับที่ 88/2557</li>
+<li>ประกาศ คสช. ฉบับที่ 111/2557</li>
+<li>ประกาศ คสช. ฉบับที่ 114/2557</li>
+<li>คำสั่งหัวหน้า คสช. ที่ 44/2558</li>
+<li>คำสั่งหัวหน้า คสช. ที่ 7/2559</li>
+<li>คำสั่งหัวหน้า คสช. ที่ 21/2559</li>
+<li>คำสั่งหัวหน้า คสช. ที่ 7/2560</li>
+</ol>
+<p><strong>จำง่าย:</strong> มาตรา 3 = "ยกเลิกกฎหมายตำรวจเดิมและคำสั่งที่เกี่ยวข้อง"</p>
+</section>
+<section class="sec" id="3-4"><h2 id="3-4">3. มาตรา 4 — คำนิยาม <span class="stars" data-n="3">●●●</span></h2>
+<p>คำสำคัญที่ต้องจำ</p>
+<p><strong>"ข้าราชการตำรวจ"</strong> — บุคคลที่ได้รับการบรรจุและแต่งตั้งตาม พ.ร.บ. นี้ และได้รับเงินเดือนจากงบประมาณหมวดเงินเดือนของสำนักงานตำรวจแห่งชาติ รวมถึงข้าราชการในสำนักงานตำรวจแห่งชาติที่ถูกแต่งตั้ง/สั่งให้ปฏิบัติหน้าที่ราชการตำรวจ แต่ได้รับเงินเดือนจากส่วนราชการ รัฐวิสาหกิจ หรือหน่วยงานรัฐอื่นด้วย</p>
+<p><strong>"ประธานกรรมการ"</strong> — หมายถึง ประธาน ก.ต.ช.</p>
+<p><strong>"กรรมการ"</strong> — หมายถึง กรรมการ ก.ต.ช.</p>
+<p><strong>"กองทุน"</strong> — หมายถึง กองทุนเพื่อการสืบสวน สอบสวน การป้องกันและปราบปรามการกระทำความผิดทางอาญา</p>
+<p><strong>"กองบัญชาการ"</strong> — รวมถึงส่วนราชการที่เรียกชื่ออย่างอื่นแต่มีฐานะเทียบเท่ากองบัญชาการ</p>
+<p><strong>"กองบังคับการ"</strong> — รวมถึงส่วนราชการที่เรียกชื่ออย่างอื่นแต่มีฐานะเทียบเท่ากองบังคับการ</p>
+</section>
+<section class="sec" id="4-5"><h2 id="4-5">4. มาตรา 5 — ผู้รักษาการ <span class="stars" data-n="1">●</span></h2>
+<p><strong>นายกรัฐมนตรี</strong> เป็นผู้รักษาการตาม พ.ร.บ. และมีอำนาจออก <strong>กฎกระทรวง</strong></p>
+<p>กฎกระทรวงมีผลใช้บังคับเมื่อประกาศในราชกิจจานุเบกษา</p>
+</section>
+<section class="sec" id="5-69"><h2 id="5-69">5. มาตรา 6–9 — สำนักงานตำรวจแห่งชาติ</h2>
+<h3 id="6">มาตรา 6 — สำนักงานตำรวจแห่งชาติ <span class="stars" data-n="3">●●●</span></h3>
+<p>สำนักงานตำรวจแห่งชาติ</p>
+<ul>
+<li>เป็น <strong>ส่วนราชการ</strong></li>
+<li>มีฐานะเป็น <strong>นิติบุคคล</strong></li>
+<li>อยู่ในบังคับบัญชาของ <strong>นายกรัฐมนตรี</strong></li>
+</ul>
+<p><strong>หน้าที่และอำนาจ 7 ข้อ</strong></p>
+<ol>
+<li>รักษาความปลอดภัยพระมหากษัตริย์ พระราชินี พระรัชทายาท ผู้สำเร็จราชการแทนพระองค์ พระบรมวงศานุวงศ์ ผู้แทนพระองค์ พระราชอาคันตุกะ</li>
+<li>ดูแล ควบคุม กำกับการปฏิบัติงานของตำรวจตามกฎหมาย</li>
+<li>ป้องกันและปราบปรามการกระทำความผิดทางอาญา</li>
+<li>รักษาความสงบเรียบร้อย ความปลอดภัยของประชาชน และความมั่นคงของราชอาณาจักร</li>
+<li>ปฏิบัติการอื่นตามที่กฎหมายกำหนด</li>
+<li>ช่วยเหลือการพัฒนาประเทศตามที่นายกรัฐมนตรีมอบหมาย</li>
+<li>ปฏิบัติการอื่นเพื่อส่งเสริมและสนับสนุนข้อ 1–5 ให้มีประสิทธิภาพ</li>
+</ol>
+<p><strong>ข้อสอบชอบถาม:</strong> สตช. อยู่ในบังคับบัญชาของใคร → <strong>นายกรัฐมนตรี</strong></p>
+<h3 id="7">มาตรา 7 — การมีส่วนร่วมของท้องถิ่น <span class="stars" data-n="2">●●</span></h3>
+<p>สตช. ต้องจัดระบบให้เหมาะกับแต่ละท้องถิ่นและชุมชน</p>
+<p>ต้องเปิดให้องค์กรปกครองส่วนท้องถิ่น ภาคเอกชน ชุมชน มีส่วนร่วมในนโยบาย งบประมาณ อาสาสมัคร การติดตามตรวจสอบการปฏิบัติงานตำรวจ ตามหลักเกณฑ์และวิธีการที่ <strong>ก.ต.ช.</strong> กำหนด</p>
+<p><strong>เงินอุดหนุนจากท้องถิ่น:</strong> ถ้าองค์กรปกครองส่วนท้องถิ่นจัดสรรเงินอุดหนุนให้สถานีตำรวจ → ใช้เพื่อประโยชน์ในการปฏิบัติหน้าที่และกิจการของสถานีตำรวจ → <strong>ไม่ต้องนำส่งคลังเป็นรายได้แผ่นดิน</strong></p>
+<h3 id="8-2">มาตรา 8 — ตำรวจมี 2 ประเภท <span class="stars" data-n="3">●●●</span></h3>
+<p><strong>1. ข้าราชการตำรวจที่มียศ</strong> — ผู้ดำรงตำแหน่งตามมาตรา 62</p>
+<p><strong>2. ข้าราชการตำรวจที่ไม่มียศ</strong> — ผู้ดำรงตำแหน่งในกลุ่มสายงานตามมาตรา 61 (2) และ (5) ตามที่ ก.ตร. กำหนด</p>
+<p>รายละเอียดเรื่องตำแหน่ง คุณสมบัติ การบรรจุ แต่งตั้ง วินัย เงินเดือน ฯลฯ ของตำรวจไม่มียศ ให้ตราเป็น <strong>พระราชกฤษฎีกา</strong></p>
+<p>งานพิสูจน์หลักฐานหรืองานลักษณะเดียวกัน ต้องกำหนดให้ผู้ปฏิบัติงาน <strong>มีอิสระในการปฏิบัติหน้าที่</strong></p>
+<h3 id="9">มาตรา 9 — วันเวลาทำงาน/วันลา</h3>
+<p>โดยหลักใช้หลักเกณฑ์เดียวกับข้าราชการพลเรือนที่ ครม. กำหนด แต่ถ้าจำเป็นเพื่อประโยชน์ในการปฏิบัติหน้าที่ <strong>ก.ต.ช. สามารถกำหนดวัน/เวลาแตกต่างได้</strong></p>
+</section>
+<section class="sec" id="6-1013"><h2 id="6-1013">6. การจัดโครงสร้าง สตช. มาตรา 10–13</h2>
+<h3 id="10">มาตรา 10 <span class="stars" data-n="1">●</span></h3>
+<p>การจัดระเบียบราชการต้องมุ่งผลสัมฤทธิ์ต่อภารกิจของรัฐ ประสิทธิภาพ ความคุ้มค่า ความสะดวกและความยุติธรรมต่อประชาชน</p>
+<p>ต้องส่งเสริมให้ตำรวจมี <strong>คุณภาพ + คุณธรรม + จริยธรรม + คุณภาพชีวิตที่ดี</strong></p>
+<h3 id="11">มาตรา 11 — โครงสร้างหลัก</h3>
+<p>สตช. แบ่งส่วนราชการเป็น</p>
+<ol>
+<li><strong>สำนักงานผู้บัญชาการตำรวจแห่งชาติ</strong></li>
+<li><strong>กองบัญชาการ</strong> หรือส่วนราชการที่เทียบเท่า</li>
+</ol>
+<p>การแบ่ง/จัดตั้งกองบัญชาการ → <strong>พระราชกฤษฎีกา</strong></p>
+<p>ส่วนระดับกองบังคับการหรือต่ำลง → <strong>กฎกระทรวง</strong></p>
+<h3 id="12">มาตรา 12 — อย่างน้อยต้องมี <span class="stars" data-n="3">●●●</span></h3>
+<ol>
+<li>กองบัญชาการตำรวจนครบาล และตำรวจภูธรภาค</li>
+<li>กองบังคับการตำรวจนครบาล และตำรวจภูธรจังหวัด</li>
+<li>สถานีตำรวจ</li>
+</ol>
+<p><strong>การสนธิกำลัง:</strong> กองบัญชาการ/ตำรวจภูธรภาคสามารถสั่งสนธิกำลังหรือสั่งตำรวจมาปฏิบัติหน้าที่เฉพาะกิจได้ แต่การมาปฏิบัติหน้าที่ชั่วคราว <strong>ไม่เกิน 6 เดือน</strong> เสร็จภารกิจแล้ว → กลับต้นสังกัด</p>
+<h3 id="13">มาตรา 13 — ระดับสถานีตำรวจ <span class="stars" data-n="3">●●●</span></h3>
+<p>มี 3 ระดับ</p>
+<table>
+<thead>
+<tr>
+<th>ระดับ</th>
+<th>หัวหน้าสถานี</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ใหญ่</td>
+<td>ผู้กำกับการ</td>
+</tr>
+<tr>
+<td>กลาง</td>
+<td>ผู้กำกับการ หรือสารวัตรใหญ่</td>
+</tr>
+<tr>
+<td>เล็ก</td>
+<td>สารวัตร</td>
+</tr>
+</tbody>
+</table>
+<p>การกำหนดระดับพิจารณาจากปริมาณงาน ความหนาแน่นประชาชน จำนวนกำลังพล สถานที่ตั้ง</p>
+<p><strong>จำ:</strong> ใหญ่ = ผกก. / กลาง = ผกก.หรือ สวญ. / เล็ก = สว.</p>
+</section>
+<section class="sec" id="7-1421"><h2 id="7-1421">7. ก.ต.ช. มาตรา 14–21 <span class="stars" data-n="5">●●●●●</span></h2>
+<h3 id="14">มาตรา 14 — องค์ประกอบ ก.ต.ช.</h3>
+<p><strong>ก.ต.ช. = คณะกรรมการนโยบายตำรวจแห่งชาติ</strong></p>
+<p>ประกอบด้วย</p>
+<ol>
+<li>นายกรัฐมนตรี → <strong>ประธาน</strong></li>
+<li>รองนายกรัฐมนตรีที่นายกรัฐมนตรีมอบหมาย → <strong>รองประธาน</strong></li>
+<li>กรรมการโดยตำแหน่ง: ปลัดกระทรวงกลาโหม ปลัดกระทรวงมหาดไทย ปลัดกระทรวงยุติธรรม อัยการสูงสุด เลขาธิการสำนักงานศาลยุติธรรม ผู้อำนวยการสำนักงบประมาณ</li>
+<li>กรรมการผู้ทรงคุณวุฒิ: ยุทธศาสตร์ 1, กฎหมาย 1, พัฒนาองค์กร 1, สื่อสารมวลชนหรือ ICT 1, ผู้แทนภาคประชาชน 1</li>
+<li>ผู้บัญชาการตำรวจแห่งชาติ → <strong>กรรมการและเลขานุการ</strong></li>
+</ol>
+<p>กรรมการตามข้อ 1, 2, 3, 5 ต้องประชุมด้วยตนเอง <strong>มอบหมายคนอื่นแทนไม่ได้</strong></p>
+<h3 id="15">มาตรา 15 — หน้าที่ ก.ต.ช. <span class="stars" data-n="3">●●●</span></h3>
+<p>หัวใจคือ <strong>ก.ต.ช. = กำหนด "นโยบายและยุทธศาสตร์" ของตำรวจ</strong></p>
+<p>หน้าที่สำคัญ: กำหนดนโยบาย, กำหนดยุทธศาสตร์, กำกับดูแล สตช., ออกระเบียบ/ข้อบังคับ/ข้อกำหนด/ประกาศ/มติ, กระจายอำนาจระหว่าง สตช. กับหน่วยงานต่าง ๆ, ตรวจสอบการปฏิบัติตามนโยบาย, แต่งตั้งคณะอนุกรรมการ, ปฏิบัติหน้าที่ตามที่ ครม. มอบหมาย/กฎหมายกำหนด</p>
+<h3 id="16">มาตรา 16 — คุณสมบัติกรรมการผู้ทรงคุณวุฒิ ก.ต.ช. <span class="stars" data-n="3">●●●</span></h3>
+<p>ต้อง</p>
+<ul>
+<li>สัญชาติไทยโดยการเกิด</li>
+<li>อายุ <strong>ไม่น้อยกว่า 40 ปี</strong></li>
+<li>ไม่ดำรงตำแหน่งทางการเมือง/พรรคการเมือง</li>
+<li>ไม่เป็นคนไร้ความสามารถ ฯลฯ</li>
+<li>ไม่เป็นบุคคลล้มละลาย</li>
+<li>ไม่เคยได้รับโทษจำคุกถึงที่สุด เว้นแต่ประมาท/ลหุโทษ</li>
+<li>ไม่เคยถูกไล่ออก ปลดออก หรือให้ออกจากราชการ</li>
+<li>ไม่เคยถูกให้ออกจากงานเพราะทุจริต</li>
+<li>ไม่เคยมีคำพิพากษาให้ทรัพย์สินตกเป็นของแผ่นดินจากร่ำรวยผิดปกติ</li>
+<li>ไม่เป็นกรรมการผู้จัดการ/ผู้จัดการ หรือเทียบเท่าในห้างหุ้นส่วน/บริษัท</li>
+</ul>
+<h3 id="17">มาตรา 17</h3>
+<p>กรรมการผู้ทรงคุณวุฒิ ก.ต.ช. <strong>วาระ 4 ปี</strong> เลือกใหม่ได้ แต่ <strong>ไม่เกิน 2 วาระติดต่อกัน</strong></p>
+<h3 id="18">มาตรา 18 — พ้นจากตำแหน่ง</h3>
+<p>เช่น ตาย, อายุครบ <strong>70 ปี</strong>, ลาออก, ขาดคุณสมบัติ, ก.ต.ช. มีมติไม่น้อยกว่า <strong>2 ใน 3</strong>, สมัครรับเลือกตั้ง/รับเลือกเป็น ส.ส., ส.ว., สมาชิกสภาท้องถิ่น, ผู้บริหารท้องถิ่น ฯลฯ</p>
+<h3 id="19">มาตรา 19</h3>
+<p>ถ้าพ้นก่อนครบวาระ → สรรหาคนแทน เว้นแต่เหลือวาระไม่ถึง 90 วัน จะไม่สรรหาก็ได้</p>
+<p>ผู้มาแทน → อยู่เท่าวาระที่เหลือ ถ้ามาแทนแล้วเหลือเวลา <strong>ไม่ถึง 2 ปี → ไม่นับเป็นวาระ</strong></p>
+<h3 id="20">มาตรา 20</h3>
+<p>ก่อนครบวาระ ต้องสรรหาใหม่ภายใน <strong>90 วันก่อนครบวาระ</strong></p>
+<h3 id="21">มาตรา 21 — การประชุม ก.ต.ช. <span class="stars" data-n="3">●●●</span></h3>
+<p>องค์ประชุม = <strong>ไม่น้อยกว่ากึ่งหนึ่ง</strong></p>
+<p>ถ้าประธานไม่มา → รองประธาน ถ้าประธานและรองประธานไม่มา → ที่ประชุมเลือกกรรมการคนหนึ่งเป็นประธาน</p>
+<p>ถ้ากรรมการอย่างน้อย <strong>1/3 ของจำนวนที่มีอยู่</strong> ร้องขอประชุม → ประธานต้องเรียกประชุมภายใน <strong>7 วัน</strong></p>
+<p>ก.ต.ช. ต้องประชุมอย่างน้อย <strong>ปีละ 4 ครั้ง</strong></p>
+</section>
+<section class="sec" id="8-2232"><h2 id="8-2232">8. ก.ตร. มาตรา 22–32 <span class="stars" data-n="5">●●●●●</span></h2>
+<p><strong>จำภาพใหญ่:</strong> ก.ต.ช. = นโยบาย/ยุทธศาสตร์ | ก.ตร. = บริหารบุคคลตำรวจ</p>
+<h3 id="22">มาตรา 22 — องค์ประกอบ ก.ตร.</h3>
+<ol>
+<li>นายกรัฐมนตรี → ประธาน</li>
+<li>ผบ.ตร. → รองประธาน</li>
+<li>กรรมการโดยตำแหน่ง: เลขาธิการ ก.พ., เลขาธิการ ก.พ.ร., รอง ผบ.ตร. ตามลำดับอาวุโส <strong>5 คน</strong>, จเรตำรวจแห่งชาติ</li>
+<li>กรรมการผู้ทรงคุณวุฒิ: อดีตตำรวจระดับ ผบช.ขึ้นไป <strong>3 คน</strong>, บุคคลที่ไม่เคยเป็นตำรวจ <strong>3 คน</strong></li>
+</ol>
+<p>รวมกรรมการผู้ทรงคุณวุฒิ = <strong>6 คน</strong></p>
+</section>
+<section class="sec" id="9-23"><h2 id="9-23">9. มาตรา 23 — อำนาจ ก.ตร. <span class="stars" data-n="5">●●●●●</span></h2>
+<p>หัวใจคือ <strong>บริหารทรัพยากรบุคคลตำรวจ</strong></p>
+<p>หน้าที่สำคัญ ได้แก่</p>
+<ol>
+<li>กำหนดมาตรฐานบริหารบุคคลตามระบบคุณธรรม</li>
+<li>ออกกฎ ก.ตร. ระเบียบ ข้อบังคับ ประกาศ มติด้านบริหารบุคคล</li>
+<li>กำหนดมาตรฐานขั้นต่ำเรื่องกำลังพล อุปกรณ์ เครื่องมือ พนักงานสอบสวน พนักงานสืบสวน ผู้ช่วยพนักงานสอบสวน</li>
+<li>พิจารณาให้ความเห็นชอบการคัดเลือก ผบ.ตร. ตามที่นายกรัฐมนตรีเสนอ</li>
+<li>กำกับการแต่งตั้งและโยกย้าย</li>
+<li>ประเมินการบริหารทรัพยากรบุคคล</li>
+<li>เกลี่ยกำลังพลให้สถานีตำรวจ</li>
+<li>ออกระเบียบเรื่องสอบ บรรจุ แต่งตั้ง เลื่อนเงินเดือน วินัย ออกจากราชการ</li>
+<li>เสนอ ครม. เรื่องเงินเดือน สวัสดิการ ฯลฯ</li>
+<li>กำหนดชั้นยศและเงินเดือนที่เหมาะสมกับวุฒิ</li>
+<li>กำหนดค่าธรรมเนียมด้านบริหารบุคคล</li>
+<li>อนุมัติแก้ทะเบียนประวัติเรื่องวันเดือนปีเกิดและควบคุมเกษียณ</li>
+<li>หาก สตช. ไม่ปฏิบัติตามมติ ก.ตร. → รายงานนายกรัฐมนตรี</li>
+<li>แต่งตั้งอนุกรรมการ</li>
+<li>ปฏิบัติหน้าที่อื่นตามกฎหมาย</li>
+</ol>
+</section>
+<section class="sec" id="10-3342"><h2 id="10-3342">10. ก.พ.ค.ตร. มาตรา 33–42 <span class="stars" data-n="5">●●●●●</span></h2>
+<p><strong>ก.พ.ค.ตร. = คณะกรรมการพิทักษ์ระบบคุณธรรมข้าราชการตำรวจ</strong></p>
+<p>หน้าที่สำคัญที่สุด: <strong>อุทธรณ์ + ร้องทุกข์ + พิทักษ์ระบบคุณธรรม</strong></p>
+<p>มีกรรมการ <strong>7 คน</strong> และต้องทำงาน <strong>เต็มเวลา</strong></p>
+<p><strong>คุณสมบัติสำคัญ:</strong> อายุ <strong>45–70 ปี</strong> ในวันที่ 1 มกราคมของปีที่คัดเลือก และต้องมีคุณสมบัติด้านวิชาชีพ/ราชการตามที่กฎหมายกำหนด เช่น เคยเป็นอธิบดีหรือเทียบเท่า, เคยเป็นตำรวจระดับ ผบช.ขึ้นไป, เคยเป็นผู้พิพากษาศาลอุทธรณ์ขึ้นไป, เคยเป็นอัยการพิเศษฝ่ายขึ้นไป, อาจเป็นอาจารย์มหาวิทยาลัยในสาขาที่กำหนดและมีตำแหน่งอย่างน้อยรองศาสตราจารย์ตามเงื่อนไข</p>
+<p><strong>วาระ:</strong> <strong>6 ปี และดำรงตำแหน่งได้เพียงวาระเดียว</strong></p>
+<p><strong>พ้นตำแหน่ง:</strong> เช่น ตาย, ลาออก, อายุครบ <strong>75 ปี</strong>, ขาดคุณสมบัติ, ถูกพิพากษาจำคุกถึงที่สุดตามเงื่อนไข, ไม่สามารถทำงานเต็มเวลาอย่างสม่ำเสมอ</p>
+<p>ถ้าเหลือกรรมการ <strong>น้อยกว่า 4 คน</strong> → ไม่อาจถือว่าคณะกรรมการดำเนินการต่อในสภาพปกติได้ตามที่กฎหมายกำหนด</p>
+</section>
+<section class="sec" id="11-40"><h2 id="11-40">11. มาตรา 40 — อำนาจ ก.พ.ค.ตร. <span class="stars" data-n="3">●●●</span></h2>
+<ol>
+<li>เสนอแนะเรื่องระบบคุณธรรมต่อ ก.ตร.</li>
+<li>วินิจฉัย <strong>อุทธรณ์</strong></li>
+<li>วินิจฉัย <strong>ร้องทุกข์</strong></li>
+<li>พิจารณาการคุ้มครองระบบคุณธรรม</li>
+<li>ออกกฎ ก.พ.ค.ตร.</li>
+<li>ทำหน้าที่อื่นตามกฎหมาย</li>
+</ol>
+<p><strong>ข้อสำคัญ:</strong> การวินิจฉัยอุทธรณ์และร้องทุกข์ → ก.พ.ค.ตร. ต้องพิจารณาเอง <strong>มอบหมายให้คนอื่นวินิจฉัยแทนไม่ได้</strong></p>
+</section>
+<section class="sec" id="12-4353"><h2 id="12-4353">12. ก.ร.ตร. มาตรา 43–53 <span class="stars" data-n="5">●●●●●</span></h2>
+<p><strong>ก.ร.ตร. = คณะกรรมการพิจารณาเรื่องร้องเรียนตำรวจ</strong></p>
+<p>จำง่าย: ก.พ.ค.ตร. → เรื่องของ "ข้าราชการตำรวจ" | ก.ร.ตร. → เรื่องร้องเรียนของ "ประชาชนต่อตำรวจ"</p>
+<p><strong>เรื่องที่ประชาชนร้องได้:</strong> ตำรวจปฏิบัติไม่ชอบ, ไม่ปฏิบัติหน้าที่, ประพฤติไม่เหมาะสม, เสื่อมเสียเกียรติศักดิ์ตำรวจ, ผิดวินัย, ละเมิดจริยธรรม/จรรยาบรรณ</p>
+<p><strong>องค์ประกอบที่สำคัญ</strong> มีตัวแทนจาก</p>
+<ul>
+<li>ผู้ตรวจการแผ่นดิน + กสม. → 1</li>
+<li>อดีตผู้พิพากษาศาลอุทธรณ์ขึ้นไป → 1</li>
+<li>อดีตอัยการพิเศษฝ่ายขึ้นไป → 1</li>
+<li>อดีตตำรวจระดับ ผบช.ขึ้นไป → 3</li>
+<li>ทนายความประกอบอาชีพ ≥ <strong>20 ปี</strong> → 1</li>
+<li>ผู้แทนสภาองค์กรชุมชนตำบล → 2 โดยอย่างน้อย 1 คนต้องเป็นสตรี</li>
+</ul>
+<p><strong>จเรตำรวจแห่งชาติ = กรรมการและเลขานุการ</strong></p>
+<h3 id="50">มาตรา 50 — ประชาชนร้องเรียน</h3>
+<p>ผู้ที่ไม่ได้รับความเป็นธรรม หรือพบการกระทำผิดของตำรวจ → มีสิทธิร้องเรียนต่อ <strong>ก.ร.ตร.</strong> โดยขั้นตอนต้องไม่สร้างขั้นตอนเกินจำเป็น ไม่สร้างภาระประชาชนเกินสมควร</p>
+<h3 id="51">มาตรา 51 — ก.ร.ตร. ไต่สวน</h3>
+<p>ก.ร.ตร. สามารถดำเนินการได้ไม่ว่ามีผู้ร้องเรียนหรือไม่ หากเรื่องปรากฏต่อ ก.ร.ตร.</p>
+<p>ถ้าไม่มีมูล → <strong>ยุติเรื่อง</strong></p>
+<p>ถ้าผิดวินัย → ส่งสำนวนและคำวินิจฉัยให้ผู้บังคับบัญชาลงโทษ โดยปกติผู้บังคับบัญชา <strong>ไม่ต้องสืบสวน/สอบสวนใหม่</strong> เว้นแต่มีพยานหลักฐานใหม่ตามเงื่อนไข</p>
+<p>หากเป็นเรื่องทุจริต → ส่งให้ <strong>ป.ป.ช. หรือ ป.ป.ท.</strong> แล้วแต่กรณี</p>
+</section>
+<section class="sec" id="13-5459"><h2 id="13-5459">13. ยศตำรวจ มาตรา 54–59 <span class="stars" data-n="3">●●●</span></h2>
+<h3 id="54-15">มาตรา 54 — ยศตำรวจ 15 ระดับ</h3>
+<p>เรียงจากสูง → ต่ำ</p>
+<ol>
+<li>พลตำรวจเอก</li>
+<li>พลตำรวจโท</li>
+<li>พลตำรวจตรี</li>
+<li>พันตำรวจเอก</li>
+<li>พันตำรวจโท</li>
+<li>พันตำรวจตรี</li>
+<li>ร้อยตำรวจเอก</li>
+<li>ร้อยตำรวจโท</li>
+<li>ร้อยตำรวจตรี</li>
+<li>ดาบตำรวจ</li>
+<li>จ่าสิบตำรวจ</li>
+<li>สิบตำรวจเอก</li>
+<li>สิบตำรวจโท</li>
+<li>สิบตำรวจตรี</li>
+</ol>
+<blockquote>
+<p>ในไฟล์มีลำดับยศตามมาตรา 54 และการใช้คำว่า "หญิง" ต่อท้ายยศสำหรับตำรวจหญิง</p>
+</blockquote>
+<h3 id="55">มาตรา 55 — ชั้นตำรวจ <span class="stars" data-n="3">●●●</span></h3>
+<p><strong>ชั้นสัญญาบัตร</strong> — ตั้งแต่ <strong>ร้อยตำรวจตรีขึ้นไป</strong></p>
+<p><strong>ชั้นประทวน</strong> — สิบตำรวจตรี, สิบตำรวจโท, สิบตำรวจเอก, จ่าสิบตำรวจ, ดาบตำรวจ</p>
+<p><strong>ชั้นพลตำรวจ</strong> — <strong>พลตำรวจสำรอง</strong></p>
+</section>
+<section class="sec" id="14-60"><h2 id="14-60">14. ระบบคุณธรรม มาตรา 60 <span class="stars" data-n="5">●●●●●</span></h2>
+<p>จำมาตรานี้ให้แม่นมาก การบริหารตำรวจต้องคำนึงถึง</p>
+<ol>
+<li>ความรู้ความสามารถ</li>
+<li>ความเสมอภาค</li>
+<li>ความเป็นธรรม</li>
+<li>ประโยชน์ของราชการ</li>
+<li>ผลสัมฤทธิ์</li>
+<li>ประสิทธิภาพ</li>
+<li>ไม่เลือกปฏิบัติอย่างไม่เป็นธรรม</li>
+<li>อาวุโส</li>
+<li>ผลงาน</li>
+<li>ศักยภาพ</li>
+<li>ความประพฤติ</li>
+<li>ความเป็นกลางทางการเมือง</li>
+</ol>
+<p><strong>ห้ามเด็ดขาด:</strong> ห้ามนำความคิดเห็นทางการเมืองหรือการสังกัดพรรคการเมืองมาประกอบการพิจารณาความดีความชอบ/เลื่อนตำแหน่ง</p>
+<p>การดำเนินการทางวินัยต้อง <strong>ยุติธรรม + ปราศจากอคติ</strong></p>
+</section>
+<section class="sec" id="15-61"><h2 id="15-61">15. กลุ่มสายงาน มาตรา 61 <span class="stars" data-n="4">●●●●</span></h2>
+<p>มี <strong>5 กลุ่ม</strong></p>
+<ol>
+<li><strong>บริหาร</strong></li>
+<li><strong>อำนวยการและสนับสนุน</strong></li>
+<li><strong>สืบสวนสอบสวน</strong></li>
+<li><strong>ป้องกันปราบปราม</strong></li>
+<li><strong>วิชาชีพเฉพาะ</strong></li>
+</ol>
+<p><strong>จำข้อสอบ:</strong> สืบสวนสอบสวน = กลุ่มที่ 3 | ป้องกันปราบปราม = กลุ่มที่ 4</p>
+</section>
+<section class="sec" id="16-62"><h2 id="16-62">16. ตำแหน่งตำรวจที่มียศ มาตรา 62 <span class="stars" data-n="5">●●●●●</span></h2>
+<p>เรียงตำแหน่งจากสูงลงต่ำ</p>
+<ol>
+<li>ผบ.ตร.</li>
+<li>รอง ผบ.ตร. + จตช.</li>
+<li>ผู้ช่วย ผบ.ตร. + รอง จตช.</li>
+<li>ผบช. + จตร.</li>
+<li>รอง ผบช. + รอง จตร.</li>
+<li>ผบก.</li>
+<li>รอง ผบก.</li>
+<li>ผกก.</li>
+<li>รอง ผกก. + สวญ.</li>
+<li>สว.</li>
+<li>รอง สว.</li>
+<li>ผบ.หมู่</li>
+<li>รอง ผบ.หมู่</li>
+</ol>
+</section>
+<section class="sec" id="17-71"><h2 id="17-71">17. คุณสมบัติผู้เข้ารับราชการ มาตรา 71 <span class="stars" data-n="5">●●●●●</span></h2>
+<p>ต้อง</p>
+<ol>
+<li>มีสัญชาติไทยโดยการเกิด</li>
+<li>อายุ <strong>ไม่ต่ำกว่า 18 ปี</strong></li>
+<li>เลื่อมใสการปกครองระบอบประชาธิปไตยฯ</li>
+<li>ไม่ดำรงตำแหน่งทางการเมือง/พรรคการเมือง</li>
+<li>มีคุณสมบัติอื่นตาม กฎ ก.ตร.</li>
+</ol>
+<blockquote>
+<p><strong>จำตัวเลข:</strong> อายุขั้นต่ำ = <strong>18 ปี</strong></p>
+</blockquote>
+</section>
+<section class="sec" id="18-7276"><h2 id="18-7276">18. การบรรจุและทดลองงาน มาตรา 72–76</h2>
+<h3 id="72">มาตรา 72</h3>
+<p>ผู้มีอำนาจสั่งบรรจุและแต่งตั้ง → ผู้บังคับบัญชาตามระเบียบ ก.ตร.</p>
+<h3 id="73">มาตรา 73</h3>
+<p>การบรรจุชั้นพลตำรวจ ประทวน สัญญาบัตร ต้องมาจากผู้ <strong>ได้รับคัดเลือกหรือสอบแข่งขันได้</strong></p>
+<h3 id="74">มาตรา 74</h3>
+<p>การเลือกสถานที่ปฏิบัติงาน ถ้าจบโรงเรียนนายร้อยตำรวจ → ผู้มีคะแนนเฉลี่ยสูงสุดเลือกก่อน ถ้าสอบแข่งขัน → ผู้มีคะแนนรวมสูงสุดเลือกก่อน</p>
+<h3 id="75">มาตรา 75 <span class="stars" data-n="3">●●●</span></h3>
+<p>ต้องทดลองปฏิบัติหน้าที่ราชการ <strong>ไม่น้อยกว่า 6 เดือน</strong></p>
+<p>ถ้าถูกสั่งให้ออกจากราชการระหว่างทดลองงาน → ไม่ถือว่าเคยเป็นข้าราชการตำรวจ แต่ไม่กระทบสิทธิที่เกิดขึ้นจากการปฏิบัติงาน/เงินเดือนในช่วงทดลองงาน</p>
+<h3 id="76">มาตรา 76</h3>
+<p>การแต่งตั้งตำรวจสัญญาบัตรต้องคำนึงถึงความรู้ ความชำนาญ ความถนัด ให้มีโอกาสทำงานหลากหลาย</p>
+<p>ตั้งแต่ระดับ <strong>สารวัตรขึ้นไป</strong> พิจารณา <strong>อาวุโส + ความรู้ความสามารถ + ทักษะ + ความสมัครใจ + ความจำเป็นราชการ</strong></p>
+</section>
+<section class="sec" id="19-77"><h2 id="19-77">19. มาตรา 77 — คุณสมบัติตามระดับตำแหน่ง <span class="stars" data-n="5">●●●●●</span></h2>
+<p>จำชุดนี้ให้ดี เพราะมีตัวเลขเยอะมาก</p>
+<table>
+<thead>
+<tr>
+<th>ตำแหน่ง</th>
+<th>หลักเกณฑ์สำคัญ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>รอง ผบ.ตร./จตช.</td>
+<td>พล.ต.ท. หรือ พล.ต.อ. + เคยเป็น ผช.ผบ.ตร./รอง จตช. ≥ 1 ปี</td>
+</tr>
+<tr>
+<td>ผช.ผบ.ตร./รอง จตช.</td>
+<td>พล.ต.ท. + เคยเป็น ผบช./จตร. ≥ 1 ปี</td>
+</tr>
+<tr>
+<td>ผบช./จตร.</td>
+<td>พล.ต.ต./พล.ต.ท. + เคยเป็น รอง ผบช./รอง จตร. ≥ 2 ปี</td>
+</tr>
+<tr>
+<td>รอง ผบช./รอง จตร.</td>
+<td>พล.ต.ต. + เคยเป็น ผบก. ≥ 3 ปี</td>
+</tr>
+<tr>
+<td>ผบก.</td>
+<td>พ.ต.อ.(พิเศษ) หรือ พล.ต.ต. + เคยเป็น รอง ผบก. ≥ 4 ปี</td>
+</tr>
+<tr>
+<td>รอง ผบก.</td>
+<td>พ.ต.อ./พ.ต.อ.(พิเศษ) + เคยเป็น ผกก. ≥ 4 ปี</td>
+</tr>
+<tr>
+<td>ผกก.</td>
+<td>พ.ต.ท./พ.ต.อ. + เคยเป็น รอง ผกก. ≥ 4 ปี</td>
+</tr>
+<tr>
+<td>รอง ผกก./สวญ.</td>
+<td>พ.ต.ท. + เคยเป็น สว. ≥ 5 ปี</td>
+</tr>
+<tr>
+<td>สว.</td>
+<td>ร.ต.อ.ขึ้นไป แต่ไม่สูงกว่า พ.ต.ท. + เคยเป็น รอง สว. ≥ 7 ปี</td>
+</tr>
+<tr>
+<td>รอง สว.</td>
+<td>ร.ต.ต.ขึ้นไป แต่ไม่สูงกว่า ร.ต.อ.</td>
+</tr>
+<tr>
+<td>ผบ.หมู่</td>
+<td>ส.ต.ต.ขึ้นไป แต่ไม่สูงกว่า ด.ต.</td>
+</tr>
+<tr>
+<td>รอง ผบ.หมู่</td>
+<td>ชั้นพลตำรวจ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>การนับเวลา:</strong> โดยหลัก <strong>12 เดือน = 1 ปี</strong> ไม่นับระยะเวลาทวีคูณ แต่มีข้อยกเว้นเกี่ยวกับการนับถึงวันที่ 30 กันยายน เช่น</p>
+<ul>
+<li>เป็นสัญญาบัตรครั้งแรก หากมีเวลาไม่น้อยกว่า <strong>8 เดือน</strong> → นับเป็น 1 ปี</li>
+<li>การเลื่อนตำแหน่งในวาระประจำปี → นับถึง 30 กันยายนเป็น 1 ปี</li>
+</ul>
+</section>
+<section class="sec" id="20-7881"><h2 id="20-7881">20. มาตรา 78–81 — ใครมีอำนาจแต่งตั้ง <span class="stars" data-n="5">●●●●●</span></h2>
+<p><strong>ระดับสูง:</strong> การแต่งตั้ง ผบ.ตร. → นายกรัฐมนตรีคัดเลือก → ก.ตร. ให้ความเห็นชอบ → นายกรัฐมนตรีนำความกราบบังคมทูล → ทรงพระกรุณาโปรดเกล้าฯ แต่งตั้ง</p>
+<p>ระดับรอง ผบ.ตร./จตช. เป็นต้น → ผบ.ตร. คัดเลือก → ก.ตร. เห็นชอบ → นายกรัฐมนตรีนำความกราบบังคมทูล</p>
+<p>ส่วนตำแหน่งระดับต่าง ๆ จะมีคณะกรรมการพิจารณาการแต่งตั้งเข้ามาตรวจสอบคุณสมบัติและความเหมาะสมก่อน</p>
+</section>
+<section class="sec" id="21-82"><h2 id="21-82">21. มาตรา 82 — หลักอาวุโสกับความสามารถ <span class="stars" data-n="5">●●●●●</span></h2>
+<p>เป็นอีกมาตราที่ <strong>ออกสอบได้ง่ายมาก</strong></p>
+<p><strong>ระดับรอง ผบ.ตร./จตช. ลงมาถึง ผช.ผบ.ตร./รอง จตช.</strong> — พิจารณาจากบัญชีผู้มีความรู้ความสามารถและเรียงตามอาวุโส</p>
+<p><strong>ระดับ ผบช./จตร. ลงมาถึง ผบก.</strong> — ต้องพิจารณาจากผู้มีความรู้ความสามารถที่เรียงตามอาวุโส <strong>ไม่น้อยกว่า 50% ของตำแหน่งว่าง</strong></p>
+<p><strong>ระดับ รอง ผบก. ลงมาถึง สว.</strong> — ต้องพิจารณาจากบัญชีรายชื่อที่เรียงตามอาวุโส <strong>ไม่น้อยกว่า 33% ของตำแหน่งว่าง</strong> ส่วนที่เหลือ → พิจารณา <strong>อาวุโส + ความรู้ความสามารถ</strong></p>
+<p>ความรู้ความสามารถดูจากประวัติรับราชการ ผลการปฏิบัติงาน ความประพฤติ ความพึงพอใจของประชาชน/ผู้รับบริการ</p>
+</section>
+<section class="sec" id="22-8385"><h2 id="22-8385">22. มาตรา 83–85 <span class="stars" data-n="3">●●●</span></h2>
+<h3 id="83">มาตรา 83</h3>
+<p>การเลื่อนตำแหน่งในกลุ่มสายงาน ต้องมีเวลาปฏิบัติงานในกลุ่มสายงานนั้น โดยหลักไม่น้อยกว่า <strong>1/2 ของระยะเวลาที่กำหนดสำหรับการเลื่อนตำแหน่ง</strong> และกลุ่ม <strong>สืบสวนสอบสวน ↔ ป้องกันปราบปราม</strong> สามารถนับระยะเวลาเกื้อกูลกันได้</p>
+<h3 id="84">มาตรา 84</h3>
+<p>กลุ่มสายงานสืบสวนสอบสวน เลื่อนตำแหน่ง → ต้องมีเวลาปฏิบัติงานในสายงานปัจจุบันรวมไม่น้อยกว่า <strong>1/2</strong> ของเวลาที่กำหนดสำหรับระดับถัดไป</p>
+<h3 id="85">มาตรา 85 <span class="stars" data-n="1">●</span></h3>
+<p>แต่งตั้งหัวหน้าสถานีตำรวจระดับ <strong>ผู้กำกับการเป็นครั้งแรก</strong> ต้องแต่งตั้งไปยัง <strong>สถานีตำรวจระดับกลาง</strong></p>
+</section>
+<section class="sec" id="23-87"><h2 id="23-87">23. มาตรา 87 — ร้องทุกข์เรื่องแต่งตั้ง <span class="stars" data-n="5">●●●●●</span></h2>
+<p>ถ้าตำรวจเห็นว่าถูกจัดลำดับอาวุโสไม่เป็นธรรม หรือได้รับการแต่งตั้งไม่เป็นธรรม ร้องทุกข์ต่อ <strong>ก.พ.ค.ตร.</strong> ภายใน <strong>30 วัน</strong> นับแต่วันที่ทราบคำสั่งแต่งตั้ง</p>
+<p>ก.พ.ค.ตร. ต้องพิจารณาให้เสร็จ <strong>30 วัน</strong></p>
+<p>ถ้าไม่พอใจคำวินิจฉัย → อุทธรณ์ต่อ <strong>ศาลปกครองสูงสุด</strong> ภายใน <strong>90 วัน</strong></p>
+<p><strong>การซื้อขายตำแหน่ง <span class="stars" data-n="5">●●●●●</span></strong></p>
+<p>ผู้ใดให้ ขอให้ รับว่าจะให้ เรียก รับ ยอมจะรับทรัพย์สิน/ประโยชน์ แอบอ้างอำนาจ กระทำการมิชอบ เพื่อให้แต่งตั้งหรือไม่แต่งตั้งบุคคล → <strong>จำคุกไม่เกิน 5 ปี</strong></p>
+</section>
+<section class="sec" id="24-88"><h2 id="24-88">24. มาตรา 88</h2>
+<p>ก.ตร. ต้องออกกฎกำหนดหลักเกณฑ์แต่งตั้ง/โยกย้ายให้ชัดเจน เช่น การจัดลำดับอาวุโส วาระประจำปี การนับระยะเวลาดำรงตำแหน่ง จำนวนตำแหน่งว่าง สัดส่วนอาวุโส ประเภทตำแหน่ง บัญชีผู้สมควรได้รับการเลื่อนตำแหน่ง</p>
+<p>กฎดังกล่าวมีผลเมื่อพ้น <strong>180 วัน</strong> นับแต่วันประกาศในราชกิจจานุเบกษา</p>
+</section>
+<section class="sec" id="25-8997"><h2 id="25-8997">25. มาตรา 89–97 — เงินเดือน/การบริหาร</h2>
+<h3 id="90">มาตรา 90</h3>
+<p>โดยหลักแต่งตั้งตำรวจ → ต้องมีคุณสมบัติเฉพาะตำแหน่ง</p>
+<p>ข้อยกเว้น ก.ตร. อนุมัติได้หากมีเหตุผลและความจำเป็น <strong>แต่ห้ามใช้ข้อยกเว้นนี้กับกลุ่มสายงานสืบสวนสอบสวน</strong></p>
+<p>การแต่งตั้งไปตำแหน่งอื่นโดยหลัก → ต้องไม่ต่ำกว่าตำแหน่งเดิม เว้นแต่ ก.ตร. อนุมัติเป็นกรณีพิเศษ</p>
+</section>
+<section class="sec" id="26-9194"><h2 id="26-9194">26. มาตรา 91–94 <span class="stars" data-n="1">●</span></h2>
+<h3 id="91">มาตรา 91</h3>
+<p>ผู้มีอำนาจสั่งให้ตำรวจไปประจำ/สำรองราชการ</p>
+<ul>
+<li>ประธาน ก.ตร. → สำหรับ ผบ.ตร.</li>
+<li>ผบ.ตร. → สำหรับตำรวจทุกตำแหน่ง</li>
+<li>ผบช. → สำหรับตำรวจในกองบัญชาการ</li>
+</ul>
+<h3 id="92">มาตรา 92 <span class="stars" data-n="1">●</span></h3>
+<p>ห้ามดึงตำรวจจากสถานีตำรวจไปทำงานส่วนราชการอื่น <strong>เว้นแต่มีตำรวจอื่นมาปฏิบัติหน้าที่แทนสถานีนั้น</strong></p>
+<p><strong>การรักษาความปลอดภัยบุคคลสำคัญ:</strong> ผู้ขอต้องร้องขอ ตำรวจที่ถูกส่งไปต้อง <strong>สมัครใจ</strong></p>
+<p>เมื่อผู้ขอพ้นตำแหน่ง → โดยหลักให้ตำรวจกลับ สตช. ภายใน <strong>30 วัน</strong></p>
+<p><strong>ขาดราชการเกิน 15 วัน:</strong> ถ้าไม่มีเหตุอันสมควร → ต้องดำเนินการทางวินัย ให้เสร็จภายใน <strong>60 วัน</strong> ขยายได้ไม่เกิน 2 ครั้ง ครั้งละไม่เกิน <strong>60 วัน</strong></p>
+</section>
+<section class="sec" id="27-93"><h2 id="27-93">27. มาตรา 93 — การโอนตำรวจ <span class="stars" data-n="3">●●●</span></h2>
+<p>ตำรวจจะโอนไปหน่วยงานอื่นได้เมื่อ</p>
+<ol>
+<li>เจ้าตัว <strong>สมัครใจ</strong></li>
+<li>หน่วยงานอื่น <strong>ต้องการรับโอน</strong></li>
+<li>ทำความตกลงกับสำนักงานตำรวจแห่งชาติ</li>
+</ol>
+</section>
+<section class="sec" id="28-95"><h2 id="28-95">28. มาตรา 95 — เลื่อนเงินเดือน <span class="stars" data-n="3">●●●</span></h2>
+<p>การเลื่อนเงินเดือนพิจารณาจากคุณภาพงาน ปริมาณงาน ประสิทธิภาพ ประสิทธิผล ความสามารถ ความอุตสาหะ การรักษาวินัย การประพฤติตนเหมาะสม</p>
+<p>การเลื่อนเงินเดือนกรณีพิเศษ <strong>เกิน 2 ขั้น</strong> ต้องได้รับอนุมัติจาก <strong>ก.ตร.</strong></p>
+</section>
+<section class="sec" id="29-9697"><h2 id="29-9697">29. มาตรา 96–97</h2>
+<h3 id="96">มาตรา 96</h3>
+<p>ตำรวจเสียชีวิตเนื่องจากการปฏิบัติหน้าที่ → ก.ตร. อาจพิจารณาเลื่อนเงินเดือนกรณีพิเศษ เพื่อประโยชน์ในการคำนวณบำเหน็จบำนาญ</p>
+<h3 id="97">มาตรา 97</h3>
+<p>ผู้บังคับบัญชามีหน้าที่พัฒนาผู้ใต้บังคับบัญชา เพิ่มความรู้ ทักษะ ทัศนคติ คุณธรรม จริยธรรม ประเมินผลการปฏิบัติราชการ เพื่อนำไปใช้ประกอบการแต่งตั้งและเลื่อนเงินเดือน</p>
+</section>
+<section class="sec" id="30-98104"><h2 id="30-98104">30. มาตรา 98–104 — เงินเดือน <span class="stars" data-n="3">●●●</span></h2>
+<h3 id="98">มาตรา 98</h3>
+<p>เงินเดือนและเงินประจำตำแหน่ง → ตามบัญชีท้าย พ.ร.บ. <strong>เงินประจำตำแหน่งไม่ถือเป็นเงินเดือน</strong></p>
+<p>การปรับเงินเดือนโดยทั่วไป หากปรับเพิ่มเท่ากันทุกอัตรา → ไม่เกิน <strong>10%</strong> และต้องได้รับงบประมาณจากรัฐสภา แล้วตราเป็นพระราชกฤษฎีกา</p>
+<h3 id="99">มาตรา 99 — จับคู่ยศกับระดับเงินเดือน <span class="stars" data-n="5">●●●●●</span></h3>
+<table>
+<thead>
+<tr>
+<th>ยศ</th>
+<th>ระดับ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>พล.ต.อ. ผบ.ตร.</td>
+<td>ส.9 ขั้นสูงสุด</td>
+</tr>
+<tr>
+<td>พล.ต.อ.</td>
+<td>ส.8</td>
+</tr>
+<tr>
+<td>พล.ต.ท.</td>
+<td>ส.7</td>
+</tr>
+<tr>
+<td>พล.ต.ต.</td>
+<td>ส.6</td>
+</tr>
+<tr>
+<td>พ.ต.อ.(พิเศษ)</td>
+<td>ส.5</td>
+</tr>
+<tr>
+<td>พ.ต.อ.</td>
+<td>ส.4</td>
+</tr>
+<tr>
+<td>พ.ต.ท.</td>
+<td>ส.3</td>
+</tr>
+<tr>
+<td>พ.ต.ต.</td>
+<td>ส.2</td>
+</tr>
+<tr>
+<td>ร.ต.อ.–ร.ต.ต.</td>
+<td>ส.1</td>
+</tr>
+<tr>
+<td>ด.ต.</td>
+<td>ป.3</td>
+</tr>
+<tr>
+<td>จ.ส.ต. พิเศษ</td>
+<td>ป.2</td>
+</tr>
+<tr>
+<td>จ.ส.ต.–ส.ต.ต.</td>
+<td>ป.1</td>
+</tr>
+<tr>
+<td>พลตำรวจสำรอง</td>
+<td>พ.1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="sec" id="31-100"><h2 id="31-100">31. มาตรา 100</h2>
+<p>ตำรวจ <strong>ไม่มียศ</strong> → มาตรา 98–99 ไม่ใช้บังคับ</p>
+<p>เงินเดือนและเงินประจำตำแหน่ง → พระราชกฤษฎีกากำหนด โดยเทียบเคียงกับข้าราชการพลเรือนตำแหน่งคล้ายกัน/ระดับเดียวกัน</p>
+</section>
+<section class="sec" id="32-105"><h2 id="32-105">32. มาตรา 105 — รักษาราชการแทน <span class="stars" data-n="5">●●●●●</span></h2>
+<p>กรณีตำแหน่งว่างหรือผู้ดำรงตำแหน่งไม่สามารถปฏิบัติราชการ</p>
+<table>
+<thead>
+<tr>
+<th>ตำแหน่ง</th>
+<th>ผู้สั่งให้รักษาราชการแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ผบ.ตร.</td>
+<td>นายกรัฐมนตรี</td>
+</tr>
+<tr>
+<td>รอง ผบ.ตร./จตช. ลงมา</td>
+<td>ผบ.ตร.</td>
+</tr>
+<tr>
+<td>ผบก. ลงมา</td>
+<td>ผบช.</td>
+</tr>
+<tr>
+<td>ผกก. ลงมา</td>
+<td>ผบก.</td>
+</tr>
+</tbody>
+</table>
+<p>ถ้าไม่มีการแต่งตั้งผู้รักษาราชการแทน → ตำแหน่งรองทำหน้าที่</p>
+<p>ถ้าไม่มีรอง/รองทำไม่ได้ → ตำแหน่งผู้ช่วย ถ้ามีหลายคน → ผู้มีอาวุโสตามระเบียบ ก.ตร.</p>
+<p>ถ้าไม่มีทั้งรองและผู้ช่วย → ตำรวจชั้นสัญญาบัตรที่มีอาวุโส</p>
+</section>
+<section class="sec" id="33-107"><h2 id="33-107">33. มาตรา 107 — การมอบอำนาจ <span class="stars" data-n="3">●●●</span></h2>
+<p>ผู้มีอำนาจสามารถมอบอำนาจได้ ถ้ากฎหมายไม่ได้ห้ามหรือกำหนดไว้เป็นอย่างอื่น</p>
+<p>การมอบอำนาจต้อง <strong>ทำเป็นหนังสือ</strong></p>
+<p>ผู้มอบยังมีหน้าที่แนะนำ กำกับ ติดตาม</p>
+<p>ผู้รับมอบ <strong>ห้ามมอบอำนาจต่อ</strong> เว้นแต่ได้รับความเห็นชอบจากผู้มอบเป็นกรณี ๆ ไป</p>
+</section>
+<section class="sec" id="34-110116"><h2 id="34-110116">34. วินัย มาตรา 110–116 <span class="stars" data-n="5">●●●●●</span></h2>
+<h3 id="110">มาตรา 110</h3>
+<p>ตำรวจต้องปฏิบัติตามกฎหมาย ระเบียบราชการ มติ ครม. จรรยาบรรณตำรวจ วินัย</p>
+<p>กฎ ก.ตร. เรื่องนี้มีผลเมื่อพ้น <strong>60 วัน</strong> นับแต่ประกาศในราชกิจจานุเบกษา</p>
+</section>
+<section class="sec" id="35-111-18"><h2 id="35-111-18">35. มาตรา 111 — ข้อปฏิบัติ/ข้อห้าม 18 ข้อ <span class="stars" data-n="5">●●●●●</span></h2>
+<p>ต้องจำหัวใจทุกข้อ</p>
+<ol>
+<li>ซื่อสัตย์ สุจริต เที่ยงธรรม</li>
+<li>ปฏิบัติตามคำสั่งที่ชอบด้วยกฎหมาย</li>
+<li>รักษาระเบียบการเคารพตามสายบังคับบัญชา ยศ ตำแหน่ง</li>
+<li>อุทิศเวลาให้ราชการ</li>
+<li>ไม่ข้ามผู้บังคับบัญชา</li>
+<li>รักษาความลับราชการ</li>
+<li>สุภาพ สามัคคี ช่วยเหลือกัน</li>
+<li>บริการประชาชนด้วยความเป็นธรรม รวดเร็ว สุภาพ</li>
+<li>ตั้งใจ อุตสาหะ ระมัดระวัง ไม่ประมาท</li>
+<li>ไม่ทำให้แตกความสามัคคี/กลั่นแกล้งกัน</li>
+<li>ไม่รายงานเท็จ</li>
+<li>ไม่ใช้วาจา/พฤติกรรมไม่เหมาะสม</li>
+<li>ไม่ประพฤติชั่ว</li>
+<li>ไม่บังคับผู้บังคับบัญชาให้เสียระเบียบวินัย</li>
+<li>ไม่ทำให้ราชการเสียหาย</li>
+<li>ไม่แสวงหาผลประโยชน์จนเสียความเที่ยงธรรม</li>
+<li>ไม่เป็นกรรมการผู้จัดการ/ผู้จัดการในห้างหุ้นส่วนหรือบริษัท</li>
+<li>ปฏิบัติตามกฎ ก.ตร. และสิ่งที่กฎหมายถือเป็นความผิดวินัย</li>
+</ol>
+</section>
+<section class="sec" id="36-112"><h2 id="36-112">36. มาตรา 112 — วินัยอย่างร้ายแรง <span class="stars" data-n="5">●●●●●</span></h2>
+<p>กรณีสำคัญ เช่น</p>
+<ol>
+<li>ปฏิบัติ/ละเว้นหน้าที่โดยมิชอบเพื่อประโยชน์ตนเองหรือผู้อื่น</li>
+<li>ล่วงละเมิดหรือคุกคามทางเพศตาม ก.ตร.</li>
+<li>ละทิ้ง/ทอดทิ้งหน้าที่จนเสียหายร้ายแรง หรือขาดราชการติดต่อกัน <strong>เกิน 15 วัน</strong> โดยไม่มีเหตุ</li>
+<li>ดูหมิ่น เหยียดหยาม กดขี่ ข่มเหง หรือทำร้ายประชาชน</li>
+<li>ทำความผิดอาญาจนถูกจำคุกถึงที่สุด เว้นแต่ประมาท/ลหุโทษ</li>
+<li>ประพฤติชั่วอย่างร้ายแรง</li>
+<li>ฝ่าฝืนมาตรา 26 วรรคสาม หรือไม่ปฏิบัติตามมาตรา 51 วรรคสอง</li>
+<li>จงใจฝ่าฝืนหลักเกณฑ์แต่งตั้งเพื่อช่วยเหลือ/ทำร้ายบุคคล</li>
+<li>การกระทำใด ๆ ที่ทำให้ราชการเสียหายอย่างร้ายแรง</li>
+<li>การกระทำตามที่ กฎ ก.ตร. กำหนดเป็นวินัยร้ายแรง</li>
+</ol>
+</section>
+<section class="sec" id="37-113114"><h2 id="37-113114">37. มาตรา 113–114</h2>
+<p><strong>ผู้บังคับบัญชา</strong> มีหน้าที่ <strong>สร้างวินัย + ป้องกันความผิด + ดำเนินการทางวินัย</strong></p>
+<p>ถ้ามีมูลต้องดำเนินการทันที ผู้บังคับบัญชาที่ละเลยหรือไม่สุจริต → <strong>ผิดวินัย</strong></p>
+<h3 id="114">มาตรา 114</h3>
+<p>ในกรณีจำเป็นเพื่อรักษาวินัยหรือปราบปรามผู้ก่อการกำเริบ/ผู้ละทิ้งหน้าที่ ผู้บังคับบัญชาอาจใช้อาวุธหรือกำลังบังคับได้</p>
+<p>ถ้ากระทำโดยสุจริตและสมควรแก่เหตุ → ไม่ต้องรับผิดทางแพ่งและอาญา แต่ต้องรายงานตามสายบังคับบัญชาถึง ผบ.ตร. โดยเร็ว</p>
+</section>
+<section class="sec" id="38-115-7"><h2 id="38-115-7">38. มาตรา 115 — โทษทางวินัย 7 สถาน <span class="stars" data-n="5">●●●●●</span></h2>
+<p>เรียงให้จำ</p>
+<ol>
+<li><strong>ภาคทัณฑ์</strong></li>
+<li><strong>ทัณฑกรรม</strong></li>
+<li><strong>กักยาม</strong></li>
+<li><strong>กักขัง</strong></li>
+<li><strong>ตัดเงินเดือน</strong></li>
+<li><strong>ปลดออก</strong></li>
+<li><strong>ไล่ออก</strong></li>
+</ol>
+<p><strong>ทัณฑกรรม</strong> เช่น งานโยธา อยู่เวรยามนอกหน้าที่ งานสาธารณประโยชน์ ไม่เกิน <strong>6 ชั่วโมง/วัน</strong></p>
+<p>กักยาม/กักขัง หากให้งานโยธาหรืองานราชการด้วย → ไม่เกิน <strong>6 ชั่วโมง/วัน</strong></p>
+</section>
+<section class="sec" id="39-117125"><h2 id="39-117125">39. การดำเนินการทางวินัย มาตรา 117–125 <span class="stars" data-n="5">●●●●●</span></h2>
+<h3 id="117">มาตรา 117</h3>
+<p>เมื่อมีข้อกล่าวหาหรือสงสัย → ผู้บังคับบัญชาต้องพิจารณาว่ามีมูลหรือไม่ ถ้าจำเป็น → สืบสวนข้อเท็จจริงก่อน</p>
+<p>ต้องให้ผู้ถูกกล่าวหา <strong>มีโอกาสชี้แจง</strong></p>
+<p>ไม่มีมูล → ยุติเรื่อง | มีมูล → ดำเนินการต่อ</p>
+<h3 id="118">มาตรา 118</h3>
+<p>ถ้าเป็น <strong>วินัยไม่ร้ายแรง</strong> → ดำเนินการตามมาตรา 124</p>
+<h3 id="119">มาตรา 119 <span class="stars" data-n="5">●●●●●</span></h3>
+<p>ถ้าเป็น <strong>วินัยร้ายแรง</strong> → ต้องแต่งตั้ง <strong>คณะกรรมการสอบสวน</strong></p>
+<p>ต้องแจ้งข้อกล่าวหา แจ้งสรุปพยานหลักฐาน เปิดโอกาสให้ชี้แจง เปิดโอกาสนำสืบแก้ข้อกล่าวหา</p>
+<p>ถ้าผิด → ลงโทษตามมาตรา 124 หรือ 125 | ถ้าไม่ผิด → ยุติเรื่อง</p>
+</section>
+<section class="sec" id="40-120"><h2 id="40-120">40. มาตรา 120 — ระยะเวลาสำคัญ <span class="stars" data-n="5">●●●●●</span></h2>
+<p>การพิจารณาของผู้มีอำนาจ → ต้องเสร็จภายใน <strong>60 วัน</strong> นับแต่ได้รับสำนวนที่ครบถ้วนสมบูรณ์</p>
+<p>ขยายได้ไม่เกิน <strong>2 ครั้ง</strong> ครั้งละไม่เกิน <strong>30 วัน</strong></p>
+<p>ถ้ายังไม่เสร็จ → ผู้บังคับบัญชาเหนือขึ้นไปต้องพิจารณาแทนภายใน <strong>30 วัน</strong> และมีการดำเนินการทางวินัยกับผู้บังคับบัญชาที่ล่าช้า</p>
+<p>ความผิดที่ปรากฏชัดแจ้งตาม ก.ตร. → อาจดำเนินการโดย <strong>ไม่ต้องสอบสวน</strong></p>
+</section>
+<section class="sec" id="41-121122"><h2 id="41-121122">41. มาตรา 121–122 — คดีอาญากับวินัย <span class="stars" data-n="5">●●●●●</span></h2>
+<p><strong>มีคดีอาญา ≠ ต้องหยุดคดีวินัย</strong></p>
+<p>การดำเนินคดีอาญา → ไม่เป็นเหตุให้ต้องชะลอการดำเนินการทางวินัย</p>
+<p>ดังนั้น <strong>วินัยกับอาญาดำเนินการคู่ขนานกันได้</strong></p>
+<p>ถ้าศาลภายหลังพิพากษาว่าไม่ได้กระทำผิด → ต้องนำคำพิพากษามาทบทวนการลงโทษทางวินัยตามเงื่อนไขของกฎหมาย</p>
+</section>
+<section class="sec" id="42-123"><h2 id="42-123">42. มาตรา 123 — กักตัวระหว่างสอบสวน</h2>
+<p>ถ้าจำเป็น เช่น เกรงหลบหนี ไปทำร้ายผู้เสียหาย ข่มขู่พยาน กักตัวได้เท่าที่จำเป็น แต่ <strong>ไม่เกิน 15 วัน</strong> และไม่เกินอำนาจกักขังของผู้สั่ง</p>
+</section>
+<section class="sec" id="43-124"><h2 id="43-124">43. มาตรา 124 — วินัยไม่ร้ายแรง</h2>
+<p>โทษที่ใช้ได้: ภาคทัณฑ์ ทัณฑกรรม กักยาม กักขัง ตัดเงินเดือน</p>
+<p>ถ้าผิดเล็กน้อยและมีเหตุสมควรงดโทษ → อาจทำทัณฑ์บนเป็นหนังสือหรือว่ากล่าวตักเตือน</p>
+</section>
+<section class="sec" id="44-125"><h2 id="44-125">44. มาตรา 125 — วินัยร้ายแรง <span class="stars" data-n="5">●●●●●</span></h2>
+<p>โทษ <strong>ปลดออก หรือ ไล่ออก</strong></p>
+<p>แม้มีเหตุลดหย่อน → <strong>ห้ามลดต่ำกว่าปลดออก</strong></p>
+<p>ผู้ถูกลงโทษ <strong>ปลดออก</strong> → มีสิทธิได้รับบำเหน็จบำนาญเสมือนลาออก</p>
+<p>คณะกรรมการเสนอแนะโทษต้องเสนอภายใน <strong>30 วัน</strong> นับแต่ได้รับสำนวน</p>
+</section>
+<section class="sec" id="45-126130"><h2 id="45-126130">45. มาตรา 126–130</h2>
+<h3 id="126">มาตรา 126</h3>
+<p>ผู้บังคับบัญชาระดับเหนือสามารถตรวจสอบการลงโทษ อาจเพิ่มโทษ ลดโทษ งดโทษ ยกโทษ แก้คำสั่ง</p>
+<p>ถ้าเห็นว่าเป็นวินัยร้ายแรง → รายงาน ผบ.ตร.</p>
+<h3 id="127">มาตรา 127</h3>
+<p>การดำเนินการวินัยร้ายแรง/สั่งออกจากราชการ → ต้องรายงาน <strong>ก.ตร.</strong></p>
+<h3 id="128">มาตรา 128</h3>
+<p>ผู้สืบสวนและกรรมการสอบสวนเป็น <strong>เจ้าพนักงานตามประมวลกฎหมายอาญา</strong></p>
+<p>กรรมการสอบสวนมีอำนาจคล้ายพนักงานสอบสวนตาม ป.วิ.อาญาในส่วนที่เกี่ยวข้อง</p>
+<h3 id="129">มาตรา 129 <span class="stars" data-n="3">●●●</span></h3>
+<p>แม้ออกจากราชการแล้ว หากมีการกล่าวหาเกี่ยวกับความผิดวินัยร้ายแรงที่เกิดขณะรับราชการ → ยังดำเนินการทางวินัยได้</p>
+<p>โดยหลักต้องสั่งลงโทษภายใน <strong>3 ปี</strong> ตามเงื่อนไขที่กฎหมายกำหนด</p>
+<h3 id="130">มาตรา 130</h3>
+<p>กรณี ป.ป.ช./ป.ป.ท. ชี้มูล → ดำเนินการตามกฎหมาย ป.ป.ช./ป.ป.ท. ที่เกี่ยวข้อง</p>
+</section>
+<section class="sec" id="46-131"><h2 id="46-131">46. มาตรา 131 — พักราชการ/ออกจากราชการไว้ก่อน <span class="stars" data-n="5">●●●●●</span></h2>
+<p>ใช้เมื่อถูกกล่าวหาวินัยร้ายแรงและตั้งกรรมการสอบสวน หรือถูกกล่าวหาคดีอาญา/ถูกฟ้องคดีอาญา เว้นแต่ประมาท ลหุโทษ</p>
+<p>ผู้มีอำนาจอาจสั่ง <strong>พักราชการ</strong> หรือ <strong>ให้ออกจากราชการไว้ก่อน</strong></p>
+<p>ถ้าภายหลังไม่ผิด หรือผิดไม่ถึงปลด/ไล่ออก → ต้องสั่งกลับเข้ารับราชการตามเงื่อนไข</p>
+<p>สถานะระหว่าง "ออกจากราชการไว้ก่อน" → ยังถือเป็น <strong>ข้าราชการตำรวจ</strong> และถ้าลงโทษภายหลัง → มีผลย้อนหลังถึงวันที่พักราชการ/ออกจากราชการไว้ก่อนตามเงื่อนไข</p>
+</section>
+<section class="sec" id="47-133139"><h2 id="47-133139">47. มาตรา 133–139 — การออกจากราชการ <span class="stars" data-n="5">●●●●●</span></h2>
+<h3 id="133">มาตรา 133</h3>
+<p>ตำรวจออกจากราชการเมื่อ</p>
+<ol>
+<li>ตาย</li>
+<li>พ้นราชการตามกฎหมายบำเหน็จบำนาญ</li>
+<li>ลาออก</li>
+<li>ถูกสั่งให้ออกตามกรณีที่กฎหมายกำหนด</li>
+<li>ปลดออก</li>
+<li>ไล่ออก</li>
+</ol>
+<h3 id="134">มาตรา 134</h3>
+<p>ถ้าภายหลังพบว่าขาดคุณสมบัติ มีลักษณะต้องห้าม ขาดคุณสมบัติเฉพาะตำแหน่งตั้งแต่ก่อนบรรจุ → สั่งให้ออกจากราชการได้</p>
+<p>ถ้าเข้ารับราชการโดยสุจริต → ถือเป็นการออกเพื่อรับบำเหน็จบำนาญเหตุทดแทนตามกฎหมายบำเหน็จบำนาญ</p>
+</section>
+<section class="sec" id="48-135"><h2 id="48-135">48. มาตรา 135 — การลาออก <span class="stars" data-n="5">●●●●●</span></h2>
+<p><strong>กรณีลาออกเพื่อ</strong> ดำรงตำแหน่งตามรัฐธรรมนูญ ตำแหน่งทางการเมือง สมัครรับเลือกตั้ง รับเลือกเป็น ส.ส. ส.ว. สมาชิกสภาท้องถิ่น ผู้บริหารท้องถิ่น → การลาออกมีผล <strong>ตั้งแต่วันที่ขอลาออก</strong></p>
+<p><strong>กรณีทั่วไป</strong> ถ้าราชการเห็นว่าจำเป็นเพื่อประโยชน์ราชการ → ยับยั้งการลาออกได้ไม่เกิน <strong>90 วัน</strong></p>
+<p>ถ้าไม่ยับยั้ง → มีผลตั้งแต่วันขอลาออก</p>
+</section>
+<section class="sec" id="49-136139"><h2 id="49-136139">49. มาตรา 136–139</h2>
+<h3 id="136">มาตรา 136</h3>
+<p>อาจให้ออกจากราชการเพื่อรับบำเหน็จบำนาญเหตุทดแทน เช่น เจ็บป่วยจนปฏิบัติหน้าที่ไม่ได้สม่ำเสมอ สมัครไปปฏิบัติงานอื่นตามความประสงค์ของราชการ ขาดคุณสมบัติบางประการ ไม่สามารถปฏิบัติราชการให้มีประสิทธิภาพ/ประสิทธิผลในระดับที่ราชการพอใจ</p>
+<h3 id="137">มาตรา 137</h3>
+<p>กรณี <strong>หย่อนความสามารถ / บกพร่องในหน้าที่ / ประพฤติตนไม่เหมาะสมกับตำแหน่ง</strong> ถ้าปล่อยให้อยู่ต่อจะเสียหายแก่ราชการ → ตั้งคณะกรรมการสอบสวน</p>
+<h3 id="138">มาตรา 138</h3>
+<p>กรณีมีมลทินหรือมัวหมองตามเงื่อนไขของกฎหมาย → ออกจากราชการเพื่อรับบำเหน็จบำนาญเหตุทดแทนได้</p>
+<h3 id="139">มาตรา 139</h3>
+<p>ถูกจำคุกถึงที่สุดจากความผิดประมาท ลหุโทษ ถ้ายังไม่ถึงขั้นปลด/ไล่ออก แต่ให้อยู่ต่อจะเสียหายราชการ → ออกจากราชการเพื่อรับบำเหน็จบำนาญเหตุทดแทนได้</p>
+</section>
+<section class="sec" id="50-140"><h2 id="50-140">50. มาตรา 140 — ตำแหน่งระดับสูง</h2>
+<p>ตำแหน่ง ผบ.ตร., จตช., รอง ผบ.ตร., ตำแหน่งเทียบเท่า การพ้นจากตำแหน่ง → นำความกราบบังคมทูล เว้นแต่ ตาย เกษียณ พ้นราชการเพราะถูกลงโทษ</p>
+<p>ส่วนตั้งแต่ ผบก. หรือเทียบเท่าขึ้นไป → นายกรัฐมนตรีนำความกราบบังคมทูลเพื่อทรงทราบ</p>
+</section>
+<section class="sec" id="51-141"><h2 id="51-141">51. มาตรา 141 — การอุทธรณ์ <span class="stars" data-n="5">●●●●●</span></h2>
+<p>จำตารางนี้ให้แม่น</p>
+<table>
+<thead>
+<tr>
+<th>โทษ</th>
+<th>อุทธรณ์ต่อ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ภาคทัณฑ์</td>
+<td>ผู้บังคับบัญชาของผู้สั่งลงโทษ</td>
+</tr>
+<tr>
+<td>ทัณฑกรรม</td>
+<td>ผู้บังคับบัญชาของผู้สั่งลงโทษ</td>
+</tr>
+<tr>
+<td>กักยาม</td>
+<td>ผู้บังคับบัญชาของผู้สั่งลงโทษ</td>
+</tr>
+<tr>
+<td>กักขัง</td>
+<td>ผู้บังคับบัญชาของผู้สั่งลงโทษ</td>
+</tr>
+<tr>
+<td>ตัดเงินเดือน</td>
+<td>ผู้บังคับบัญชาของผู้สั่งลงโทษ</td>
+</tr>
+<tr>
+<td>ปลดออก</td>
+<td><strong>ก.พ.ค.ตร.</strong></td>
+</tr>
+<tr>
+<td>ไล่ออก</td>
+<td><strong>ก.พ.ค.ตร.</strong></td>
+</tr>
+<tr>
+<td>สั่งให้ออกจากราชการ</td>
+<td><strong>ก.พ.ค.ตร.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>ถ้า ผบ.ตร. เป็นผู้สั่งลงโทษใน 5 โทษแรก → อุทธรณ์ต่อ <strong>ก.ตร.</strong></p>
+<p><strong>ระยะเวลา:</strong> อุทธรณ์ภายใน <strong>30 วัน</strong> นับแต่ทราบคำสั่ง</p>
+</section>
+<section class="sec" id="52"><h2 id="52">52. ระยะเวลาการพิจารณาอุทธรณ์ <span class="stars" data-n="5">●●●●●</span></h2>
+<p>ก.ตร. หรือ ก.พ.ค.ตร. ต้องพิจารณาให้เสร็จภายใน <strong>120 วัน</strong></p>
+<p>ขยายได้ไม่เกิน <strong>2 ครั้ง</strong> ครั้งละไม่เกิน <strong>60 วัน</strong></p>
+<p>ถ้ายังไม่เสร็จตามกำหนด → ผู้มีสิทธิสามารถฟ้องศาลปกครองได้ภายใน <strong>90 วัน</strong></p>
+</section>
+<section class="sec" id="53-142146"><h2 id="53-142146">53. มาตรา 142–146</h2>
+<h3 id="142">มาตรา 142</h3>
+<p>เมื่อ ก.พ.ค.ตร. วินิจฉัยแล้ว → ผู้บังคับบัญชาต้องดำเนินการตามคำวินิจฉัยภายใน <strong>30 วัน</strong></p>
+<p>ถ้าไม่เห็นด้วยกับคำวินิจฉัย → ฟ้องศาลปกครองสูงสุดภายใน <strong>90 วัน</strong></p>
+<p>ผู้บังคับบัญชาที่จงใจไม่ปฏิบัติตาม → มีความผิดตามที่กฎหมายกำหนด</p>
+<h3 id="143">มาตรา 143</h3>
+<p>ก.พ.ค.ตร. มีอำนาจ เช่น เรียกสำนวน สั่งสอบสวนใหม่ สั่งสอบสวนเพิ่มเติม เรียกบุคคลมาให้ถ้อยคำ เรียกเอกสาร/หลักฐาน เข้าอาคารหรือสถานที่ที่เกี่ยวข้องในเวลาที่กฎหมายกำหนด</p>
+<h3 id="144">มาตรา 144</h3>
+<p>ก.พ.ค.ตร. อาจไม่รับอุทธรณ์ ยกอุทธรณ์ แก้ไขคำสั่ง ยกเลิกคำสั่ง เยียวยาความเสียหาย ดำเนินการอื่นเพื่อความยุติธรรม</p>
+<p><strong>แต่การแก้ไขคำวินิจฉัย → ห้ามเพิ่มโทษ</strong></p>
+</section>
+<section class="sec" id="54-147150"><h2 id="54-147150">54. การร้องทุกข์ มาตรา 147–150 <span class="stars" data-n="5">●●●●●</span></h2>
+<h3 id="147">มาตรา 147</h3>
+<p>ตำรวจร้องทุกข์ได้หากเห็นว่าผู้บังคับบัญชาใช้อำนาจไม่ถูกต้อง ไม่ปฏิบัติตามกฎหมาย/ระเบียบ ปฏิบัติโดยมิชอบ กฎ ก.ตร. ขัด พ.ร.บ. เกิดความไม่เป็นธรรม</p>
+<p><strong>แต่ถ้าเป็นเรื่องที่มีสิทธิอุทธรณ์ → ใช้ช่องทางอุทธรณ์ ไม่ใช้ร้องทุกข์</strong></p>
+<h3 id="148">มาตรา 148 — ร้องทุกข์ต่อใคร <span class="stars" data-n="5">●●●●●</span></h3>
+<p><strong>เหตุเกิดจากผู้บังคับบัญชา</strong> → ร้องต่อ <strong>ผู้บังคับบัญชาชั้นเหนือขึ้นไปตามลำดับ</strong></p>
+<p><strong>เหตุเกิดจากหัวหน้าส่วนราชการระดับกองบัญชาการขึ้นไป</strong> → ร้องต่อ <strong>ก.พ.ค.ตร.</strong></p>
+<p><strong>ร้องว่ากฎ ก.ตร. ไม่เป็นธรรมหรือขัด พ.ร.บ.</strong> → <strong>ก.พ.ค.ตร.</strong></p>
+<h3 id="149">มาตรา 149</h3>
+<p>ผู้พิจารณาร้องทุกข์อาจไม่รับ ยกคำร้อง แก้คำสั่ง ยกเลิกคำสั่ง เยียวยาความเสียหาย ดำเนินการอื่นเพื่อความยุติธรรม</p>
+<p>ถ้าร้องทุกข์ต่อผู้บังคับบัญชาแล้วไม่พอใจ → อุทธรณ์ต่อ <strong>ก.พ.ค.ตร.</strong> ภายใน <strong>30 วัน</strong></p>
+<h3 id="150">มาตรา 150</h3>
+<p>ถ้า ก.พ.ค.ตร. เห็นว่ากฎกระทรวง/กฎ ก.ตร./ระเบียบ/ข้อบังคับ/ประกาศ/มติ/คำสั่ง ไม่สอดคล้องกับ <strong>ระบบคุณธรรมตามมาตรา 60</strong> → แจ้งผู้มีอำนาจให้แก้ไขหรือยกเลิก</p>
+</section>
+<section class="sec" id="55-151155"><h2 id="55-151155">55. เครื่องแบบตำรวจ มาตรา 151–155 <span class="stars" data-n="5">●●●●●</span></h2>
+<h3 id="151">มาตรา 151</h3>
+<p>ชนิด/ประเภท/ลักษณะเครื่องแบบ → กำหนดโดย <strong>กฎกระทรวง</strong></p>
+<h3 id="152">มาตรา 152 <span class="stars" data-n="1">●</span></h3>
+<p>แต่งเครื่องแบบตำรวจโดยไม่มีสิทธิ → จำคุก <strong>3 เดือน–5 ปี</strong></p>
+<p>ถ้าอยู่ในเขตกฎอัยการศึก เขตประกาศภาวะฉุกเฉิน หรือแต่งเพื่อกระทำความผิดอาญา → จำคุก <strong>1–10 ปี</strong></p>
+<h3 id="153">มาตรา 153</h3>
+<p>ตำรวจแต่งเครื่องแบบขณะกระทำความผิดอาญาที่มีโทษจำคุกสูงสุดตั้งแต่ 1 ปีขึ้นไป → จำคุก <strong>1–7 ปี</strong></p>
+<h3 id="154">มาตรา 154</h3>
+<p>แต่งกายคล้ายเครื่องแบบตำรวจ แล้วทำให้ตำรวจถูกดูหมิ่น ถูกเกลียดชัง ราชการเสียหาย บุคคลอื่นหลงเชื่อว่าเป็นตำรวจ → จำคุกไม่เกิน <strong>3 เดือน</strong> หรือปรับ <strong>1,000–10,000 บาท</strong> หรือทั้งจำทั้งปรับ</p>
+<p>ถ้าอยู่ในเขตกฎอัยการศึก/ฉุกเฉิน/เพื่อกระทำผิดอาญา → จำคุก <strong>1–10 ปี</strong></p>
+<h3 id="155">มาตรา 155</h3>
+<p>ภาพยนตร์/ละคร/การแสดงที่ใช้เครื่องแบบตำรวจหรือชุดคล้ายตำรวจ → ผู้รับผิดชอบการแสดงต้องแจ้งหัวหน้าสถานีตำรวจท้องที่ตามหลักเกณฑ์กฎกระทรวง</p>
+</section>
+<section class="sec" id="56-156161"><h2 id="56-156161">56. กองทุน มาตรา 156–161 <span class="stars" data-n="4">●●●●</span></h2>
+<h3 id="156">มาตรา 156</h3>
+<p>จัดตั้ง <strong>กองทุนเพื่อการสืบสวน สอบสวน การป้องกันและปราบปรามการกระทำความผิดทางอาญา</strong></p>
+<p>วัตถุประสงค์ → สนับสนุนค่าใช้จ่ายในการสืบสวน สอบสวน ป้องกันและปราบปรามอาชญากรรม</p>
+<h3 id="157">มาตรา 157 — เงินกองทุนมาจาก <span class="stars" data-n="1">●</span></h3>
+<ol>
+<li>ทรัพย์สินที่โอนมาตามมาตรา 176</li>
+<li>เงินอุดหนุนรัฐบาล</li>
+<li>เงิน/ทรัพย์สินจากหน่วยงานรัฐ รัฐวิสาหกิจ ท้องถิ่น มูลนิธิ</li>
+<li>ดอกผลกองทุน</li>
+</ol>
+<p>ครม. อาจอนุมัติให้เงินบางประเภท เช่น ค่าเปรียบเทียบปรับคดีอาญา ค่าปรับจราจรส่วนที่ต้องนำส่งรายได้แผ่นดิน ค่าปรับทางปกครอง เป็นของกองทุนได้ตามเงื่อนไข</p>
+</section>
+<section class="sec" id="57-159"><h2 id="57-159">57. มาตรา 159 — คณะกรรมการบริหารกองทุน</h2>
+<p>ประธาน: <strong>ผบ.ตร.</strong></p>
+<p>กรรมการประกอบด้วย จเรตำรวจแห่งชาติ ผู้แทนกรมบัญชีกลาง ผู้แทนสำนักงานอัยการสูงสุด ผู้แทนสำนักงบประมาณ รอง ผบ.ตร. หรือผู้ช่วย ผบ.ตร. ที่ ผบ.ตร. มอบหมาย 2 คน</p>
+<p>เลขานุการ → ตำรวจที่ประธานแต่งตั้ง 1 คน</p>
+<p>ผู้ช่วยเลขานุการ → ไม่เกิน 2 คน</p>
+</section>
+<section class="sec" id="58-160161"><h2 id="58-160161">58. มาตรา 160–161</h2>
+<p>คณะกรรมการบริหารกองทุนมีหน้าที่บริหารกองทุน กำหนดหลักเกณฑ์จ่ายเงิน จัดระบบบัญชี กำหนดการรับ/เก็บ/จ่ายเงิน กำหนดค่าใช้จ่าย ตั้งอนุกรรมการ ออกระเบียบ/ข้อบังคับ/ประกาศ รายงานสถานะการเงินต่อ ก.ต.ช.</p>
+<p><strong>งบการเงิน</strong> ต้องส่งให้ผู้สอบบัญชีตรวจสอบภายใน <strong>90 วันนับแต่สิ้นปีปฏิทิน</strong></p>
+<p>ผู้สอบบัญชีคือ <strong>สำนักงานการตรวจเงินแผ่นดิน</strong></p>
+</section>
+<section class="sec" id="59-162181"><h2 id="59-162181">59. บทเฉพาะกาล มาตรา 162–181 <span class="stars" data-n="5">●●●●●</span></h2>
+<p>ส่วนนี้ข้อสอบชอบออก <strong>ตัวเลขระยะเวลา</strong></p>
+<h3 id="162">มาตรา 162</h3>
+<p>โครงสร้างส่วนราชการเดิม → ใช้ต่อไปก่อนได้ แต่ไม่เกิน <strong>1 ปี</strong></p>
+<h3 id="163">มาตรา 163 <span class="stars" data-n="1">●</span></h3>
+<p>กองบังคับการตำรวจรถไฟ → <strong>ยุบเมื่อครบ 1 ปี</strong> นับแต่ พ.ร.บ. ใช้บังคับ</p>
+<p>งบประมาณ/กำลังพลนำไปจัดสรรตามมาตรา 12</p>
+<h3 id="164">มาตรา 164</h3>
+<p>คดีสืบสวน/สอบสวนของตำรวจรถไฟที่ค้างอยู่ → โอนไปยังสถานีตำรวจหรือกองบังคับการตามที่ ผบ.ตร. กำหนด</p>
+<p>การสอบสวนเดิมและที่จะดำเนินต่อ → ถือว่าเป็นการดำเนินการโดยพนักงานสอบสวนผู้มีอำนาจตามกฎหมาย</p>
+</section>
+<section class="sec" id="60-165"><h2 id="60-165">60. มาตรา 165 — โอนภารกิจทรัพยากรธรรมชาติ <span class="stars" data-n="3">●●●</span></h2>
+<p>ภายใน <strong>2 ปี</strong> ต้องพิจารณาว่าเรื่องที่เกี่ยวกับป่าไม้ ป่าสงวน อุทยาน สัตว์ป่า ทะเลและชายฝั่ง ประมง สิ่งแวดล้อม น้ำบาดาล เลื่อยโซ่ยนต์ ฯลฯ ควรถ่ายโอนภารกิจจากตำรวจไปให้หน่วยงานเฉพาะด้านหรือไม่</p>
+<p>หากตกลงไม่ได้ตามกำหนด → กองบังคับการปราบปรามทรัพยากรธรรมชาติและสิ่งแวดล้อม <strong>ยุบ</strong></p>
+<p><strong>ขยายเวลาได้หรือไม่?</strong> ได้ ครม. โดยข้อเสนอแนะของ ก.ต.ช. → ขยายได้ครั้งละ <strong>1 ปี</strong> แต่ไม่เกิน <strong>3 ครั้ง</strong> ดังนั้นสูงสุดเพิ่มได้ 3 ปี</p>
+</section>
+<section class="sec" id="61-166"><h2 id="61-166">61. มาตรา 166 — ภารกิจอนุญาต/จดทะเบียน <span class="stars" data-n="3">●●●</span></h2>
+<p>ภายใน <strong>5 ปี</strong> ก.ต.ช. ต้องทบทวนอำนาจตำรวจในเรื่องการอนุญาต การจดทะเบียน</p>
+<p>หากเห็นว่าตำรวจไม่จำเป็นต้องทำ → โอนให้หน่วยงานอื่นตามกระบวนการ</p>
+<p>หาก ก.ต.ช. ไม่ดำเนินการ/ไม่เสร็จภายในกำหนด → อำนาจของตำรวจในเรื่องนั้น <strong>สิ้นสุด</strong> เว้นแต่ ครม. และรัฐสภามีมติให้คงอำนาจไว้</p>
+</section>
+<section class="sec" id="62-168"><h2 id="62-168">62. มาตรา 168 — กรอบกำลังพล <span class="stars" data-n="3">●●●</span></h2>
+<p>ช่วงเริ่มแรกไม่เกิน <strong>2 ปี</strong> ให้ใช้กรอบกำลังพลพื้นฐานที่ ก.ตร. กำหนด</p>
+<p>ต้องกำหนดให้เสร็จภายใน <strong>240 วัน</strong></p>
+<p>และ สตช. ต้องดำเนินการให้เป็นไปตามมาตรา 12 ภายใน <strong>3 ปีหลังจากครบกำหนด 2 ปีดังกล่าว</strong></p>
+</section>
+<section class="sec" id="63-169171"><h2 id="63-169171">63. มาตรา 169–171</h2>
+<h3 id="169">มาตรา 169</h3>
+<p>ตำรวจตาม พ.ร.บ. 2547 ก่อนกฎหมายใหม่ใช้ → เป็นตำรวจตาม พ.ร.บ. 2565 ต่อไป</p>
+<h3 id="170">มาตรา 170</h3>
+<p>ผู้ที่มียศตามกฎหมายเดิม → ถือว่ามียศตามกฎหมายใหม่ในลำดับเดียวกัน</p>
+<h3 id="171">มาตรา 171</h3>
+<p>เรื่องตำรวจไม่มียศ → ไม่กระทบผู้ที่ดำรงตำแหน่งและมียศอยู่ก่อนกฎหมายใหม่ในช่วงก่อนพระราชกฤษฎีกาตามมาตรา 8 มีผลใช้บังคับ</p>
+</section>
+<section class="sec" id="64-172"><h2 id="64-172">64. มาตรา 172 — ก.ต.ช. ช่วงเริ่มแรก</h2>
+<p>ระหว่างยังไม่มีกรรมการผู้ทรงคุณวุฒิ ก.ต.ช. → ใช้เฉพาะประธานและกรรมการตามที่กฎหมายกำหนดเท่าที่จำเป็นไปก่อน</p>
+<p>ต้องเลือกกรรมการผู้ทรงคุณวุฒิให้เสร็จภายใน <strong>120 วัน</strong></p>
+</section>
+<section class="sec" id="65-173"><h2 id="65-173">65. มาตรา 173 — ก.ตร. ช่วงเริ่มแรก</h2>
+<p>ระหว่างยังไม่มีกรรมการผู้ทรงคุณวุฒิ ก.ตร. → ดำเนินการเท่าที่จำเป็นไปก่อน</p>
+<p>ต้องเลือกกรรมการผู้ทรงคุณวุฒิให้เสร็จภายใน <strong>180 วัน</strong></p>
+</section>
+<section class="sec" id="66-174"><h2 id="66-174">66. มาตรา 174 — จัดกลุ่มสายงาน</h2>
+<p>ก.ตร. ต้องกำหนดตำแหน่งตามกลุ่มสายงานและระดับตำแหน่ง ให้เสร็จภายใน <strong>180 วัน</strong> นับแต่มีกรรมการ ก.ตร. ผู้ทรงคุณวุฒิ</p>
+<p>ตำรวจไม่มียศ → กำหนดตำแหน่งให้เสร็จภายใน <strong>1 ปี</strong></p>
+<p>การนำตำรวจเข้าสู่กลุ่มสายงาน → ต้องดำเนินการภายใน <strong>1 ปี</strong> ตามเงื่อนไขของมาตรา</p>
+</section>
+<section class="sec" id="67-175"><h2 id="67-175">67. มาตรา 175</h2>
+<p>หลังเลือกกรรมการ ก.ตร. ผู้ทรงคุณวุฒิแล้ว → ดำเนินการคัดเลือกกรรมการ ก.ร.ตร. ผู้ทรงคุณวุฒิ ให้เสร็จและประกาศในราชกิจจานุเบกษาภายใน <strong>240 วัน</strong></p>
+</section>
+<section class="sec" id="68-176"><h2 id="68-176">68. มาตรา 176</h2>
+<p>โอนกิจการ ทรัพย์สิน สิทธิ หน้าที่ หนี้ ภาระผูกพัน เงินงบประมาณ ของกองทุนเดิมตาม พ.ร.บ. 2547 → ไปเป็นของ <strong>กองทุนใหม่ตาม พ.ร.บ. 2565</strong></p>
+</section>
+<section class="sec" id="69-177"><h2 id="69-177">69. มาตรา 177</h2>
+<p>ตำรวจที่รับราชการอยู่ก่อนกฎหมายใหม่ → ได้รับเงินเดือน/เงินประจำตำแหน่ง/เงินเพิ่ม/ค่าตอบแทนตามเดิม</p>
+<p>ถ้าเงินเดือนต่ำกว่าขั้นต่ำของระดับ → ปรับให้เท่าขั้นต่ำตั้งแต่วันที่กฎหมายใช้บังคับ</p>
+</section>
+<section class="sec" id="70-178"><h2 id="70-178">70. มาตรา 178 <span class="stars" data-n="3">●●●</span></h2>
+<p>ช่วงเริ่มแรก <strong>180 วัน</strong> การแต่งตั้งตำรวจ → ใช้หลักเกณฑ์ วิธีการ และเงื่อนไขเดิมที่ใช้อยู่ก่อน พ.ร.บ. ใหม่</p>
+<p>ถ้าใช้ไม่ได้ → ก.ตร. กำหนดได้ แต่ต้องไม่ขัด พ.ร.บ. ใหม่</p>
+</section>
+<section class="sec" id="71-179"><h2 id="71-179">71. มาตรา 179</h2>
+<p>ระหว่างที่ยังไม่มีกฎ/ระเบียบใหม่ → ใช้กฎหมาย/กฎ/ระเบียบ/มติเดิมไปก่อน <strong>เท่าที่ไม่ขัดหรือแย้งกับ พ.ร.บ. 2565</strong></p>
+</section>
+<section class="sec" id="72-180"><h2 id="72-180">72. มาตรา 180 — วินัยค้างจากกฎหมายเดิม</h2>
+<p>ถ้าความผิดเกิดก่อน พ.ร.บ. ใหม่ → การลงโทษอาจอาศัยกฎหมายเดิมตามที่กฎหมายกำหนด แต่การสอบสวน/พิจารณาโดยหลักให้ใช้กฎหมายใหม่</p>
+<p>ข้อยกเว้นคือ ถ้าเริ่มสอบสวนตามกฎหมายเดิมก่อนแล้วและยังไม่เสร็จ → ดำเนินต่อด้วยกฎหมายเดิมจนเสร็จ</p>
+<p>ถ้าสอบสวน/พิจารณาเสร็จแล้วก่อนกฎหมายใหม่ → ผลเดิมยังใช้ได้</p>
+</section>
+<section class="sec" id="73-181"><h2 id="73-181">73. มาตรา 181 — อุทธรณ์/ร้องทุกข์ค้างเดิม <span class="stars" data-n="3">●●●</span></h2>
+<p>เรื่องอุทธรณ์/ร้องทุกข์ที่ยื่นก่อนกฎหมายใหม่และอยู่ในอำนาจ ก.ตร. → ก.ตร. ดำเนินการต่อจนเสร็จ</p>
+<p>เรื่องที่ยื่นในวันหรือหลัง พ.ร.บ. ใช้บังคับ → <strong>ก.พ.ค.ตร.</strong> พิจารณา</p>
+<p>ระหว่างยังไม่มี ก.พ.ค.ตร. → ก.ตร. ทำหน้าที่แทนไปก่อน</p>
+<p>การจัดตั้ง ก.พ.ค.ตร. → ต้องเสร็จภายใน <strong>180 วัน</strong></p>
+</section>
+<section class="sec" id="_1"><h2 id="_1">🧠 ตาราง "ตัวเลขทองคำ" ที่ต้องจำก่อนเข้าห้องสอบ</h2>
+<table>
+<thead>
+<tr>
+<th>เรื่อง</th>
+<th style="text-align: right;">ตัวเลข</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>อายุขั้นต่ำสมัครตำรวจ</td>
+<td style="text-align: right;"><strong>18 ปี</strong></td>
+</tr>
+<tr>
+<td>ก.ต.ช. ผู้ทรงคุณวุฒิ อายุขั้นต่ำ</td>
+<td style="text-align: right;"><strong>40 ปี</strong></td>
+</tr>
+<tr>
+<td>ก.ต.ช. วาระ</td>
+<td style="text-align: right;"><strong>4 ปี</strong></td>
+</tr>
+<tr>
+<td>ก.ต.ช. วาระติดต่อกันสูงสุด</td>
+<td style="text-align: right;"><strong>2 วาระ</strong></td>
+</tr>
+<tr>
+<td>ก.ต.ช. อายุพ้นตำแหน่ง</td>
+<td style="text-align: right;"><strong>70 ปี</strong></td>
+</tr>
+<tr>
+<td>สรรหา ก.ต.ช. ใหม่ก่อนครบวาระ</td>
+<td style="text-align: right;"><strong>90 วัน</strong></td>
+</tr>
+<tr>
+<td>ประชุม ก.ต.ช. อย่างน้อย</td>
+<td style="text-align: right;"><strong>4 ครั้ง/ปี</strong></td>
+</tr>
+<tr>
+<td>ก.พ.ค.ตร. จำนวน</td>
+<td style="text-align: right;"><strong>7 คน</strong></td>
+</tr>
+<tr>
+<td>ก.พ.ค.ตร. อายุ</td>
+<td style="text-align: right;"><strong>45–70 ปี</strong></td>
+</tr>
+<tr>
+<td>ก.พ.ค.ตร. วาระ</td>
+<td style="text-align: right;"><strong>6 ปี / 1 วาระ</strong></td>
+</tr>
+<tr>
+<td>ก.พ.ค.ตร. อายุพ้นตำแหน่ง</td>
+<td style="text-align: right;"><strong>75 ปี</strong></td>
+</tr>
+<tr>
+<td>ก.ร.ตร. ทนายความ</td>
+<td style="text-align: right;"><strong>20 ปี</strong></td>
+</tr>
+<tr>
+<td>แต่งตั้ง ผกก. ครั้งแรก</td>
+<td style="text-align: right;">สถานีระดับ <strong>กลาง</strong></td>
+</tr>
+<tr>
+<td>อุทธรณ์คำสั่ง</td>
+<td style="text-align: right;"><strong>30 วัน</strong></td>
+</tr>
+<tr>
+<td>ร้องทุกข์เรื่องอาวุโส/แต่งตั้ง</td>
+<td style="text-align: right;"><strong>30 วัน</strong></td>
+</tr>
+<tr>
+<td>ก.พ.ค.ตร. วินิจฉัยเรื่องอุทธรณ์</td>
+<td style="text-align: right;"><strong>120 วัน</strong></td>
+</tr>
+<tr>
+<td>ขยาย</td>
+<td style="text-align: right;"><strong>2 ครั้ง × 60 วัน</strong></td>
+</tr>
+<tr>
+<td>ฟ้องศาลเมื่อพิจารณาไม่เสร็จ</td>
+<td style="text-align: right;"><strong>90 วัน</strong></td>
+</tr>
+<tr>
+<td>ดำเนินการตามคำวินิจฉัย ก.พ.ค.ตร.</td>
+<td style="text-align: right;"><strong>30 วัน</strong></td>
+</tr>
+<tr>
+<td>ทบทวนอุทธรณ์หลังศาล</td>
+<td style="text-align: right;"><strong>90 วัน</strong></td>
+</tr>
+<tr>
+<td>กักตัวระหว่างสอบสวน</td>
+<td style="text-align: right;"><strong>ไม่เกิน 15 วัน</strong></td>
+</tr>
+<tr>
+<td>พิจารณาสำนวนวินัย</td>
+<td style="text-align: right;"><strong>60 วัน</strong></td>
+</tr>
+<tr>
+<td>ขยาย</td>
+<td style="text-align: right;"><strong>2 × 30 วัน</strong></td>
+</tr>
+<tr>
+<td>ขาดราชการเป็นวินัยร้ายแรง</td>
+<td style="text-align: right;"><strong>เกิน 15 วัน</strong></td>
+</tr>
+<tr>
+<td>ดำเนินวินัยกรณีขาดราชการ</td>
+<td style="text-align: right;"><strong>60 วัน</strong></td>
+</tr>
+<tr>
+<td>ขยาย</td>
+<td style="text-align: right;"><strong>2 × 60 วัน</strong></td>
+</tr>
+<tr>
+<td>งานทัณฑกรรม/งานระหว่างกัก</td>
+<td style="text-align: right;"><strong>ไม่เกิน 6 ชม./วัน</strong></td>
+</tr>
+<tr>
+<td>แต่งเครื่องแบบโดยไม่มีสิทธิ</td>
+<td style="text-align: right;"><strong>3 เดือน–5 ปี</strong></td>
+</tr>
+<tr>
+<td>เครื่องแบบในฉุกเฉิน/เพื่อก่ออาญา</td>
+<td style="text-align: right;"><strong>1–10 ปี</strong></td>
+</tr>
+<tr>
+<td>ตำรวจแต่งเครื่องแบบขณะก่ออาญา</td>
+<td style="text-align: right;"><strong>1–7 ปี</strong></td>
+</tr>
+<tr>
+<td>ชุดคล้ายตำรวจ</td>
+<td style="text-align: right;">ไม่เกิน <strong>3 เดือน</strong> / ปรับ <strong>1,000–10,000</strong></td>
+</tr>
+<tr>
+<td>เงินกองทุนส่งบัญชีให้สอบ</td>
+<td style="text-align: right;"><strong>90 วัน</strong></td>
+</tr>
+<tr>
+<td>โครงสร้างเดิมใช้ต่อ</td>
+<td style="text-align: right;"><strong>ไม่เกิน 1 ปี</strong></td>
+</tr>
+<tr>
+<td>ตำรวจรถไฟยุบ</td>
+<td style="text-align: right;"><strong>1 ปี</strong></td>
+</tr>
+<tr>
+<td>ทบทวนภารกิจทรัพยากรธรรมชาติ</td>
+<td style="text-align: right;"><strong>2 ปี</strong></td>
+</tr>
+<tr>
+<td>ขยายเรื่อง ม.165</td>
+<td style="text-align: right;"><strong>1 ปี × ไม่เกิน 3 ครั้ง</strong></td>
+</tr>
+<tr>
+<td>ทบทวนอำนาจอนุญาต/ทะเบียน</td>
+<td style="text-align: right;"><strong>5 ปี</strong></td>
+</tr>
+<tr>
+<td>กรอบกำลังพลเริ่มแรก</td>
+<td style="text-align: right;"><strong>2 ปี</strong></td>
+</tr>
+<tr>
+<td>กรอบพื้นฐานต้องกำหนด</td>
+<td style="text-align: right;"><strong>240 วัน</strong></td>
+</tr>
+<tr>
+<td>ก.ต.ช. ผู้ทรงคุณวุฒิช่วงแรก</td>
+<td style="text-align: right;"><strong>120 วัน</strong></td>
+</tr>
+<tr>
+<td>ก.ตร. ผู้ทรงคุณวุฒิช่วงแรก</td>
+<td style="text-align: right;"><strong>180 วัน</strong></td>
+</tr>
+<tr>
+<td>จัดตำแหน่งตามกลุ่มสายงาน</td>
+<td style="text-align: right;"><strong>180 วัน</strong></td>
+</tr>
+<tr>
+<td>ตำรวจไม่มียศ</td>
+<td style="text-align: right;"><strong>1 ปี</strong></td>
+</tr>
+<tr>
+<td>ก.ร.ตร. ช่วงแรก</td>
+<td style="text-align: right;"><strong>240 วัน</strong></td>
+</tr>
+<tr>
+<td>ช่วงแต่งตั้งตามหลักเกณฑ์เดิม</td>
+<td style="text-align: right;"><strong>180 วัน</strong></td>
+</tr>
+<tr>
+<td>จัดตั้ง ก.พ.ค.ตร.</td>
+<td style="text-align: right;"><strong>180 วัน</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="sec" id="15_1"><h2 id="15_1">🔥 15 เรื่องที่แนะนำให้ท่องก่อนสอบ</h2>
+<p>ถ้าเวลาอ่านเหลือน้อย ให้จำชุดนี้ก่อน</p>
+<p><strong>1. ก.ต.ช. vs ก.ตร. vs ก.พ.ค.ตร. vs ก.ร.ตร.</strong>
+ก.ต.ช. → นโยบาย/ยุทธศาสตร์ | ก.ตร. → บริหารบุคคล | ก.พ.ค.ตร. → อุทธรณ์/ร้องทุกข์/ระบบคุณธรรมของตำรวจ | ก.ร.ตร. → ร้องเรียนตำรวจจากประชาชน</p>
+<p><strong>2. สตช. อยู่ใต้ใคร?</strong> นายกรัฐมนตรี</p>
+<p><strong>3. ตำรวจมีกี่ประเภท?</strong> 2 ประเภท มียศ / ไม่มียศ</p>
+<p><strong>4. กลุ่มสายงานมีกี่กลุ่ม?</strong> 5 กลุ่ม บริหาร / อำนวยการ / สืบสวนสอบสวน / ป้องกันปราบปราม / วิชาชีพเฉพาะ</p>
+<p><strong>5. ชั้นตำรวจ</strong> สัญญาบัตร = ร.ต.ต.ขึ้นไป | ประทวน = ส.ต.ต.–ด.ต. | พลตำรวจ = พลตำรวจสำรอง</p>
+<p><strong>6. โทษวินัย</strong> 7 สถาน ภาคทัณฑ์ → ทัณฑกรรม → กักยาม → กักขัง → ตัดเงินเดือน → ปลด → ไล่</p>
+<p><strong>7. วินัยร้ายแรง</strong> จำคำว่า "ปลด/ไล่" และการลดโทษ ห้ามต่ำกว่าปลดออก</p>
+<p><strong>8. วินัยกับอาญา</strong> ไม่ต้องรอคดีอาญา ดำเนินการทางวินัยต่อได้</p>
+<p><strong>9. อุทธรณ์</strong> โทษเบา → ผู้บังคับบัญชา/ก.ตร. ตามกรณี | ปลด/ไล่/ออก → ก.พ.ค.ตร.</p>
+<p><strong>10. ระยะเวลาอุทธรณ์</strong> 30 วัน</p>
+<p><strong>11. ก.พ.ค.ตร. พิจารณา</strong> 120 วัน ขยาย 2 × 60 วัน</p>
+<p><strong>12. ร้องทุกข์เรื่องแต่งตั้ง</strong> ก.พ.ค.ตร. ภายใน 30 วัน</p>
+<p><strong>13. ซื้อขายตำแหน่ง</strong> จำคุกไม่เกิน 5 ปี</p>
+<p><strong>14. กรณีเครื่องแบบ</strong> ไม่มีสิทธิ → 3 เดือน–5 ปี | ฉุกเฉิน/เพื่อก่ออาญา → 1–10 ปี</p>
+<p><strong>15. บทเฉพาะกาล</strong> ตัวเลขที่ควรจำ: 120 → 180 → 240 → 1 → 2 → 3 → 5 ปี</p>
+<ul>
+<li>120 วัน = ก.ต.ช. ผู้ทรงคุณวุฒิ</li>
+<li>180 วัน = ก.ตร./จัดกลุ่ม/แต่งตั้งช่วงแรก</li>
+<li>240 วัน = ก.ร.ตร./กรอบกำลังพล</li>
+<li>1 ปี = หลายเรื่องของโครงสร้าง/ตำรวจรถไฟ</li>
+<li>2 ปี = ทรัพยากรธรรมชาติ</li>
+<li>3 ครั้ง = ขยาย ม.165</li>
+<li>5 ปี = ทบทวนอำนาจอนุญาต/จดทะเบียน</li>
+</ul>
+</section>
+<section class="sec" id="_2"><h2 id="_2">⚠️ จุดที่ต้องระวังมากในการทำข้อสอบ</h2>
+<p>ข้อสอบมักไม่ได้ถามแค่ "อะไร" แต่ถามว่า <strong>"ใคร + ภายในกี่วัน + กี่คน + กี่ปี + ยกเว้นกรณีใด"</strong></p>
+<p>โดยเฉพาะชุดนี้: <strong>40 / 45 / 70 / 75 ปี</strong> — <strong>30 / 60 / 90 / 120 / 180 / 240 วัน</strong> — <strong>15 วัน / 6 ชั่วโมง / 5 ปี / 10 ปี</strong> — <strong>33% / 50% / 2 ใน 3</strong></p>
+<p>และต้องแยกให้ชัดว่า <strong>ก.ต.ช. ไม่ใช่ ก.ตร.</strong>, <strong>ก.พ.ค.ตร. ไม่ใช่ ก.ร.ตร.</strong> เพราะหน้าที่แตกต่างกันอย่างชัดเจนตามโครงสร้างของกฎหมาย</p>
+<p><strong>หมายเหตุ:</strong> เนื้อหานี้สรุปจากไฟล์ พ.ร.บ.ตำรวจแห่งชาติ พ.ศ. 2565 ที่แนบมาเป็นหลัก โดยตัวไฟล์มีทั้งหมด 82 หน้า และเนื้อหาหลักครอบคลุมถึงมาตรา 181 รวมบทเฉพาะกาล</p></section>
+
+    <p class="footer-note">สรุปจากไฟล์ พ.ร.บ.ตำรวจแห่งชาติ พ.ศ. 2565 ที่ผู้ใช้แนบมา (ครอบคลุมมาตรา 1–181 รวมบทเฉพาะกาล) จัดทำเพื่อการอ่านทบทวนก่อนสอบ ควรตรวจสอบกับตัวบทกฎหมายฉบับเต็มประกอบด้วยทุกครั้ง</p>
+  </main>
+</div>
+
+<button class="fab" id="topBtn">↑ กลับขึ้นบนสุด</button>
+
+<script>
+// active link highlighting on scroll
+const links = Array.from(document.querySelectorAll('.nav-group a[data-target]'));
+const sections = links.map(l => document.getElementById(l.dataset.target)).filter(Boolean);
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const id = entry.target.id;
+    const link = links.find(l => l.dataset.target === id);
+    if(!link) return;
+    if(entry.isIntersecting){
+      links.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+sections.forEach(s => observer.observe(s));
+
+// search filter
+const searchInput = document.getElementById('navSearch');
+searchInput.addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.nav-group').forEach(group => {
+    let anyVisible = false;
+    group.querySelectorAll('li').forEach(li => {
+      const text = li.textContent.toLowerCase();
+      const match = q === '' || text.includes(q);
+      li.classList.toggle('nav-hidden', !match);
+      if(match) anyVisible = true;
+    });
+    group.classList.toggle('nav-hidden', !anyVisible);
+  });
+});
+
+// back to top
+document.getElementById('topBtn').addEventListener('click', () => {
+  window.scrollTo({top:0, behavior:'smooth'});
+  document.getElementById('sidebar').scrollTo({top:0, behavior:'smooth'});
+});
+
+// style the golden numbers table specially (last table on page)
+const tables = document.querySelectorAll('main table');
+if(tables.length) tables[tables.length-1].classList.add('golden-table');
+</script>
+</body>
+</html>

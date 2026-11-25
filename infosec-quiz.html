@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ข้อสอบความมั่นคงปลอดภัยสารสนเทศ (Information Security)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#152238; --navy-2:#1e3151; --paper:#f6f3ec;
+  --ink:#20242b; --ink-soft:#5b616d; --brass:#a67c2e; --brass-l:#c99a44;
+  --rule:#ded7c7; --card:#fff;
+  --ok:#2f6b4f; --ok-bg:#e8f3ec; --bad:#96342c; --bad-bg:#fbeceb;
+  --shadow:0 1px 3px rgba(21,34,56,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Sarabun',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Noto Serif Thai',serif;color:var(--navy);line-height:1.4;margin:0}
+button{font-family:'Sarabun',sans-serif}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px 90px}
+
+/* ---- header ---- */
+header{background:var(--navy);color:#fff;padding:26px 0 24px;margin-bottom:28px}
+header .wrap{padding-bottom:0}
+.badge{width:42px;height:42px;border-radius:50%;background:linear-gradient(155deg,var(--brass-l),var(--brass));
+  color:var(--navy);display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif Thai',serif;font-weight:800;font-size:14px;margin-bottom:12px}
+header h1{color:#fff;font-size:22px;margin-bottom:4px}
+header p{margin:0;color:#98a3ba;font-size:13.5px}
+
+/* ---- setup screen ---- */
+.panel{background:var(--card);border-radius:12px;padding:24px;box-shadow:var(--shadow);margin-bottom:18px}
+.panel h2{font-size:17px;margin-bottom:4px}
+.panel .hint{color:var(--ink-soft);font-size:13.5px;margin:0 0 16px}
+.opts{display:flex;flex-wrap:wrap;gap:9px}
+.chip{border:1px solid var(--rule);background:#fbf9f4;border-radius:8px;
+  padding:9px 15px;font-size:14px;cursor:pointer;color:var(--ink);transition:.15s}
+.chip:hover{border-color:var(--brass)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip .ct{opacity:.65;font-size:12.5px;margin-left:5px}
+.btn{background:var(--navy);color:#fff;border:none;border-radius:9px;
+  padding:13px 26px;font-size:15px;font-weight:600;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--navy-2)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--rule)}
+.btn.ghost:hover{background:#efeade}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+
+/* ---- progress ---- */
+.bar-wrap{position:sticky;top:0;z-index:20;background:var(--paper);
+  padding:12px 0 10px;border-bottom:1px solid var(--rule);margin-bottom:22px}
+.bar-top{display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;color:var(--ink-soft);margin-bottom:7px}
+.bar-top b{color:var(--navy);font-size:14px}
+.bar{height:5px;background:#e2dccd;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brass);width:0;transition:width .3s}
+
+/* ---- question ---- */
+.qcat{font-size:12.5px;color:var(--brass);font-weight:600;margin-bottom:8px}
+.qtext{font-size:18px;font-family:'Noto Serif Thai',serif;font-weight:600;
+  color:var(--navy);line-height:1.6;margin-bottom:18px}
+.choice{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;
+  background:var(--card);border:1px solid var(--rule);border-radius:10px;
+  padding:13px 16px;margin-bottom:10px;font-size:15px;color:var(--ink);
+  cursor:pointer;transition:.12s;box-shadow:var(--shadow);line-height:1.6}
+.choice:hover:not(:disabled){border-color:var(--brass);transform:translateX(2px)}
+.choice:disabled{cursor:default}
+.choice .k{flex:0 0 26px;height:26px;border-radius:7px;background:#efeade;
+  color:var(--navy);font-weight:600;font-size:13.5px;
+  display:flex;align-items:center;justify-content:center;margin-top:1px}
+.choice.correct{border-color:var(--ok);background:var(--ok-bg)}
+.choice.correct .k{background:var(--ok);color:#fff}
+.choice.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.choice.wrong .k{background:var(--bad);color:#fff}
+.choice.picked{border-width:2px}
+.choice.dim{opacity:.55}
+code{font-family:'SF Mono',Consolas,Menlo,monospace;background:#efeade;color:var(--navy);
+  padding:1px 6px;border-radius:5px;font-size:0.92em}
+.choice.correct code{background:#d7ead9}
+.choice.wrong code{background:#f6d9d6}
+.feedback code{background:#efeade;color:var(--navy);padding:1px 6px;border-radius:5px;font-size:0.92em}
+
+.feedback{border-radius:10px;padding:14px 16px;margin:16px 0 4px;font-size:14.5px;
+  border-left:3px solid;background:var(--card);box-shadow:var(--shadow)}
+.feedback.ok{border-color:var(--ok)} .feedback.bad{border-color:var(--bad)}
+.feedback .verdict{font-weight:700;font-family:'Noto Serif Thai',serif;margin-bottom:5px;display:block}
+.feedback.ok .verdict{color:var(--ok)} .feedback.bad .verdict{color:var(--bad)}
+.feedback p{margin:0;color:var(--ink-soft)}
+
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+
+/* ---- result ---- */
+.score-hero{text-align:center;padding:34px 24px}
+.score-num{font-family:'Noto Serif Thai',serif;font-size:58px;font-weight:800;
+  color:var(--navy);line-height:1}
+.score-num span{font-size:24px;color:var(--ink-soft);font-weight:600}
+.score-grade{font-size:19px;font-family:'Noto Serif Thai',serif;font-weight:700;margin:10px 0 4px}
+.score-msg{color:var(--ink-soft);font-size:14px;margin:0}
+.bycat{margin-top:4px}
+.bycat-row{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:9px 0;border-bottom:1px solid var(--rule);font-size:14px}
+.bycat-row:last-child{border-bottom:none}
+.bycat-row .nm{flex:1;min-width:0}
+.bycat-row .sc{font-weight:600;color:var(--navy);white-space:nowrap}
+.mini{height:4px;width:76px;background:#e2dccd;border-radius:2px;overflow:hidden;flex:0 0 76px}
+.mini i{display:block;height:100%;background:var(--brass)}
+
+.review-item{background:var(--card);border-radius:10px;padding:16px 18px;margin-bottom:12px;
+  box-shadow:var(--shadow);border-left:3px solid var(--bad)}
+.review-item .rq{font-weight:600;color:var(--navy);margin-bottom:8px;font-size:15px}
+.review-item .ra{font-size:14px;margin:3px 0}
+.review-item .ra.you{color:var(--bad)} .review-item .ra.right{color:var(--ok)}
+.review-item .re{font-size:13.5px;color:var(--ink-soft);margin:8px 0 0;
+  padding-top:8px;border-top:1px solid var(--rule)}
+
+.hidden{display:none!important}
+@media(max-width:600px){
+  .qtext{font-size:16.5px} .score-num{font-size:46px}
+  .wrap{padding:0 15px 80px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="badge">Sec</div>
+    <h1>ข้อสอบความมั่นคงปลอดภัยสารสนเทศ (Information Security)</h1>
+    <p>166 ข้อ ครบ 17 บท พร้อมเฉลยและคำอธิบาย</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ SETUP ============ -->
+  <section id="setup">
+    <div class="panel">
+      <h2>เลือกชุดข้อสอบ</h2>
+      <p class="hint">เลือกหมวดที่ต้องการฝึก หรือกด “ทุกหมวด” เพื่อทำครบ 100 ข้อ</p>
+      <div class="opts" id="catOpts"></div>
+    </div>
+
+    <div class="panel">
+      <h2>จำนวนข้อ</h2>
+      <p class="hint">สุ่มข้อจากหมวดที่เลือก</p>
+      <div class="opts" id="lenOpts"></div>
+    </div>
+
+    <div class="panel">
+      <h2>รูปแบบการทำ</h2>
+      <p class="hint">เลือกว่าจะเห็นเฉลยทันทีหลังตอบ หรือเก็บไว้ดูตอนจบ</p>
+      <div class="opts" id="modeOpts">
+        <button class="chip on" data-mode="instant">เฉลยทันทีหลังตอบ</button>
+        <button class="chip" data-mode="exam">โหมดสอบจริง (เฉลยตอนจบ)</button>
+      </div>
+      <div class="opts" style="margin-top:12px">
+        <button class="chip on" id="shuffleChip">สลับลำดับตัวเลือก</button>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="startBtn">เริ่มทำข้อสอบ</button>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" class="hidden">
+    <div class="bar-wrap">
+      <div class="bar-top">
+        <span>ข้อ <b id="curNum">1</b> / <span id="totNum">100</span></span>
+        <span id="liveScore"></span>
+      </div>
+      <div class="bar"><i id="barFill"></i></div>
+    </div>
+
+    <div class="qcat" id="qcat"></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="choices"></div>
+    <div id="feedback"></div>
+
+    <div class="navrow">
+      <button class="btn ghost" id="quitBtn">ออก</button>
+      <button class="btn" id="nextBtn" disabled>ข้อถัดไป</button>
+    </div>
+  </section>
+
+  <!-- ============ RESULT ============ -->
+  <section id="result" class="hidden">
+    <div class="panel score-hero">
+      <div class="score-num"><span id="rScore">0</span><span> / <span id="rTotal">100</span></span></div>
+      <div class="score-grade" id="rGrade"></div>
+      <p class="score-msg" id="rMsg"></p>
+    </div>
+
+    <div class="panel">
+      <h2>คะแนนแยกตามหมวด</h2>
+      <p class="hint">ดูว่าหมวดไหนควรกลับไปทบทวน</p>
+      <div class="bycat" id="byCat"></div>
+    </div>
+
+    <div id="reviewWrap">
+      <div class="panel" style="margin-bottom:14px">
+        <h2>ทบทวนข้อที่ตอบผิด</h2>
+        <p class="hint" id="wrongCount" style="margin:0"></p>
+      </div>
+      <div id="reviewList"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="retryWrongBtn">ทำเฉพาะข้อที่ผิดอีกครั้ง</button>
+      <button class="btn ghost" id="againBtn">เลือกชุดใหม่</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const QUESTIONS = [{"id": 1, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "เอ็นนิกมา (Enigma) เป็นเครื่องสำหรับทำอะไร", "c": ["ป้องกันไวรัส", "ตรวจจับการบุกรุก", "เข้ารหัสข้อมูล", "สแกนเครือข่าย"], "a": 2, "e": "Enigma เป็นอุปกรณ์เครื่องจักรกลไฟฟ้าที่กองทัพเยอรมันใช้ในสมัยสงครามโลกครั้งที่ 2 สำหรับเข้ารหัสและถอดรหัสลับทางการทหาร"}, {"id": 2, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "ระบบคอมพิวเตอร์ที่มีความปลอดภัยสูงสุดตามมาตรฐาน TCSEC (Orange Book) อยู่ในระดับใด", "c": ["B1 : Labeled Security Protection", "B2 : Structured Protection", "B3 : Security Domains", "A1 : Verified Design"], "a": 3, "e": "มาตรฐาน TCSEC แบ่งระดับความปลอดภัยเป็น D, C (C1-C2), B (B1-B3) และ A (A1) โดยระดับ A สูงสุดซึ่งต้องมีการพิสูจน์ความถูกต้องตามหลักการทางคณิตศาสตร์"}, {"id": 3, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "ข้อใดไม่ใช่คุณสมบัติหลักของข้อมูล", "c": ["Confidentiality", "Integrity", "Authentication", "Availability"], "a": 2, "e": "คุณสมบัติหลักพื้นฐานด้านความปลอดภัยของข้อมูล (CIA Triad) ประกอบด้วย Confidentiality (ความลับ), Integrity (ความถูกต้องครบถ้วน) และ Availability (ความพร้อมใช้งาน) ส่วน Authentication เป็นกระบวนการพิสูจน์ตัวตน"}, {"id": 4, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "กระบวนการในการตรวจสอบสิทธิ์และอนุญาตตามสิทธิ์นั้น คือข้อใด", "c": ["Identification", "Authentication", "Authorization", "Non-repudiation"], "a": 2, "e": "Authorization คือกระบวนการพิจารณาว่าผู้ใช้งานที่ผ่านการพิสูจน์ตัวตนแล้ว มีสิทธิ์เข้าถึงทรัพยากรหรือสั่งใช้งานส่วนใดได้บ้าง"}, {"id": 5, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "การโจมตีแบบปฏิเสธการให้บริการหรือ DoS จะโจมตีคุณสมบัติด้านใดของข้อมูล", "c": ["Confidentiality", "Integrity", "Availability", "ถูกทุกข้อ"], "a": 2, "e": "การโจมตีแบบ Denial of Service (DoS) มุ่งเน้นทำให้ระบบหรือเครือข่ายใช้งานไม่ได้ ส่งผลกระทบโดยตรงต่อความพร้อมใช้งาน (Availability)"}, {"id": 6, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "การรักษาความลับของข้อมูล (Confidentiality) สามารถทำได้โดยใช้เทคนิคหรือเครื่องมือใด", "c": ["Antivirus", "Firewall", "Encryption", "Scanner"], "a": 2, "e": "การเข้ารหัสข้อมูล (Encryption) ทำให้ข้อมูลกลายเป็น ciphertext ที่อ่านไม่ออกหากไม่มีคีย์ ซึ่งเป็นวิธีหลักในการรักษาความลับ"}, {"id": 7, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "มัลแวร์ (Malware) ข้อใดสามารถแพร่กระจายด้วยตัวเองได้", "c": ["Virus", "Trojan", "Worm", "DoS"], "a": 2, "e": "Worm (หนอนอินเทอร์เน็ต) สามารถสำเนาตัวเองและแพร่กระจายผ่านเครือข่ายได้โดยไม่ต้องอาศัยไฟล์แนบหรืออาศัยการรันโปรแกรมจากผู้ใช้เหมือน Virus หรือ Trojan"}, {"id": 8, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "การเข้ารหัสแบบใดที่ใช้ key เดียวกันสำหรับทั้งการเข้าและถอดรหัส", "c": ["Public Key", "Symmetric Key", "Asymmetric Key", "Digital Signature"], "a": 1, "e": "Symmetric Key Cryptography (การเข้ารหัสแบบสมมาตร) ใช้กุญแจดอกเดียวกันทั้งฝั่งเข้ารหัสและถอดรหัส"}, {"id": 9, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "ข้อใดไม่ใช่สิ่งที่ใช้สำหรับการพิสูจน์ทราบตัวตน (Authentication)", "c": ["Username", "Password", "PIN", "Fingerprint"], "a": 0, "e": "Username ใช้สำหรับขั้นตอนการแสดงตน (Identification) เพื่อบอกว่าเราคือใคร แต่การพิสูจน์ตัวตน (Authentication) ต้องใช้สิ่งที่เรารู้ (Password/PIN) หรือสิ่งที่เรามี/เป็น (เช่น Fingerprint)"}, {"id": 10, "cat": "ความรู้พื้นฐานด้านความมั่นคงปลอดภัยสารสนเทศ", "q": "การโจมตีแบบ Phishing ใช้เทคนิคในข้อใด", "c": ["DoS", "Social Engineering", "Password Guessing", "Brute force"], "a": 1, "e": "Phishing อาศัยจิตวิทยาหลอกลวงมนุษย์ (Social Engineering) เช่น ส่งอีเมลปลอมอ้างเป็นธนาคาร เพื่อให้เหยื่อหลงเชื่อและกรอกข้อมูลส่วนตัว"}, {"id": 11, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "ไอทีภิบาล (IT Governance) หมายถึงข้อใด", "c": ["การบริหารงานไอที", "การอำนวยการและควบคุมทางด้านไอที", "การตรวจสอบระบบไอที", "การสร้างความตระหนักด้านความปลอดภัย"], "a": 1, "e": "IT Governance มุ่งเน้นไปที่ทิศทาง การกำกับดูแล และการควบคุมโครงสร้างองค์กรด้านไอทีให้บรรลุเป้าหมายทางธุรกิจ"}, {"id": 12, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "มิติที่สำคัญของ IT Governance คือข้อใด", "c": ["Strategic alignment", "Value delivery", "Risk management", "ถูกทุกข้อ"], "a": 3, "e": "ไอทีภิบาลประกอบด้วยมิติหลัก ได้แก่ ความสอดคล้องเชิงกลยุทธ์, การส่งมอบมูลค่าเพิ่ม, การบริหารความเสี่ยง, การบริหารจัดการทรัพยากร และการวัดผลงาน"}, {"id": 13, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "ข้อใดไม่ใช่ผลลัพธ์ที่ได้จาก Information Security Governance", "c": ["Strategic alignment", "Value delivery", "Risk management", "Project management"], "a": 3, "e": "การจัดการโครงการ (Project management) เป็นกรอบการทำงานในระดับการปฏิบัติงานหรือบริหารโครงการเฉพาะกิจ ไม่ใช่ผลลัพธ์หลักโดยตรงของ Security Governance"}, {"id": 14, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "ข้อใดไม่ใช่หลักการพื้นฐาน COBIT 5", "c": ["Meeting stakeholder needs", "Covering enterprise end-to-end", "Applied a single integrated framework", "Strategic alignment"], "a": 3, "e": "หลักการพื้นฐาน 5 ข้อของ COBIT 5 ได้แก่ 1. Meeting stakeholder needs, 2. Covering enterprise end-to-end, 3. Applying a single integrated framework, 4. Enabling a holistic approach, 5. Separating governance from management"}, {"id": 15, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "ข้อใดไม่ใช่กลุ่มของแนวทางในการปฏิบัติที่ดีที่สุดของ ITILv3", "c": ["Service Strategy", "Service Design", "Service Transition", "Covering enterprise end-to-end"], "a": 3, "e": "ITILv3 แบ่งวงจรชีวิตการบริการออกเป็น 5 ระยะ ได้แก่ Service Strategy, Service Design, Service Transition, Service Operation และ Continual Service Improvement"}, {"id": 16, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "ISO/IEC 27001 เวอร์ชัน 2013 ประกอบด้วย 14 วัตถุประสงค์ (Controls Objectives) และกี่มาตรการควบคุม (Controls)", "c": ["114", "133", "144", "128"], "a": 0, "e": "ใน Annex A ของมาตรฐาน ISO/IEC 27001:2013 มี 14 หมวด/วัตถุประสงค์ และรวมมาตรการควบคุมย่อยทั้งหมด 114 ข้อ"}, {"id": 17, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "ข้อใดไม่ใช่ข้อบังคับที่ต้องปฏิบัติตาม", "c": ["Policy", "Procedure", "Guideline", "Standard"], "a": 2, "e": "แนวปฏิบัติ (Guideline) เป็นเพียงข้อแนะนำหรือข้อเสนอแนะที่ยืดหยุ่นในการปฏิบัติงาน ไม่ใช่ข้อบังคับที่ต้องทำตามอย่างเคร่งครัดเหมือน Policy หรือ Standard"}, {"id": 18, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "กลุ่มบุคคลใดที่ไม่ต้องมีการสร้างความตระหนักด้านการรักษาความปลอดภัย (Security Awareness Training)", "c": ["ผู้บริหาร", "ผู้ดูแลระบบ", "พนักงานทั่วไป", "ทุกกลุ่มต้อง"], "a": 3, "e": "ทุกคนในองค์กรตั้งแต่ระดับผู้บริหาร พนักงานทั่วไป ไปจนถึงผู้ดูแลระบบ จำเป็นต้องได้รับการสร้างความตระหนักรู้ด้านความปลอดภัย เนื่องจากมนุษย์มักเป็นจุดอ่อนที่สุด"}, {"id": 19, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "การตรวจสอบประเภทใดที่เป็นเรื่องหลักของการตรวจสอบ", "c": ["การตรวจสอบการปฏิบัติตามนโยบาย", "การประเมินโครงการใหม่ๆ", "การทดลองเจาะระบบ (Penetration Test)", "การตรวจสอบนโยบายของไฟร์วอลล์"], "a": 0, "e": "การตรวจสอบ (Audit) มุ่งเน้นตรวจสอบว่าการดำเนินงานจริงมีความสอดคล้องและปฏิบัติตามนโยบายหรือกฎระเบียบที่กำหนดไว้หรือไม่"}, {"id": 20, "cat": "ไอทีภิบาลและมาตรฐานความปลอดภัย (IT Governance)", "q": "ข้อใดไม่จัดอยู่ในกลุ่มการรักษาความปลอดภัยในการปฏิบัติงาน (Operational Security) ตามมาตรฐาน ISO/IEC 27001:2013", "c": ["Protection from malware", "Backup", "Logging and monitoring", "ทุกข้อจัดอยู่ในกลุ่ม"], "a": 3, "e": "การป้องกันมัลแวร์, การสำรองข้อมูล, และการบันทึก/เฝ้าระวังกิจกรรม (Log & Monitoring) ล้วนเป็นมาตรการที่อยู่ภายใต้หมวด Operational Security ทั้งสิ้น"}, {"id": 21, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "ข้อใดไม่ถือว่าเป็นองค์ประกอบของความเสี่ยง", "c": ["Asset", "Vulnerability", "Threat", "Solution"], "a": 3, "e": "องค์ประกอบหลักของความเสี่ยง (Risk) ประกอบด้วย ทรัพย์สิน (Asset), ช่องโหว่ (Vulnerability) และภัยคุกคาม (Threat) ส่วน Solution เป็นแนวทางแก้ไขไม่ใช่ส่วนประกอบของความเสี่ยง"}, {"id": 22, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "มาตรฐานด้านการบริหารความเสี่ยงในข้อใดที่ใช้ได้ตามข้อบังคับของมาตรฐาน ISO/IEC 27001:2013", "c": ["ISO 31000", "NIST SP 800-30", "ISO/IEC 27005", "ถูกทุกข้อ"], "a": 3, "e": "มาตรฐาน ISO/IEC 27001 ไม่ได้บังคับใช้กรอบการประเมินความเสี่ยงรูปแบบเดียว องค์กรสามารถเลือกใช้มาตรฐานสากลที่น่าเชื่อถือ เช่น ISO 31000, NIST หรือ ISO/IEC 27005 ได้"}, {"id": 23, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "ข้อใดเป็นขั้นตอนแรกของการประเมินความเสี่ยง", "c": ["การระบุทรัพย์สิน (Asset Identification)", "การวิเคราะห์ภัยคุกคาม", "การประเมินช่องโหว่", "การคำนวณความเสี่ยง"], "a": 0, "e": "การเริ่มต้นประเมินความเสี่ยงต้องรู้ก่อนว่าองค์กรมีทรัพย์สินอะไรบ้างที่ต้องปกป้อง (Asset Identification)"}, {"id": 24, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "ข้อใดไม่ถือว่าเป็นประเภทของทรัพย์สิน (Asset) สำหรับการประเมินความเสี่ยงตามมาตรฐาน ISO", "c": ["Hardware", "Software", "Personnel", "Firewall Policy"], "a": 3, "e": "ทรัพย์สินตามมาตรฐาน ISO แบ่งเป็น ข้อมูล, ฮาร์ดแวร์, ซอฟต์แวร์, บุคลากร, สถานที่ และบริการ ส่วนนโยบายไฟร์วอลล์จัดเป็นมาตรการควบคุม (Control)"}, {"id": 25, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "การซื้อประกันภัย จัดเป็นการจัดการกับความเสี่ยงประเภทใด", "c": ["Risk Mitigation", "Risk Avoidance", "Risk Transfer", "Risk Acceptance"], "a": 2, "e": "การทำประกันภัยเป็นการถ่ายโอนหรือส่งต่อความเสี่ยง (Risk Transfer) ไปให้บริษัทประกันรับภาระทางการเงินแทน"}, {"id": 26, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "การโจมตีแบบวิศวกรรมสังคม (Social engineering) จัดว่าเป็นช่องโหว่ประเภทใด", "c": ["Hardware vulnerability", "Software vulnerability", "Physical vulnerability", "Human vulnerability"], "a": 3, "e": "วิศวกรรมสังคมเป็นการโจมตีที่อาศัยจุดอ่อนด้านพฤติกรรมและความไว้วางใจของมนุษย์ (Human vulnerability)"}, {"id": 27, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "ความลับของข้อมูลควรใช้มาตรการใดในการควบคุม", "c": ["Backup", "UPS", "Antivirus", "Encryption"], "a": 3, "e": "การเข้ารหัสข้อมูล (Encryption) เป็นมาตรการหลักในการรักษาความลับ (Confidentiality)"}, {"id": 28, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "ระดับความเสี่ยงสามารถคำนวณได้จากข้อใด", "c": ["Asset x Threat", "Threat x Vulnerability", "Asset x Vulnerability", "Likelihood x Impact"], "a": 3, "e": "ระดับความเสี่ยง (Risk) ประเมินจากโอกาสที่จะเกิดภัยคุกคาม (Likelihood) คูณด้วยผลกระทบที่จะได้รับ (Impact)"}, {"id": 29, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "ระบบไฟฟ้ามีผลกระทบด้านใดกับคุณสมบัติของข้อมูล", "c": ["Confidentiality", "Integrity", "Availability", "ถูกทั้งข้อ b และ c"], "a": 2, "e": "หากไฟดับ ระบบคอมพิวเตอร์จะใช้งานไม่ได้ ส่งผลกระทบโดยตรงต่อความพร้อมใช้งาน (Availability)"}, {"id": 30, "cat": "การบริหารความเสี่ยง (Risk Management)", "q": "ผลที่ได้จากการประเมินความเสี่ยงคือข้อใด", "c": ["นโยบายความปลอดภัย", "รายการทรัพย์สิน", "รายงานระดับความเสี่ยง (Risk Register)", "งบประมาณ"], "a": 2, "e": "ผลลัพธ์ของการประเมินความเสี่ยงคือตารางบันทึกรายการความเสี่ยงและระดับความเสี่ยง (Risk Register) เพื่อนำไปบริหารจัดการต่อ"}, {"id": 31, "cat": "Access Control", "q": "การควบคุมการเข้าถึงต้องใช้กับการรักษาความปลอดภัยข้อมูลด้านใด", "c": ["Confidentiality", "Integrity", "Availability", "ถูกทุกข้อ"], "a": 3, "e": "Access Control ช่วยปกป้องทั้งความลับ ความถูกต้อง และความพร้อมใช้งาน โดยจำกัดสิทธิ์ให้เฉพาะผู้มีอำนาจเข้าถึงข้อมูลเท่านั้น"}, {"id": 32, "cat": "Access Control", "q": "ข้อใดเป็นขั้นตอนแรกของการควบคุมการเข้าถึง", "c": ["Identification", "Authentication", "Authorization", "Accounting"], "a": 0, "e": "ขั้นตอนแรกสุดคือการแสดงตน (Identification) เช่น การระบุชื่อผู้ใช้งาน (Username) ว่าตนคือใคร"}, {"id": 33, "cat": "Access Control", "q": "ข้อใดเป็นหลักฐานที่ใช้สำหรับการพิสูจน์ทราบตัวตน", "c": ["Username", "Role", "Password", "IP Address"], "a": 2, "e": "รหัสผ่าน (Password) จัดเป็นสิ่งที่เรารู้ (Something you know) ใช้ในขั้นตอน Authentication ส่วน Username ใช้สำหรับ Identification"}, {"id": 34, "cat": "Access Control", "q": "รหัสผ่าน (Password) ที่เก็บไว้ในระบบมักเก็บไว้ในรูปแบบใด", "c": ["Plain text", "Hash value", "Encrypted text", "Binary code"], "a": 1, "e": "เพื่อความปลอดภัย ระบบจะไม่เก็บรหัสผ่านตรงๆ แต่จะเก็บค่าแฮช (Hash value เช่น MD5, SHA-256) ร่วมกับการทำ Salt"}, {"id": 35, "cat": "Access Control", "q": "อัตราผิดพลาดของไบโอเมตริกส์แบบใดที่ใช้เปรียบเทียบคุณภาพของเทคโนโลยีไบโอเมตริกส์นั้น", "c": ["FRR", "FAR", "EER (Equal Error Rate)", "Accuracy rate"], "a": 2, "e": "EER คือจุดที่อัตราการปฏิเสธผู้มีสิทธิ์ผิดพลาด (FRR) และอัตราการยอมรับผู้ไม่มีสิทธิ์ผิดพลาด (FAR) เท่ากัน ใช้เป็นมาตรฐานวัดคุณภาพระบบไบโอเมตริกส์"}, {"id": 36, "cat": "Access Control", "q": "ไบโอเมตริกส์แบบใดที่มีความเชื่อถือได้สูงสุด", "c": ["Voice print", "Iris scan", "Fingerprint", "Hand geometry"], "a": 1, "e": "การสแกนม่านตา (Iris scan) มีความแม่นยำและเสถียรสูงที่สุดเนื่องจากลวดลายม่านตามีความซับซ้อนและไม่เปลี่ยนแปลงตลอดชีวิต"}, {"id": 37, "cat": "Access Control", "q": "Kerberos เป็นระบบพิสูจน์ทราบตัวตนแบบใด", "c": ["Single sign-on พื้นฐาน", "Ticket-based authentication", "Certificate-based", "Biometric-based"], "a": 1, "e": "Kerberos ใช้ระบบตั๋ว (Ticket Granting Ticket) ในการยืนยันตัวตนเพื่อเข้าถึงบริการต่างๆ ในเครือข่ายโดยไม่ต้องกรอกรหัสผ่านซ้ำ"}, {"id": 38, "cat": "Access Control", "q": "ใบ Certificate ตามมาตรฐานของ X.509 จะมี Public key ของใคร", "c": ["เจ้าของใบ Certificate", "ของ CA", "ของผู้ตรวจสอบ", "ของแฮกเกอร์"], "a": 0, "e": "X.509 Digital Certificate จะผูกพับลิกคีย์ (Public Key) เข้ากับตัวตนของเจ้าของใบรับรองนั้นๆ โดยมี CA เป็นผู้เซ็นรับรอง"}, {"id": 39, "cat": "Access Control", "q": "ลายเซ็นดิจิตอล (Digital Signature) เป็นการเข้ารหัสข้อมูลค่าแฮช (Hash) ของข้อความทั้งหมด โดยใช้คีย์อะไร", "c": ["Public key ของผู้รับ", "Private key ของผู้ส่ง", "Symmetric key", "Private key ของผู้รับ"], "a": 1, "e": "ผู้ส่งจะใช้ Private Key ของตนเองเข้ารหัสค่าแฮชเพื่อสร้างลายเซ็นดิจิทัล ซึ่งผู้รับสามารถใช้ Public Key ของผู้ส่งมาถอดรหัสเพื่อตรวจสอบความถูกต้องได้"}, {"id": 40, "cat": "Access Control", "q": "ข้อใดเป็นขั้นตอนที่สำคัญที่สุดของการควบคุมการเข้าถึง", "c": ["Identification", "Authentication", "Accounting", "ถูกทุกข้อมีความสำคัญต่อเนื่องกัน"], "a": 3, "e": "กระบวนการควบคุมการเข้าถึง (AAA: Authentication, Authorization, Accounting) ต้องทำงานร่วมกันอย่างเป็นระบบจึงจะมีความสมบูรณ์"}, {"id": 41, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "ซีซาร์ไซเฟอร์ (Caesar Cipher) เป็นการเข้ารหัสแบบใด", "c": ["Substitution cipher", "Transposition cipher", "Symmetric cipher", "Asymmetric cipher"], "a": 0, "e": "Caesar Cipher เป็นการเข้ารหัสแบบแทนที่ (Substitution) โดยเลื่อนตัวอักษรไปตามจำนวนคงที่"}, {"id": 42, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "การเข้ารหัสแบบใดที่ใช้คีย์เดียวกันทั้งการเข้าและถอดรหัส", "c": ["Symmetric Key Cryptography", "Asymmetric Key Cryptography", "Public Key Cryptography", "Digital Signature"], "a": 0, "e": "การเข้ารหัสแบบสมมาตรใช้กุญแจดอกเดียวกันทั้งสองฝั่ง"}, {"id": 43, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "การเข้ารหัสแบบใดเหมาะสำหรับการเข้ารหัสข้อมูลที่ต้องการส่งผ่านเครือข่ายอย่างต่อเนื่อง", "c": ["Block cipher", "Stream cipher", "Asymmetric cipher", "Hash function"], "a": 1, "e": "Stream Cipher ทำการเข้ารหัสข้อมูลทีละบิตหรือทีละไบต์ จึงเหมาะกับการส่งข้อมูลต่อเนื่องแบบ Real-time บนเครือข่าย"}, {"id": 44, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "Electronic Codebook (ECB) เป็นการเข้ารหัสแบบใด", "c": ["Stream cipher mode", "Asymmetric mode", "Block cipher mode of operation", "Hash mode"], "a": 2, "e": "ECB เป็นโหมดการทำงานพื้นฐานของ Block Cipher ที่นำบล็อกข้อมูลขนาดเท่ากันมาเข้ารหัสด้วยคีย์เดียวกันโดยตรง (ซึ่งมีความปลอดภัยต่ำเพราะข้อมูลเหมือนกันจะได้ ciphertext ซ้ำกัน)"}, {"id": 45, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "DES ใช้คีย์ที่มีความยาวเท่าใด", "c": ["56 bits", "128 bits", "192 bits", "256 bits"], "a": 0, "e": "อัลกอริทึม DES ใช้คีย์ความยาว 56 บิต (จริงๆ รับเข้ามา 64 บิต แต่ใช้จริง 56 บิต ที่เหลือเป็น parity bit)"}, {"id": 46, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "AES ใช้อัลกอริทึมใดในการเข้ารหัส", "c": ["Rijndael", "RSA", "Diffie-Hellman", "MD5"], "a": 0, "e": "AES (Advanced Encryption Standard) ถูกพัฒนาขึ้นโดยใช้อัลกอริทึมที่มีชื่อว่า Rijndael"}, {"id": 47, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "ข้อใดไม่ใช่ความยาวของคีย์ของ AES", "c": ["64 bits", "128 bits", "192 bits", "256 bits"], "a": 0, "e": "มาตรฐาน AES รองรับความยาวคีย์เฉพาะ 128, 192 และ 256 บิตเท่านั้น ไม่มีขนาด 64 บิต"}, {"id": 48, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "ข้อใดไม่ใช่การเข้ารหัสแบบพับลิกคีย์", "c": ["RSA", "ECC", "DES", "Diffie-Hellman"], "a": 2, "e": "DES เป็นการเข้ารหัสแบบสมมาตร (Symmetric Key) ส่วน RSA, ECC และ Diffie-Hellman เป็นระบบอสมมาตรหรือพับลิกคีย์"}, {"id": 49, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "ข้อใดเป็นเทคนิคที่นิยมใช้สำหรับการแลกเปลี่ยนคีย์ที่ปลอดภัย", "c": ["RSA", "MD5", "Diffie-Hellman", "DES"], "a": 2, "e": "Diffie-Hellman Key Exchange เป็นโปรโตคอลที่ออกแบบมาเพื่อให้คู่สนทนาสามารถตกลงและสร้าง Symmetric Key ร่วมกันผ่านช่องทางที่ไม่ปลอดภัยได้"}, {"id": 50, "cat": "Cryptography (การเข้ารหัสข้อมูล)", "q": "MD5 เป็นแฮชฟังก์ชันที่สร้างค่าแฮชที่มีขนาดกี่บิต", "c": ["128 bits", "160 bits", "256 bits", "512 bits"], "a": 0, "e": "MD5 (Message Digest 5) ให้ค่าผลลัพธ์ (Hash value) ขนาด 128 บิต"}, {"id": 51, "cat": "Network Security", "q": "ข้อใดเป็นโปรโตคอลที่ใช้สำหรับการรักษาความปลอดภัยอีเมล", "c": ["HTTP", "FTP", "PGP / S/MIME", "SNMP"], "a": 2, "e": "PGP (Pretty Good Privacy) และ S/MIME เป็นเทคโนโลยีหลักที่ออกแบบมาเพื่อเข้ารหัสและเซ็นชื่อดิจิทัลสำหรับรับ-ส่งอีเมลอย่างปลอดภัย"}, {"id": 52, "cat": "Network Security", "q": "การที่ผู้ใช้เก็บพับลิกคีย์ของคู่สนทนาไว้เองนั้น ผู้ใช้จะเป็นคนตัดสินเกี่ยวกับความน่าเชื่อถือของคีย์ต่างๆ ที่เก็บไว้นั้น ลักษณะนี้จะเรียกว่าอะไร", "c": ["Web of Trust", "Public Key Infrastructure (PKI)", "Certificate Authority", "Centralized Trust"], "a": 0, "e": "Web of Trust เป็นรูปแบบความน่าเชื่อถือแบบกระจายศูนย์ (มักใช้ใน PGP) ที่ผู้ใช้แต่ละคนสร้างตาข่ายความเชื่อถือและเซ็นรับรองคีย์ให้กันและกันด้วยตนเอง"}, {"id": 53, "cat": "Network Security", "q": "PGP ใช้การเข้ารหัสข้อมูลอีเมลแบบใด", "c": ["Symmetric key อย่างเดียว", "Hybrid encryption (Symmetric + Asymmetric)", "Asymmetric key อย่างเดียว", "Hash function อย่างเดียว"], "a": 1, "e": "PGP ใช้การเข้ารหัสแบบผสมผสาน โดยใช้ Symmetric key เข้ารหัสตัวข้อความเพื่อให้ทำงานได้เร็ว และใช้ Asymmetric key เข้ารหัส Session key เพื่อความปลอดภัยในการส่งผ่านเครือข่าย"}, {"id": 54, "cat": "Network Security", "q": "S/MIME ใช้โครงสร้างใดในการแจกจ่ายและตรวจสอบใบรับรอง", "c": ["Web of Trust", "Peer-to-peer", "Public Key Infrastructure (PKI)", "LDAP directory"], "a": 2, "e": "S/MIME อาศัยโครงสร้างพื้นฐานกุญแจสาธารณะ (PKI) ซึ่งมีองค์กรกลางอย่าง Certificate Authority (CA) ออกใบรับรองดิจิทัลให้"}, {"id": 55, "cat": "Network Security", "q": "โปรโตคอลใดใช้ประโยชน์การเข้ารหัสข้อมูลจากโปรโตคอล SSL/TLS", "c": ["HTTP", "HTTPS", "FTP", "Telnet"], "a": 1, "e": "HTTPS (HTTP Secure) ทำงานโดยนำโปรโตคอล HTTP มาครอบทับด้วยเลเยอร์ความปลอดภัยของ SSL/TLS เพื่อเข้ารหัสข้อมูลรับ-ส่งบนเว็บ"}, {"id": 56, "cat": "Network Security", "q": "โปรแกรมใดที่ออกแบบมาทดแทน Telnet โดยมีการเข้ารหัสข้อมูลที่รับส่งระหว่างไคลเอนต์และเซิร์ฟเวอร์", "c": ["FTP", "SSH", "HTTP", "SNMP"], "a": 1, "e": "SSH (Secure Shell) ถูกพัฒนาขึ้นมาแทนที่ Telnet ที่ส่งข้อมูลเป็น Plain text โดย SSH จะเข้ารหัสช่องทางการสื่อสารทั้งหมดทำให้ปลอดภัยจากการดักฟัง"}, {"id": 57, "cat": "Network Security", "q": "โปรโตคอล IPSec ทำงานในเลเยอร์ใดของ OSI", "c": ["Application layer", "Network layer", "Transport layer", "Data link layer"], "a": 1, "e": "IPSec (Internet Protocol Security) ทำงานในเลเยอร์ที่ 3 (Network layer) ของโมเดล OSI จึงสามารถป้องกันความปลอดภัยให้แก่แพ็กเก็ต IP ได้ทั้งหมด"}, {"id": 58, "cat": "Network Security", "q": "โหมดใดของ IPSec ที่มีการเข้ารหัสข้อมูลทั้ง IP แพ็กเก็ต (รวมถึง IP Header เดิมด้วย)", "c": ["Transport mode", "Tunnel mode", "Secure mode", "Encrypted mode"], "a": 1, "e": "Tunnel Mode จะเข้ารหัสทั้ง Payload และ IP Header เดิม แล้วห่อหุ้มด้วย IP Header ใหม่ นิยมใช้สำหรับการทำ VPN ระหว่างเครือข่าย"}, {"id": 59, "cat": "Network Security", "q": "IPSec ใช้การเข้ารหัสข้อมูลแบบใด", "c": ["Symmetric Key Cryptography", "Asymmetric Key Cryptography", "Hash Function อย่างเดียว", "Plain text"], "a": 0, "e": "ในการรับส่งข้อมูลจริง IPSec จะใช้ Symmetric Key (เช่น AES, 3DES) เพื่อความเร็วในการเข้ารหัสข้อมูลปริมาณมาก โดยใช้ Asymmetric/IKE ช่วยในการแลกเปลี่ยนคีย์ตอนเริ่มต้น"}, {"id": 60, "cat": "Network Security", "q": "โปรโตคอลใดที่ใช้สำหรับสร้าง VPN ในระดับเลเยอร์ 2", "c": ["IPSec", "SSL/TLS", "PPTP / L2TP", "SSH"], "a": 2, "e": "PPTP (Point-to-Point Tunneling Protocol) และ L2TP (Layer 2 Tunneling Protocol) ทำงานในเลเยอร์ 2 (Data Link Layer) สำหรับเชื่อมต่อเครือข่ายเสมือน (VPN)"}, {"id": 61, "cat": "Wireless LAN Security", "q": "มาตรฐานไวร์เลสแลนใดที่ใช้งานทั้งย่านความถี่ 2.4 GHz และ 5 GHz", "c": ["802.11b", "802.11g", "802.11n", "802.11a"], "a": 2, "e": "มาตรฐาน 802.11n (รวมถึงรุ่นใหม่กว่าอย่าง 802.11ac/ax) รองรับการทำงานได้ทั้งสองย่านความถี่ (Dual-band) คือ 2.4 GHz และ 5 GHz ในขณะที่ 802.11b/g ใช้เฉพาะ 2.4 GHz และ 802.11a ใช้เฉพาะ 5 GHz"}, {"id": 62, "cat": "Wireless LAN Security", "q": "มาตรฐานไวร์เลสแลนใดที่รองรับอัตรารับส่งข้อมูลได้สูงที่สุด (จากตัวเลือกในยุคเริ่มแรก)", "c": ["802.11n", "802.11b", "802.11a", "802.11g"], "a": 0, "e": "มาตรฐาน 802.11n นำเทคโนโลยี MIMO มาใช้ทำให้ความเร็วในการรับส่งข้อมูลสูงขึ้นมากเมื่อเทียบกับมาตรฐานเก่าอย่าง 802.11a/b/g"}, {"id": 63, "cat": "Wireless LAN Security", "q": "การเข้ารหัสข้อมูลของมาตรฐานไวร์เลสแลนเวอร์ชันแรกคือข้อใด", "c": ["WEP", "WPA", "WPA2", "AES"], "a": 0, "e": "WEP (Wired Equivalent Privacy) เป็นโปรโตคอลการเข้ารหัสรุ่นแรกสุดสำหรับ Wireless LAN ซึ่งปัจจุบันมีความปลอดภัยต่ำมากและถูกเจาะได้ง่าย"}, {"id": 64, "cat": "Wireless LAN Security", "q": "การรักษาความปลอดภัยของไวร์เลสแลนแบบ WEP ใช้อัลกอริทึมใดในการเข้ารหัสข้อมูล", "c": ["RC4", "AES", "RSA", "DES"], "a": 0, "e": "WEP ใช้อัลกอริทึมแบบ Stream cipher ที่มีชื่อว่า RC4 ร่วมกับการใช้คีย์แบบ Static ซึ่งมีจุดอ่อนเรื่อง Initialization Vector (IV) ซ้ำซ้อนจนถูกแคร็คลงได้ง่าย"}, {"id": 65, "cat": "Wireless LAN Security", "q": "การรักษาความปลอดภัยของไวร์เลสแลนแบบ WPA2 ใช้อัลกอริทึมใดในการเข้ารหัสข้อมูล", "c": ["DES", "RC4", "TKIP", "AES (CCMP)"], "a": 3, "e": "WPA2 ยกระดับความปลอดภัยขึ้นมาโดยใช้มาตรฐานการเข้ารหัสขั้นสูง AES ในโหมด CCMP ซึ่งมีความปลอดภัยสูงมาก"}, {"id": 66, "cat": "Wireless LAN Security", "q": "WPA-PSK ใช้การพิสูจน์ทราบตัวตนแบบใด", "c": ["Pre-Shared Key (ใช้รหัสผ่านชุดเดียวกันร่วมกัน)", "RADIUS Server", "Certificate", "Biometric"], "a": 0, "e": "WPA-PSK (Pre-Shared Key) หรือ Personal mode เหมาะสำหรับบ้านหรือสำนักงานขนาดเล็ก โดยใช้รหัสผ่านกลางชุดเดียวกันในการเชื่อมต่อ"}, {"id": 67, "cat": "Wireless LAN Security", "q": "มาตรฐาน IEEE 802.1x ใช้การพิสูจน์ทราบตัวตนผ่านโปรโตคอลใดร่วมด้วย", "c": ["HTTP", "FTP", "EAP (Extensible Authentication Protocol)", "SNMP"], "a": 2, "e": "IEEE 802.1X เป็น framework สำหรับควบคุมการเข้าถึงเครือข่าย โดยมักใช้งานร่วมกับโปรโตคอล EAP และ Authentication Server เช่น RADIUS"}, {"id": 68, "cat": "Wireless LAN Security", "q": "โปรโตคอลใดที่ใช้เซอร์ติฟิเกต (Certificate) ในการพิสูจน์ทราบตัวตนบนเครือข่ายไร้สาย", "c": ["LEAP", "WPA-PSK", "EAP-TLS", "PAP"], "a": 2, "e": "EAP-TLS (Transport Layer Security) กำหนดให้ต้องใช้ Digital Certificate ทั้งฝั่งไคลเอนต์และเซิร์ฟเวอร์ในการพิสูจน์ตัวตน ซึ่งมีความปลอดภัยสูงสุด"}, {"id": 69, "cat": "Wireless LAN Security", "q": "ข้อใดไม่ใช่เครื่องมือสำหรับการมอนิเตอร์เครือข่ายไวร์เลสแลน", "c": ["Kismet", "Wireshark", "Aircrack-ng suite (บางส่วน)", "SQL Injection Tool (เช่น Havij)"], "a": 3, "e": "SQL Injection เป็นเครื่องมือโจมตีเว็บแอปพลิเคชัน ไม่เกี่ยวข้องกับการมอนิเตอร์หรือจัดการเครือข่ายไร้สาย"}, {"id": 70, "cat": "Wireless LAN Security", "q": "ข้อใดคือเครื่องมือสำหรับการแคร็ครหัสผ่านเครือข่ายไวร์เลสแลนได้", "c": ["Nmap", "Metasploit", "Nessus", "Aircrack-ng"], "a": 3, "e": "Aircrack-ng เป็นชุดเครื่องมือยอดนิยมที่ใช้ในการตรวจสอบ ดักจับแพ็กเก็ต (Packet sniffing) และแคร็ครหัสผ่าน WEP/WPA-PSK ของ Wi-Fi"}, {"id": 71, "cat": "Firewall", "q": "ไฟร์วอลล์ควรติดตั้งที่ใด", "c": ["ระหว่างเครือข่ายภายในและอินเทอร์เน็ต", "ระหว่าง DMZ และเครือข่ายอื่น", "ระหว่างเครือข่ายที่แตกต่างกัน", "ถูกทุกข้อ"], "a": 3, "e": "ไฟร์วอลล์สามารถติดตั้งกั้นระหว่างโซนเครือข่ายที่มีระดับความปลอดภัยต่างกันได้ ทั้งชายขอบเครือข่าย (Edge/Internet) หรือกั้นโซนย่อยอย่าง DMZ"}, {"id": 72, "cat": "Firewall", "q": "ไฟร์วอลล์ทำงานบนเลเยอร์ใดของ TCP/IP", "c": ["เน็ตเวิร์คเลเยอร์", "ทรานสปอร์ตเลเยอร์", "แอพพลิเคชันเลเยอร์", "ถูกทุกข้อ (ขึ้นอยู่กับประเภทของไฟร์วอลล์)"], "a": 3, "e": "ไฟร์วอลล์แต่ละประเภททำงานต่างเลเยอร์กัน เช่น Packet Filter ทำงานเลเยอร์ 3-4 ส่วน Application Gateway ทำงานถึงเลเยอร์ 7"}, {"id": 73, "cat": "Firewall", "q": "เว็บเซิร์ฟเวอร์โดยดีฟอลต์ให้บริการผ่านพอร์ตใดของ TCP", "c": ["21", "25", "80", "110"], "a": 2, "e": "พอร์ต 80 เป็นพอร์ตมาตรฐานสำหรับ HTTP (เว็บเซิร์ฟเวอร์) ส่วน 443 สำหรับ HTTPS"}, {"id": 74, "cat": "Firewall", "q": "ขั้นตอนการทำ handshaking ของโปรโตคอล TCP มีกี่ขั้นตอน", "c": ["1", "2", "3", "4"], "a": 2, "e": "TCP 3-way handshake ประกอบด้วยขั้นตอน SYN, SYN-ACK และ ACK"}, {"id": 75, "cat": "Firewall", "q": "Packet Filtering Firewall ทำงานอยู่บนเลเยอร์ใด", "c": ["เลเยอร์ 2", "เลเยอร์ 3 หรือ 4", "เลเยอร์ 5", "เลเยอร์ 7"], "a": 1, "e": "Packet Filter จะตรวจสอบไอพีและพอร์ต (Network และ Transport layer)"}, {"id": 76, "cat": "Firewall", "q": "Firewall Policy หมายถึงข้อใด", "c": ["กฎที่ใช้ควบคุมการอนุญาตหรือปฏิเสธแพ็กเก็ต", "นโยบายของผู้บริหารองค์กร", "ค่าตั้งต้นของระบบปฏิบัติการ", "ข้อกำหนดการสำรองข้อมูล"], "a": 0, "e": "นโยบายไฟร์วอลล์ (Firewall Policy/Rule base) คือชุดคำสั่งที่กำหนดว่าแพ็กเก็ตใดได้รับอนุญาตหรือถูกบล็อก"}, {"id": 77, "cat": "Firewall", "q": "NAT คืออะไร", "c": ["การแปลงไอพีภายในเป็นไอพีภายนอก", "การเข้ารหัสข้อมูลเน็ตเวิร์ค", "การตรวจจับไวรัส", "การสแกนพอร์ต"], "a": 0, "e": "Network Address Translation (NAT) ช่วยแปลงแอดเดรสภายในองค์กรให้เป็นไอพีจริงสำหรับออกสู่อินเทอร์เน็ต"}, {"id": 78, "cat": "Firewall", "q": "iptables เป็นไฟร์วอลล์แบบใด", "c": ["Packet Filtering / Stateful firewall บนลีนุกซ์", "Application Proxy", "Next-Gen Firewall", "Hardware Firewall"], "a": 0, "e": "iptables เป็นเครื่องมือไฟร์วอลล์มาตรฐานในระบบปฏิบัติการ Linux"}, {"id": 79, "cat": "Firewall", "q": "ข้อใดเป็นฟังก์ชันของ UTM (Unified Threat Management)", "c": ["Firewall", "IPS", "Anti-Virus", "ถูกทุกข้อ"], "a": 3, "e": "UTM รวมระบบรักษาความปลอดภัยหลายรูปแบบไว้ในอุปกรณ์เดียว ทั้ง Firewall, IPS, Antivirus และ Web Filtering"}, {"id": 80, "cat": "Firewall", "q": "Personal Firewall คืออะไร", "c": ["ไฟร์วอลล์ราคาถูก", "ไฟร์วอลล์ที่ติดตั้งป้องกันบนโฮสต์คอมพิวเตอร์ส่วนบุคคล", "ไฟร์วอลล์สำหรับเราเตอร์บ้าน", "ไฟร์วอลล์ไร้สาย"], "a": 1, "e": "Personal Firewall เป็นซอฟต์แวร์ไฟร์วอลล์ที่รันอยู่บนเครื่องคอมพิวเตอร์แต่ละเครื่องเพื่อกรองทราฟฟิกขาเข้า-ขาออก"}, {"id": 81, "cat": "Intrusion Detection System", "q": "อุปกรณ์ใดทำหน้าที่ในการตรวจจับการบุกรุกเท่านั้น (ไม่บล็อกอัตโนมัติ)", "c": ["Firewall", "Router", "IDS", "IPS"], "a": 2, "e": "Intrusion Detection System (IDS) เน้นตรวจจับและแจ้งเตือน ส่วน IPS จะสามารถบล็อกการโจมตีได้ทันที"}, {"id": 82, "cat": "Intrusion Detection System", "q": "IDS ประเภทใดที่ตรวจสอบ Log หรือไฟล์ระบบของโฮสต์แล้วแจ้งเตือนสิ่งที่ผิดปกติ", "c": ["NIDS", "HIDS", "NIPS", "Network Honey pot"], "a": 1, "e": "Host-based IDS (HIDS) ติดตั้งและตรวจสอบพฤติกรรมภายในเครื่องโฮสต์นั้นๆ"}, {"id": 83, "cat": "Intrusion Detection System", "q": "IDS ที่ตรวจจับแพ็กเก็ตแล้วนำไปเทียบกับฐานข้อมูลรูปแบบการโจมตีที่มีอยู่ คือ IDS ประเภทใด", "c": ["Signature-based (Misuse)", "Behavior-based", "Anomaly detection", "Heuristic detection"], "a": 0, "e": "Signature-based ตรวจจับจากการเทียบรูปแบบซิกเนเจอร์ของการโจมตีที่รู้จัก"}, {"id": 84, "cat": "Intrusion Detection System", "q": "Honeypot คืออะไร", "c": ["เครื่องมือสแกนช่องโหว่", "ระบบล่อลวงแฮกเกอร์เพื่อศึกษาพฤติกรรม", "ระบบป้องกันไวรัส", "เซิร์ฟเวอร์สำรองข้อมูล"], "a": 1, "e": "Honeypot เปรียบเสมือนกับดักล่อให้ผู้บุกรุกเข้ามาโจมตีเพื่อเก็บข้อมูลและวิเคราะห์เทคนิคของแฮกเกอร์"}, {"id": 85, "cat": "Intrusion Detection System", "q": "การติดตั้ง IPS แบบ In-line หมายถึงข้อใด", "c": ["ติดตั้งขวางเส้นทางข้อมูลเพื่อให้แพ็กเก็ตวิ่งผ่านตัวอุปกรณ์", "ต่อผ่านพอร์ตกระจายสัญญาณ", "ต่อพ่วงกับฮับธรรมดา", "เชื่อมต่อแบบไร้สาย"], "a": 0, "e": "In-line ทำให้ IPS สามารถคัดกรองและตัดสกัดกั้นแพ็กเก็ตอันตรายได้ทันท่วงที"}, {"id": 86, "cat": "Intrusion Detection System", "q": "Vulnerability Scan หมายถึงอะไร", "c": ["เครื่องมือสแกนไวรัส", "เครื่องมือสแกนหาช่องโหว่ของระบบและซอฟต์แวร์", "เครื่องมือวัดความเร็วเน็ต", "ระบบเข้ารหัส"], "a": 1, "e": "Vulnerability Scanner ใช้ตรวจสอบจุดอ่อนหรือช่องโหว่ในระบบเครือข่ายและเซิร์ฟเวอร์"}, {"id": 87, "cat": "Intrusion Detection System", "q": "การทำ Port Mirroring บนสวิตช์ หมายถึงข้อใด", "c": ["การบล็อกพอร์ต", "การสแกนพอร์ต", "การคัดลอกทราฟฟิกจากพอร์ตหนึ่งส่งไปให้อุปกรณ์อื่นตรวจสอบ", "การรวมพอร์ตให้มีความเร็วสูงขึ้น"], "a": 2, "e": "Port Mirroring (หรือ SPAN) มักใช้ส่งสำเนาแพ็กเก็ตไปให้ NIDS วิเคราะห์โดยไม่ขัดขวางการทำงานปกติ"}, {"id": 88, "cat": "Intrusion Detection System", "q": "ข้อใดเป็น Pre-admission ฟังก์ชันของ NAC (Network Access Control)", "c": ["การตรวจสอบความปลอดภัยของอุปกรณ์ก่อนอนุญาตให้เข้าเครือข่าย", "การบล็อกระหว่างใช้งาน", "การอัปเดตแพตช์อัตโนมัติ", "การทำลายข้อมูล"], "a": 0, "e": "Pre-admission ตรวจสอบสถานะความปลอดภัย (เช่น มีแอนตี้ไวรัสหรือไม่) ก่อนให้เชื่อมต่อเครือข่าย"}, {"id": 89, "cat": "Intrusion Detection System", "q": "ข้อใดเป็น Post-admission ฟังก์ชันของ NAC", "c": ["การตรวจสอบตัวตนเบื้องต้น", "การควบคุมและติดตามพฤติกรรมหลังเข้าเครือข่ายแล้ว", "การติดตั้งสายแลน", "การกำหนดไอพีแอดเดรส"], "a": 1, "e": "Post-admission คอยมอนิเตอร์อุปกรณ์ที่เข้ามาอยู่ในเครือข่ายแล้วว่ามีพฤติกรรมผิดปกติหรือไม่"}, {"id": 90, "cat": "Intrusion Detection System", "q": "Captive Portal หมายถึงอะไร", "c": ["หน้าจอบังคับให้ผู้ใช้กรอกข้อมูลหรือล็อกอินก่อนใช้งานอินเทอร์เน็ต", "ช่องโหว่ของเว็บเซิร์ฟเวอร์", "โปรโตคอลบล็อกไวรัส", "ระบบสำรองฐานข้อมูล"], "a": 0, "e": "พบได้ทั่วไปตาม Free Wi-Fi ที่บังคับให้ผู้ใช้กดยอมรับเงื่อนไขหรือล็อกอินก่อนใช้งาน"}, {"id": 91, "cat": "Malware", "q": "มัลแวร์ที่สามารถแพร่กระจายตัวเองผ่านเครือข่ายได้โดยไม่ต้องอาศัยไฟล์พาหนะคือข้อใด", "c": ["Virus", "Worm", "Trojan Horse", "Logic Bomb"], "a": 1, "e": "Worm (หนอนคอมพิวเตอร์) สามารถสำเนาตัวเองและส่งผ่านช่องโหว่เครือข่ายไปสู่เครื่องอื่นได้เอง"}, {"id": 92, "cat": "Malware", "q": "SQL Slammer เป็นมัลแวร์ประเภทใดที่ระเบิดการแพร่ระบาดอย่างรวดเร็วในอดีต", "c": ["Trojan", "Spyware", "Worm", "Adware"], "a": 2, "e": "SQL Slammer เป็นแชมป์การแพร่ระบาดด้วยความเร็วสูงผ่านช่องโหว่ของฐานข้อมูล Microsoft SQL Server"}, {"id": 93, "cat": "Malware", "q": "มัลแวร์ประเภทที่แฝงมากับโปรแกรมอื่นแต่มีเป้าหมายลักขโมยข้อมูลหรือเปิดประตูหลังบ้านคือข้อใด", "c": ["Trojan Horse", "Worm", "Boot Sector Virus", "Macro Virus"], "a": 0, "e": "โทรจัน (Trojan) จะหลอกผู้ใช้ว่าเป็นโปรแกรมปกติ แต่เบื้องหลังแฝงคำสั่งอันตรายไว้"}, {"id": 94, "cat": "Malware", "q": "การโจมตีแบบ Phishing มักใช้ควบคู่กับมัลแวร์ประเภทใดในการหลอกเหยื่อ", "c": ["Ransomware", "Downloader / Spyware", "Rootkit", "Keylogger"], "a": 1, "e": "ลิงก์หรือไฟล์แนบใน Phishing มักดาวน์โหลดมัลแวร์ประเภท Downloader หรือ Spyware มาฝังในเครื่อง"}, {"id": 95, "cat": "Malware", "q": "วิธีการป้องกันมัลแวร์ที่มีประสิทธิภาพและครอบคลุมที่สุดคือข้อใด", "c": ["ติดตั้งแอนตี้ไวรัสอย่างเดียว", "ไม่ใช้งานอินเทอร์เน็ต", "ใช้ระบบป้องกันแบบหลายชั้น (Defense in Depth)", "เปลี่ยนรหัสผ่านทุกวัน"], "a": 2, "e": "การป้องกันต้องทำหลายระดับ ทั้งอัปเดตแพตช์, ใช้ไฟร์วอลล์, แอนตี้ไวรัส และสร้างความตระหนักให้ผู้ใช้"}, {"id": 96, "cat": "Malware", "q": "เทคนิคการตรวจจับมัลแวร์ของโปรแกรมป้องกันแบบใดที่ไม่สามารถตรวจจับมัลแวร์ตัวใหม่ๆ ที่ยังไม่มีฐานข้อมูลได้", "c": ["Signature-based detection", "Heuristic analysis", "Sandbox analysis", "Behavior monitoring"], "a": 0, "e": "หากมัลแวร์เป็นสายพันธุ์ใหม่ที่ยังไม่มีลายเซ็นในฐานข้อมูล Signature-based จะไม่สามารถตรวจจับได้"}, {"id": 97, "cat": "Malware", "q": "มัลแวร์ประเภทใดที่ทำการเข้ารหัสไฟล์ในเครื่องเหยื่อแล้วเรียกค่าไถ่เพื่อแลกกับกุญแจถอดรหัส", "c": ["Adware", "Ransomware", "Scareware", "Spyware"], "a": 1, "e": "แรนซัมแวร์ (Ransomware) เช่น WannaCry จะล็อกไฟล์ข้อมูลและบังคับให้จ่ายเงินไถ่"}, {"id": 98, "cat": "Malware", "q": "Payload ในโครงสร้างของมัลแวร์หมายถึงส่วนใด", "c": ["ส่วนที่ใช้แพร่กระจาย", "ส่วนซ่อนตัว", "ส่วนคำสั่งปฏิบัติการทำลายล้างหรือขโมยข้อมูลเป้าหมาย", "ส่วนหัวของไฟล์"], "a": 2, "e": "Payload คือแกนหลักของมัลแวร์ที่ทำหน้าที่สร้างความเสียหายหรือบรรลุเป้าหมายที่ผู้สร้างกำหนดไว้"}, {"id": 99, "cat": "Malware", "q": "Rootkit เป็นมัลแวร์ที่มีลักษณะเด่นอย่างไร", "c": ["ส่งสแปมเมล", "ฝังตัวในระดับลึกเพื่อซ่อนเร้นการมีอยู่ของมัลแวร์ตัวอื่นและยึดสิทธิ์ระดับ Root", "ทำให้เครื่องแฮงก์ทันที", "ทำลายฮาร์ดแวร์"], "a": 1, "e": "Rootkit จะแก้ไขระบบปฏิบัติการเพื่ออำพรางตัวไม่ให้ผู้ดูแลระบบหรือแอนตี้ไวรัสตรวจพบง่ายๆ"}, {"id": 100, "cat": "Malware", "q": "ข้อใดไม่ใช่แนวทางปฏิบัติที่ดีในการรับมือมัลแวร์", "c": ["สำรองข้อมูลสม่ำเสมอ", "อัปเดตซอฟต์แวร์และแพตช์ระบบอยู่เสมอ", "เปิดไฟล์แนบจากอีเมลแปลกๆ ทันทีเพื่อตรวจสอบ", "ใช้ซอฟต์แวร์ป้องกันมัลแวร์ที่น่าเชื่อถือ"], "a": 2, "e": "การเปิดไฟล์แนบจากแหล่งที่ไม่รู้จักมีความเสี่ยงสูงที่จะติดมัลแวร์"}, {"id": 101, "cat": "Hacking", "q": "นักเจาะระบบที่มีจรรยาบรรณ ตรวจสอบระบบเพื่อหาจุดอ่อนและช่วยปรับปรุงความปลอดภัยเรียกว่าอะไร", "c": ["Black Hat Hacker", "Script Kiddie", "White Hat Hacker", "Cyber Terrorist"], "a": 2, "e": "White Hat (แฮกเกอร์หมวกขาว) คือผู้ตรวจสอบระบบโดยได้รับอนุญาตเพื่อความปลอดภัย"}, {"id": 102, "cat": "Hacking", "q": "ขั้นตอนแรกสุดที่นักเจาะระบบมักทำก่อนเริ่มปฏิบัติการคือข้อใด", "c": ["Reconnaissance (การหาข่าวและลาดตระเวน)", "Exploitation", "Maintaining Access", "Covering Tracks"], "a": 0, "e": "ขั้นตอนแรกคือการเก็บข้อมูลเป้าหมาย (Footprinting & Reconnaissance) ทั้งแบบ Passive และ Active"}, {"id": 103, "cat": "Hacking", "q": "Google Hacking หมายถึงข้อใด", "c": ["การแฮกเว็บไซต์ Google", "การใช้เทคนิคขั้นสูงในการค้นหาข้อมูลลับหรือช่องโหว่ผ่าน Search Engine ของ Google", "การสร้างโปรแกรมค้นหาข้อมูล", "การโจมตีเซิร์ฟเวอร์ Google"], "a": 1, "e": "Google Dorks / Hacking ใช้คำสั่งค้นหาพิเศษเพื่อหาไฟล์หรือระบบที่เผลอเปิดเผยข้อมูลต่อสาธารณะ"}, {"id": 104, "cat": "Hacking", "q": "เครื่องมือใดที่นิยมใช้สำหรับการสแกนพอร์ตและตรวจสอบบริการบนเครือข่าย (Port Scanning)", "c": ["Wireshark", "Nmap", "John the Ripper", "Aircrack-ng"], "a": 1, "e": "Nmap (Network Mapper) เป็นเครื่องมือสแกนเครือข่ายและตรวจดูพอร์ตที่เปิดใช้งานยอดนิยม"}, {"id": 105, "cat": "Hacking", "q": "Metasploit Framework เป็นเครื่องมือที่มีชื่อเสียงในด้านใด", "c": ["ถอดรหัสรหัสผ่าน", "ดักจับแพ็กเก็ตไวรัส", "รวบรวมและทดสอบช่องโหว่ (Exploitation Framework)", "ป้องกันมัลแวร์"], "a": 2, "e": "Metasploit เป็นชุดเครื่องมือเจาะระบบที่รวบรวมช่องโหว่และ Shellcode ไว้ทดสอบความปลอดภัย"}, {"id": 106, "cat": "Hacking", "q": "การโจมตีแบบ SQL Injection เกิดจากสาเหตุใดหลักๆ", "c": ["รหัสผ่านคาดเดาง่าย", "เว็บแอปพลิเคชันไม่ตรวจสอบและกรองข้อมูลที่ผู้ใช้พิมพ์เข้ามาในช่องรับข้อมูล", "สาย LAN หลุด", "ระบบปฏิบัติการเก่า"], "a": 1, "e": "SQL Injection เกิดจากการที่เว็บยอมรับชุดคำสั่งฐานข้อมูลที่ผู้ใช้อินพุตเข้ามาโดยตรงทำให้ดึงข้อมูลออกไปได้"}, {"id": 107, "cat": "Hacking", "q": "John the Ripper เป็นซอฟต์แวร์ที่ใช้ทำหน้าที่อะไร", "c": ["สแกนไวรัส", "แคร็ครหัสผ่าน (Password cracking)", "สร้างมัลแวร์", "จำลองเครือข่าย"], "a": 1, "e": "John the Ripper ใช้ในการทดสอบความแข็งแกร่งของรหัสผ่านโดยการถอดรหัสแฮช (Password Hash)"}, {"id": 108, "cat": "Hacking", "q": "การโจมตีแบบ Cross-Site Scripting (XSS) มักโจมตีเป้าหมายในส่วนใด", "c": ["ฮาร์ดแวร์เรอเตอร์", "เว็บแอปพลิเคชันเพื่อให้เบราว์เซอร์ของเหยื่อรันสคริปต์อันตราย", "ระบบไฟฟ้าดาต้าเซ็นเตอร์", "โครงสร้างคีย์เข้ารหัส"], "a": 1, "e": "XSS ยอมให้แฮกเกอร์แทรกสคริปต์ฝั่งไคลเอนต์ (เช่น JavaScript) เข้าไปแสดงผลบนเว็บที่ผู้ใช้อื่นเข้าชม"}, {"id": 109, "cat": "Hacking", "q": "ข้อใดคือเป้าหมายหลักของการทำ Maintaining Access ในขั้นตอนการเจาะระบบ", "c": ["ทำลายหลักฐานการเข้าใช้", "สร้างช่องทางลับ (Backdoor) เพื่อกลับเข้ามาในระบบได้อีกในภายหลัง", "ลบข้อมูลทิ้งทั้งหมด", "แจ้งเตือนผู้ดูแลระบบ"], "a": 1, "e": "เพื่อรักษาการเข้าถึงเป้าหมายไว้อย่างต่อเนื่องแม้ระบบจะรีบูต"}, {"id": 110, "cat": "Hacking", "q": "กระบวนการสุดท้ายของการเจาะระบบ (Covering Tracks) ทำไปเพื่ออะไร", "c": ["เพิ่มความเร็วระบบ", "ลบร่องรอยและบันทึกประวัติการบุกรุกเพื่อไม่ให้ผู้ดูแลระบบจับได้", "สำรองข้อมูล", "ติดตั้งโปรแกรมออฟฟิศ"], "a": 1, "e": "ลบ Log หรือหลักฐานต่างๆ เพื่อปกปิดตัวตนไม่ให้ถูกแกะรอย"}, {"id": 111, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "เมื่อตรวจพบว่าระบบกำลังถูกโจมตีหรือเกิดเหตุผิดปกติ สิ่งแรกที่ควรทำคือข้อใด", "c": ["ลบข้อมูลทั้งหมดทิ้งทันที", "ตัดสินใจแยกเครื่องที่ติดปัญหาออกจากเครือข่ายเพื่อหยุดการแพร่ระบาด (Isolate)", "ปิดเครื่องคอมพิวเตอร์ทันทีแบบ Hard shutdown", "แจ้งตำรวจ"], "a": 1, "e": "การตัดการเชื่อมต่อเครือข่ายช่วยป้องกันไม่ให้มัลแวร์แพร่กระจายไปเครื่องอื่น แต่ยังคงสภาพสถานะในแรม (RAM) ไว้เพื่อวิเคราะห์ต่อได้"}, {"id": 112, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "False alarm ในระบบตรวจสอบความปลอดภัยหมายถึงอะไร", "c": ["การโจมตีจริง", "ระบบล่ม", "การแจ้งเตือนที่ผิดพลาดว่ามีการโจมตีทั้งที่ไม่มีจริง", "การสำรองข้อมูลล้มเหลว"], "a": 2, "e": "False alarm คือการแจ้งเตือนภัยที่ผิดพลาดว่ามีการโจมตีทั้งที่ไม่มีเหตุการณ์โจมตีเกิดขึ้นจริง ทำให้ทีมรักษาความปลอดภัยเสียเวลาตรวจสอบโดยไม่จำเป็น"}, {"id": 113, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "หากพบว่าเครื่องคอมพิวเตอร์ทำงานช้าผิดปกติ แต่สแกนไวรัสแล้วไม่พบอะไร ควรสันนิษฐานในเบื้องต้นอย่างไร", "c": ["เครื่องปกติ", "ฮาร์ดดิสก์เสีย", "อาจมีมัลแวร์ตัวใหม่ (Zero-day) หรือ Rootkit ที่ซ่อนตัวหลบหลีกการตรวจจับ", "แรมไม่พอ"], "a": 2, "e": "มัลแวร์สายพันธุ์ใหม่หรือ Rootkit มักถูกออกแบบมาให้หลบเลี่ยงการตรวจจับของโปรแกรมแอนตี้ไวรัสทั่วไปที่อาศัยฐานข้อมูลลายเซ็นเดิม"}, {"id": 114, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "เครื่องมือ Task Manager ในระบบ Windows สามารถใช้ตรวจสอบสิ่งผิดปกติใดได้บ้าง", "c": ["กระบวนการ (Processes) และการใช้ทรัพยากรซีพียูแรม", "ตรวจสอบพอร์ตเครือข่าย", "สแกนไวรัส", "กู้ไฟล์ที่ลบ"], "a": 0, "e": "Task Manager แสดงรายการโพรเซสที่กำลังทำงานพร้อมการใช้ทรัพยากร CPU และหน่วยความจำ ช่วยให้สังเกตเห็นโพรเซสแปลกปลอมที่อาจเป็นมัลแวร์ได้"}, {"id": 115, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "เมื่อตรวจสอบระบบแล้วพบว่ามีการเปิดใช้งานพอร์ต 80 และ 443 ทิ้งไว้ สันนิษฐานได้ว่าเครื่องนั้นเปิดบริการใด", "c": ["Web Server (HTTP/HTTPS)", "File Sharing", "Remote Desktop", "Email Server"], "a": 0, "e": "พอร์ต 80 เป็นพอร์ตมาตรฐานของ HTTP และพอร์ต 443 เป็นพอร์ตมาตรฐานของ HTTPS จึงบ่งชี้ว่าเครื่องนั้นกำลังให้บริการเว็บ"}, {"id": 116, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "จะตรวจสอบโปรแกรมที่ถูกตั้งค่าให้รันอัตโนมัติเมื่อเปิดเครื่อง Windows ได้จากส่วนใด", "c": ["Task Manager (Startup tab) / System Configuration (msconfig)", "Control Panel", "Recycle Bin", "Calculator"], "a": 0, "e": "แท็บ Startup ใน Task Manager หรือเครื่องมือ msconfig แสดงรายการโปรแกรมที่ถูกตั้งค่าให้เริ่มทำงานอัตโนมัติพร้อมระบบ ซึ่งมัลแวร์มักแอบตั้งค่าตนเองไว้ที่นี่"}, {"id": 117, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "Registry ของระบบปฏิบัติการ Windows คืออะไร", "c": ["ฐานข้อมูลส่วนกลางที่เก็บค่ากำหนดการตั้งค่าระบบฮาร์ดแวร์และซอฟต์แวร์", "โฟลเดอร์เก็บไฟล์เอกสาร", "หน่วยความจำสำรอง", "โปรแกรมป้องกันไวรัส"], "a": 0, "e": "Windows Registry เป็นฐานข้อมูลลำดับชั้นที่เก็บค่าการตั้งค่าของระบบปฏิบัติการและซอฟต์แวร์ที่ติดตั้ง มัลแวร์มักแก้ไข Registry เพื่อฝังตัวให้รันอัตโนมัติ"}, {"id": 118, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "โปรแกรม Wireshark มีความสามารถหลักในด้านใด", "c": ["ดักจับและวิเคราะห์แพ็กเก็ตข้อมูลบนเครือข่าย (Packet Sniffer)", "ลบไวรัส", "สร้างรหัสผ่าน", "สแกนช่องโหว่เว็บ"], "a": 0, "e": "Wireshark เป็นโปรแกรม Packet Analyzer ยอดนิยมที่ใช้ดักจับและตรวจสอบรายละเอียดของแพ็กเก็ตข้อมูลที่วิ่งอยู่บนเครือข่าย"}, {"id": 119, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "การกู้คืนระบบด้วย System Restore ไฟล์ข้อมูลเอกสารที่สร้างขึ้นหลังจุดแบ็คอัพจะได้รับผลกระทบอย่างไร", "c": ["ไฟล์ข้อมูลส่วนตัวมักจะไม่ถูกลบ แต่ค่าระบบและแอปพลิเคชันที่ติดตั้งทีหลังจะถูกย้อนกลับ", "ไฟล์หายทั้งหมด", "ไม่มีการเปลี่ยนแปลงใดๆ", "ฮาร์ดดิสก์ถูกฟอร์แมต"], "a": 0, "e": "System Restore ของ Windows จะย้อนกลับเฉพาะค่าระบบ ไดรเวอร์ และโปรแกรมที่ติดตั้งหลังจุดคืนค่า แต่จะไม่ลบไฟล์เอกสารส่วนตัวของผู้ใช้"}, {"id": 120, "cat": "การกู้คืนระบบ (System Recovery & Incident Response)", "q": "การวางแผนสำรองข้อมูล (Backup Strategy) ที่ดีควรปฏิบัติอย่างไร", "c": ["สำรองครั้งเดียวเก็บไว้ตลอดไป", "ไม่ต้องสำรอง", "ทำตามหลัก 3-2-1 Backup (3 สำเนา, 2 สื่อต่างกัน, 1 นอกสถานที่) และทำอย่างสม่ำเสมอ", "สำรองเฉพาะตอนระบบจะพัง"], "a": 2, "e": "หลักการ 3-2-1 Backup คือการมีข้อมูลสำรองอย่างน้อย 3 ชุด เก็บในสื่อ 2 ประเภทที่ต่างกัน และมี 1 ชุดเก็บไว้นอกสถานที่ เพื่อลดความเสี่ยงที่ข้อมูลทั้งหมดจะเสียหายพร้อมกัน"}, {"id": 121, "cat": "Windows Security", "q": "Windows Defender ทำหน้าที่หลักในข้อใด", "c": ["เร่งความเร็วเครื่อง", "ป้องกันและตรวจจับมัลแวร์เบื้องต้นสำหรับระบบวินโดวส์", "จัดการฐานข้อมูล", "บล็อกเว็บไซต์โป๊อย่างเดียว"], "a": 1, "e": "Windows Defender เป็นซอฟต์แวร์ป้องกันมัลแวร์ที่ติดตั้งมาพร้อมกับระบบปฏิบัติการ Windows ทำหน้าที่สแกนและป้องกันภัยคุกคามเบื้องต้น"}, {"id": 122, "cat": "Windows Security", "q": "Microsoft Security Bulletin คืออะไร", "c": ["ประกาศแจ้งเตือนความปลอดภัย ช่องโหว่ และแพตช์อัปเดตจากไมโครซอฟท์", "ข่าวสารบริษัท", "คู่มือการใช้งานวินโดวส์", "โปรแกรมสแกนไวรัส"], "a": 0, "e": "Microsoft Security Bulletin เป็นประกาศอย่างเป็นทางการที่แจ้งรายละเอียดช่องโหว่ ระดับความรุนแรง และแพตช์แก้ไขสำหรับผลิตภัณฑ์ของไมโครซอฟท์"}, {"id": 123, "cat": "Windows Security", "q": "ช่องโหว่ประเภท Cross-Site Scripting (XSS) มักเกิดขึ้นกับระบบใด", "c": ["เว็บแอปพลิเคชัน", "ไดรเวอร์การ์ดจอ", "ระบบไฟฟ้า", "เครื่องพิมพ์"], "a": 0, "e": "XSS เป็นช่องโหว่ที่เกิดจากการที่เว็บแอปพลิเคชันไม่กรองข้อมูลนำเข้าอย่างเหมาะสม ทำให้สคริปต์อันตรายถูกฝังและรันบนเบราว์เซอร์ของผู้ใช้อื่น"}, {"id": 124, "cat": "Windows Security", "q": "แนวทางใดในการป้องกันสแปมเมล (Spam Mail) ที่ได้ผลในระดับองค์กร", "c": ["ติดตั้งระบบกรองเมล (Email Gateway/Spam Filter) และตั้งค่า SPF/DKIM/DMARC", "ปิดอีเมลบริษัท", "เปลี่ยนรหัสผ่านทุกชั่วโมง", "ลบวินโดวส์ทิ้ง"], "a": 0, "e": "การติดตั้งระบบกรองเมลร่วมกับการตั้งค่า SPF, DKIM และ DMARC ช่วยยืนยันความถูกต้องของผู้ส่งและลดการปลอมแปลงอีเมลได้อย่างมีประสิทธิภาพ"}, {"id": 125, "cat": "Windows Security", "q": "หนอนอินเทอร์เน็ตเช่น SQL Slammer หรือ MSBlast มักโจมตีผ่านช่องโหว่ประเภทใด", "c": ["Buffer Overflow", "Weak Password", "Physical damage", "Social Engineering"], "a": 0, "e": "หนอนอินเทอร์เน็ตในยุคนั้นมักใช้ประโยชน์จากช่องโหว่ Buffer Overflow ในบริการเครือข่ายของระบบปฏิบัติการเพื่อแพร่กระจายตัวเองโดยอัตโนมัติ"}, {"id": 126, "cat": "Windows Security", "q": "พอร์ตเครือข่ายหมายเลข 135, 139, 445 มักถูกใช้โดยบริการใดของวินโดวส์ ซึ่งมักตกเป็นเป้าหมายของมัลแวร์โจมตี", "c": ["Web Service", "SMB / NetBIOS (File and Printer Sharing)", "FTP Service", "DNS Service"], "a": 1, "e": "พอร์ต 135, 139 และ 445 เกี่ยวข้องกับบริการแชร์ไฟล์และเครื่องพิมพ์ผ่าน SMB/NetBIOS ซึ่งเป็นช่องทางยอดนิยมที่มัลแวร์ใช้แพร่กระจายในเครือข่ายภายใน"}, {"id": 127, "cat": "Windows Security", "q": "Back Orifice เป็นตัวอย่างของมัลแวร์ประเภทใดในยุคแรกๆ", "c": ["ไวรัสบูตเซกเตอร์", "Remote Access Trojan (RAT) / Backdoor", "แรนซัมแวร์", "สปายแวร์มือถือ"], "a": 1, "e": "Back Orifice เป็นหนึ่งใน Remote Access Trojan (RAT) ยุคแรกที่เปิดช่องทางลับ (Backdoor) ให้ผู้โจมตีควบคุมเครื่องเหยื่อจากระยะไกลได้"}, {"id": 128, "cat": "Windows Security", "q": "รหัสผ่านที่ปลอดภัยตามหลักความมั่นคงปลอดภัยควรมีลักษณะอย่างไร", "c": ["ยาวอย่างน้อย 8-12 ตัวอักษร ประกอบด้วย A-Z, a-z, 0-9 และอักขระพิเศษ", "ใช้วันเดือนปีเกิด", "ใช้เลข 123456", "ใช้ชื่อตัวเอง"], "a": 0, "e": "รหัสผ่านที่แข็งแกร่งควรมีความยาวเพียงพอและผสมผสานตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก ตัวเลข และอักขระพิเศษ เพื่อยากต่อการคาดเดาหรือถูกโจมตีแบบ Brute Force"}, {"id": 129, "cat": "Linux Security", "q": "การกำหนดบทบาทหน้าที่ (Role) และความจำเป็นในการติดตั้งแพ็กเกจเฉพาะที่จำเป็นบนลีนุกซ์มีประโยชน์อย่างไร", "c": ["ลดพื้นที่และลดช่องโหว่ที่อาจเกิดขึ้นจากบริการส่วนเกิน (Reduce Attack Surface)", "ทำให้เครื่องช้าลง", "เพิ่มความยุ่งยาก", "ไม่มีผลอะไร"], "a": 0, "e": "การติดตั้งเฉพาะแพ็กเกจและบริการที่จำเป็นช่วยลดพื้นผิวการโจมตี (Attack Surface) และลดจุดที่อาจถูกเจาะช่องโหว่ลงได้"}, {"id": 130, "cat": "Linux Security", "q": "การตรวจสอบค่าแฮช (เช่น MD5/SHA256) ของซอฟต์แวร์หรือแพ็กเกจก่อนติดตั้งบนลีนุกซ์มีประโยชน์อย่างไร", "c": ["ตรวจสอบความถูกต้องและแน่ใจว่าไฟล์ไม่ถูกแก้ไขหรือแอบแฝงมัลแวร์ระหว่างดาวน์โหลด", "ทำให้ดาวน์โหลดเร็วขึ้น", "บีบอัดไฟล์", "ลบไวรัสอัตโนมัติ"], "a": 0, "e": "การเปรียบเทียบค่าแฮชของไฟล์ที่ดาวน์โหลดกับค่าแฮชต้นฉบับที่ผู้พัฒนาประกาศไว้ ช่วยยืนยันว่าไฟล์ไม่ถูกดัดแปลงหรือสอดแทรกมัลแวร์ระหว่างทาง"}, {"id": 131, "cat": "Linux Security", "q": "คำสั่งในระบบ Ubuntu ระหว่าง apt-get update กับ apt-get upgrade แตกต่างกันอย่างไร", "c": ["Update คือการดึงรายชื่อแพ็กเกจล่าสุดมาตรวจสอบ ส่วน Upgrade คือการอัปเดตตัวซอฟต์แวร์ให้เป็นเวอร์ชันใหม่", "เหมือนกันทุกประการ", "Upgrade คือลบโปรแกรมทิ้ง", "Update คือการปิดเครื่อง"], "a": 0, "e": "apt-get update จะดึงข้อมูลรายการแพ็กเกจเวอร์ชันล่าสุดจาก repository มาเก็บไว้ในเครื่อง ส่วน apt-get upgrade จะติดตั้งอัปเดตจริงให้กับซอฟต์แวร์ที่มีเวอร์ชันใหม่กว่า"}, {"id": 132, "cat": "Linux Security", "q": "คำสั่งลีนุกซ์ใดใช้สำหรับมอนิเตอร์โพรเซสที่กำลังทำงานอยู่และแสดงผลแบบเรียลไทม์", "c": ["ls", "top หรือ htop", "cat", "grep"], "a": 1, "e": "คำสั่ง top และ htop แสดงรายการโพรเซสที่กำลังทำงานพร้อมการใช้ทรัพยากรระบบแบบเรียลไทม์ ช่วยตรวจจับโพรเซสผิดปกติได้"}, {"id": 133, "cat": "Linux Security", "q": "คำสั่งใดใช้ตรวจสอบพื้นที่ว่างและการใช้งานฮาร์ดดิสก์บนลีนุกซ์", "c": ["df -h", "ps -ef", "ifconfig", "pwd"], "a": 0, "e": "คำสั่ง df -h แสดงพื้นที่ใช้งานและพื้นที่ว่างของดิสก์ในรูปแบบที่อ่านง่าย (human-readable)"}, {"id": 134, "cat": "Linux Security", "q": "แอปพลิเคชันเซิร์ฟเวอร์ระบบ DNS ที่นิยมที่สุดบนลีนุกซ์คือข้อใด", "c": ["BIND (Berkeley Internet Name Domain)", "Apache", "Postfix", "MySQL"], "a": 0, "e": "BIND เป็นซอฟต์แวร์ DNS Server ที่ได้รับความนิยมและใช้งานแพร่หลายที่สุดบนระบบลีนุกซ์"}, {"id": 135, "cat": "Linux Security", "q": "Apache บนลีนุกซ์ทำหน้าที่เป็นซอฟต์แวร์ประเภทใด", "c": ["Web Server", "Mail Server", "Database Server", "Firewall"], "a": 0, "e": "Apache HTTP Server เป็นซอฟต์แวร์เว็บเซิร์ฟเวอร์ (Web Server) ยอดนิยมที่ใช้ให้บริการเว็บไซต์"}, {"id": 136, "cat": "Linux Security", "q": "Mail Transfer Agent (MTA) ยอดนิยมบนลีนุกซ์สำหรับจัดการรับส่งอีเมลคือข้อใด", "c": ["Postfix / Sendmail", "Apache", "Nmap", "SSH"], "a": 0, "e": "Postfix และ Sendmail เป็นซอฟต์แวร์ Mail Transfer Agent (MTA) ยอดนิยมที่ใช้รับส่งอีเมลบนเซิร์ฟเวอร์ลีนุกซ์"}, {"id": 137, "cat": "Linux Security", "q": "Open Relay ในระบบ Mail Server หมายถึงข้อใดและความเสี่ยงคืออะไร", "c": ["เซิร์ฟเวอร์ที่ยอมให้ใครก็ได้ส่งอีเมลผ่านตนเอง ทำให้ตกเป็นเครื่องมือกระจาย Spam mail", "ช่องทางสำรองข้อมูล", "ระบบเปิดประตูห้องเซิร์ฟเวอร์", "ระบบเข้ารหัสอีเมล"], "a": 0, "e": "Open Relay เป็นการตั้งค่า Mail Server ที่ไม่ปลอดภัย ยอมให้บุคคลภายนอกส่งอีเมลผ่านเซิร์ฟเวอร์ได้โดยไม่ตรวจสอบสิทธิ์ ทำให้ถูกนำไปใช้ส่งสแปมจำนวนมากได้"}, {"id": 138, "cat": "Physical and Environmental Security", "q": "สิ่งสำคัญที่สุดในการออกแบบระบบรักษาความปลอดภัยทางกายภาพ (Physical Security) คืออะไร", "c": ["ความปลอดภัยของชีวิตมนุษย์ (Human Safety) เป็นอันดับแรก", "ความสวยงามของตึก", "ราคาประหยัด", "ความเร็วของเครือข่าย"], "a": 0, "e": "หลักการออกแบบความปลอดภัยทางกายภาพทุกมาตรฐานยึดความปลอดภัยในชีวิตของมนุษย์เป็นลำดับความสำคัญสูงสุดก่อนเรื่องทรัพย์สินหรือข้อมูลเสมอ"}, {"id": 139, "cat": "Physical and Environmental Security", "q": "การเลือกทำเลที่ตั้งอาคาร วัสดุก่อสร้าง และการจัดวางผังห้องเซิร์ฟเวอร์ จัดเป็นมาตรการควบคุมด้านใด", "c": ["Physical Security Control", "Logical Control", "Administrative Control", "Software Control"], "a": 0, "e": "การเลือกทำเล วัสดุก่อสร้าง และผังห้องเซิร์ฟเวอร์เป็นส่วนหนึ่งของมาตรการควบคุมทางกายภาพ (Physical Security Control) ที่ป้องกันภัยคุกคามเชิงกายภาพ"}, {"id": 140, "cat": "Physical and Environmental Security", "q": "หลักการ CPTED (Crime Prevention Through Environmental Design) เน้นเรื่องใด", "c": ["การออกแบบสภาพแวดล้อมทางกายภาพเพื่อป้องกันอาชญากรรมและการบุกรุก", "การเขียนโค้ดป้องกันแฮกเกอร์", "การเข้ารหัสไฟล์", "การตั้งค่าไฟร์วอลล์"], "a": 0, "e": "CPTED เป็นแนวคิดการออกแบบสภาพแวดล้อมทางกายภาพ เช่น แสงสว่าง แนวสายตา และการจัดวางพื้นที่ เพื่อลดโอกาสในการเกิดอาชญากรรมและการบุกรุก"}, {"id": 141, "cat": "Physical and Environmental Security", "q": "กระจกนิรภัยประเภทใดเมื่อแตกแล้วจะแตกละเอียดเป็นเม็ดเล็กๆ ไม่มีคมเพื่อลดอันตราย", "c": ["Laminated Glass", "Tempered Glass", "Normal Glass", "Plastic Glass"], "a": 1, "e": "Tempered Glass (กระจกนิรภัยอบแข็ง) เมื่อแตกจะแตกตัวเป็นเม็ดเล็กๆ ทื่อ ไม่มีคมแหลม ลดความเสี่ยงต่อการบาดเจ็บเมื่อเทียบกับกระจกธรรมดา"}, {"id": 142, "cat": "Physical and Environmental Security", "q": "อุณหภูมิที่เหมาะสมภายในห้อง Data Center ตามมาตรฐานทั่วไปควรอยู่ในช่วงใด", "c": ["18 - 27 องศาเซลเซียส", "35 - 40 องศาเซลเซียส", "0 - 10 องศาเซลเซียส", "เท่าไหร่ก็ได้"], "a": 0, "e": "มาตรฐานทั่วไป (เช่น ASHRAE) แนะนำอุณหภูมิห้อง Data Center ในช่วงประมาณ 18-27 องศาเซลเซียส เพื่อรักษาประสิทธิภาพและอายุการใช้งานของอุปกรณ์"}, {"id": 143, "cat": "Physical and Environmental Security", "q": "การทำความดันบวก (Positive Pressure) ภายในห้อง Data Center มีประโยชน์อย่างไร", "c": ["ป้องกันไม่ให้ฝุ่นละอองหรือควันภายนอกไหลทะลักเข้ามาเมื่อมีการเปิดประตู", "ช่วยเพิ่มออกซิเจน", "ทำให้เน็ตเร็วขึ้น", "ลดเสียงรบกวน"], "a": 0, "e": "การรักษาความดันอากาศภายในห้องให้สูงกว่าภายนอก (Positive Pressure) ช่วยไล่อากาศออกทางช่องเปิดเมื่อมีการเปิดประตู ป้องกันฝุ่นและสิ่งปนเปื้อนจากภายนอกไม่ให้ไหลย้อนเข้ามา"}, {"id": 144, "cat": "Physical and Environmental Security", "q": "สภาวะไฟฟ้ากระชากหรือแรงดันสูงชั่วขณะเรียกว่าอะไร", "c": ["Surge / Spike", "Blackout", "Sag", "Brownout"], "a": 0, "e": "Surge หรือ Spike คือภาวะแรงดันไฟฟ้าพุ่งสูงขึ้นอย่างฉับพลันในช่วงเวลาสั้นๆ ซึ่งอาจสร้างความเสียหายต่ออุปกรณ์อิเล็กทรอนิกส์ได้"}, {"id": 145, "cat": "Physical and Environmental Security", "q": "เพลิงไหม้ที่เกิดจากอุปกรณ์ไฟฟ้าหรือระบบคอมพิวเตอร์จัดเป็นไฟประเภทใด และควรใช้สารดับเพลิงชนิดใด", "c": ["ประเภท C (ใช้ก๊าซสะอาดหรือ CO2 ห้ามใช้น้ำ)", "ประเภท A (ใช้น้ำ)", "ประเภท B (ใช้โฟม)", "ประเภท D (ใช้ทราย)"], "a": 0, "e": "เพลิงไหม้จากอุปกรณ์ไฟฟ้าจัดเป็นไฟประเภท C ซึ่งห้ามใช้น้ำดับเด็ดขาดเพราะน้ำนำไฟฟ้า ควรใช้สารดับเพลิงชนิดก๊าซสะอาดหรือ CO2 แทน"}, {"id": 146, "cat": "Physical and Environmental Security", "q": "องค์ประกอบของไฟ (Fire Triangle) ประกอบด้วยสิ่งใดบ้าง", "c": ["เชื้อเพลิง, ความร้อน, ออกซิเจน", "ลม, น้ำ, ไฟ", "ฮาร์ดแวร์, ซอฟต์แวร์, ไฟฟ้า", "คาร์บอน, ไนโตรเจน, ฮีเลียม"], "a": 0, "e": "Fire Triangle ประกอบด้วยองค์ประกอบสำคัญ 3 อย่างที่ทำให้เกิดไฟ ได้แก่ เชื้อเพลิง (Fuel), ความร้อน (Heat) และออกซิเจน (Oxygen) การตัดองค์ประกอบใดออกไปจะช่วยดับไฟได้"}, {"id": 147, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "อาชญากรรมทางคอมพิวเตอร์หมายถึงข้อใด", "c": ["การโจมตีระบบคอมพิวเตอร์ของผู้อื่น", "การลักลอบใช้งานคอมพิวเตอร์โดยไม่ได้รับอนุญาต", "การกระทำผิดทางอาญาโดยใช้คอมพิวเตอร์หรือเครือข่ายเป็นเครื่องมือหรือเป้าหมาย", "ถูกทุกข้อ"], "a": 3, "e": "อาชญากรรมคอมพิวเตอร์ครอบคลุมทั้งการใช้คอมพิวเตอร์เป็นเครื่องมือในการกระทำผิด และการพุ่งเป้าโจมตีที่ตัวระบบคอมพิวเตอร์โดยตรง"}, {"id": 148, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "OECD คืออะไร", "c": ["องค์การเพื่อความร่วมมือทางเศรษฐกิจและการพัฒนา (Organization for Economic Co-operation and Development)", "องค์การต่อต้านอาชญากรรมคอมพิวเตอร์สากล", "หน่วยงานกำกับดูแลอินเทอร์เน็ต", "สมาคมความปลอดภัยไซเบอร์"], "a": 0, "e": "OECD เป็นองค์กรระหว่างประเทศที่มีบทบาทสำคัญในการวางแนวทางและหลักเกณฑ์ด้านความปลอดภัยของข้อมูลรวมถึงนโยบายไอทีในยุคแรกๆ"}, {"id": 149, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "Computer Forensics (นิติคอมพิวเตอร์) คืออะไร", "c": ["การพิสูจน์หลักฐานทางคอมพิวเตอร์เพื่อหาหลักฐานมัดตัวผู้กระทำผิดตามกระบวนการทางกฎหมาย", "การกู้คืนไฟล์งานที่ลบ", "การสแกนไวรัสในเครื่องผู้ต้องหา", "การเจาะระบบเพื่อตรวจสอบช่องโหว่"], "a": 0, "e": "นิติคอมพิวเตอร์เน้นการเก็บรักษา วิเคราะห์ และกู้คืนข้อมูลทางดิจิทัลให้มีน้ำหนักเพียงพอในการใช้เป็นหลักฐานในชั้นศาล"}, {"id": 150, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "เมื่อนักสืบสวนเข้าถึงที่เกิดเหตุแล้วพบเครื่องคอมพิวเตอร์เปิดทิ้งไว้ ควรปฏิบัติอย่างไรเป็นเบื้องต้น", "c": ["ปิดเครื่องทันทีเพื่อป้องกันข้อมูลรั่วไหล", "ตรวจสอบโปรแกรมที่กำลังรันและเก็บข้อมูลหลักฐานในหน่วยความจำชั่วคราว (RAM) ก่อนจัดการปิด", "ถอดปลั๊กไฟออกทันที", "ฟอร์แมตฮาร์ดดิสก์"], "a": 1, "e": "หากปิดเครื่องทันที ข้อมูลที่อยู่ใน RAM (เช่น รหัสผ่านชั่วคราว การเชื่อมต่อเครือข่าย) จะสูญหายไปทั้งหมด จึงต้องเก็บภาพแรมหรือบันทึกสถานะก่อน"}, {"id": 151, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "การทำสำเนาข้อมูลจากฮาร์ดดิสก์ของกลางเพื่อนำมาตรวจสอบทางนิติคอมพิวเตอร์ควรทำอย่างไร", "c": ["ทำการ Copy วางไฟล์ปกติ", "ทำการสำเนาแบบบิตต่อบิต (Bit-stream Image / Forensic Clone) และคำนวณค่าแฮชตรวจสอบความถูกต้อง", "ติดตั้งโปรแกรมสแกนแล้วดึงไฟล์", "ถ่ายรูปหน้าจอ"], "a": 1, "e": "เพื่อไม่ให้ต้นฉบับเสียหายและสามารถนำไปพิสูจน์ได้ว่าข้อมูลไม่มีการถูกเปลี่ยนแปลง จึงต้องทำสำเนาแบบจำลองทุกบิต (Forensic Image)"}, {"id": 152, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "ตัวอย่างซอฟต์แวร์ที่นิยมใช้ในทางนิติคอมพิวเตอร์ (Computer Forensics Tools) คือข้อใด", "c": ["EnCase / Autopsy / FTK", "Microsoft Word", "Apache Web Server", "WinRAR"], "a": 0, "e": "EnCase, Autopsy และ Forensic Toolkit (FTK) เป็นเครื่องมือมาตรฐานที่ใช้ในการสืบสวนและวิเคราะห์หลักฐานดิจิทัล"}, {"id": 153, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "ความแตกต่างระหว่างกฎหมายแพ่งและกฎหมายอาญาคือข้อใด", "c": ["กฎหมายอาญาเกี่ยวกับการกระทำผิดต่อรัฐมีโทษจำคุกหรือปรับ ส่วนกฎหมายแพ่งเกี่ยวกับการเรียกร้องค่าเสียหายระหว่างเอกชนด้วยกัน", "เหมือนกันทุกประการ", "กฎหมายแพ่งมีโทษรุนแรงกว่า", "กฎหมายอาญาใช้เฉพาะคดีฆาตกรรม"], "a": 0, "e": "กฎหมายอาญาเป็นความผิดต่อรัฐและสังคม มีบทลงโทษจำคุกหรือปรับ ส่วนกฎหมายแพ่งเกี่ยวข้องกับข้อพิพาทและการเรียกร้องค่าเสียหายระหว่างเอกชนด้วยกัน"}, {"id": 154, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "ลายมือชื่ออิเล็กทรอนิกส์ (Electronic Signature) ตามกฎหมายหมายถึงข้อใด", "c": ["การใช้อักษร อักขระ ตัวเลข หรือสัญลักษณ์ใดๆ ที่สร้างขึ้นทางอิเล็กทรอนิกส์เพื่อแสดงความสัมพันธ์ระหว่างบุคคลกับข้อมูลอิเล็กทรอนิกส์", "การสแกนลายเซ็นจริงด้วยเครื่องสแกนเนอร์", "รูปภาพลายเซ็นบนกระดาษ", "รหัสผ่านอีเมล"], "a": 0, "e": "ลายมือชื่ออิเล็กทรอนิกส์ตามกฎหมายครอบคลุมสัญลักษณ์ใดๆ ที่สร้างขึ้นทางอิเล็กทรอนิกส์เพื่อระบุและแสดงความเกี่ยวพันระหว่างบุคคลกับข้อมูลนั้น ไม่จำเป็นต้องเป็นภาพลายเซ็นจริง"}, {"id": 155, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "การตัดต่อภาพผู้อื่นแล้วนำเข้าสู่ระบบคอมพิวเตอร์จนทำให้บุคคลนั้นได้รับความเสียหาย เสื่อมเสียชื่อเสียง เข้าข่ายความผิดตาม พ.ร.บ. คอมพิวเตอร์ มาตราใด (อ้างอิงตามเนื้อหาหลัก)", "c": ["มาตรา 5", "มาตรา 9", "มาตรา 12", "มาตรา 16 (ว่าด้วยการนำเข้าภาพตัดต่อ เติม หรือดัดแปลงเข้าสู่ระบบจนน่าจะทำให้ผู้อื่นเสียชื่อเสียง)"], "a": 3, "e": "มาตรา 16 ของ พ.ร.บ. คอมพิวเตอร์ฯ บัญญัติเรื่องการนำเข้าสู่ระบบคอมพิวเตอร์ซึ่งภาพที่ถูกตัดต่อ เติม หรือดัดแปลงจนทำให้ผู้อื่นเสียชื่อเสียงหรือได้รับความอับอาย"}, {"id": 156, "cat": "กฎหมายอาชญากรรมคอมพิวเตอร์และนิติคอมพิวเตอร์ (Computer Forensics)", "q": "ตาม พ.ร.บ. ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ ผู้ให้บริการ (Service Provider) มีหน้าที่ต้องเก็บรักษาข้อมูลจราจรทางคอมพิวเตอร์ (Log files) ไว้เป็นเวลาอย่างน้อยเท่าใด", "c": ["30 วัน", "60 วัน", "90 วัน", "ไม่น้อยกว่า 90 วัน (และอาจขยายได้ถึง 2 ปีตามพนักงานเจ้าหน้าที่สั่ง)"], "a": 3, "e": "ผู้ให้บริการต้องเก็บรักษาข้อมูลจราจรทางคอมพิวเตอร์ไว้ไม่น้อยกว่า 90 วัน และในกรณีจำเป็นพนักงานเจ้าหน้าที่อาจสั่งให้เก็บเพิ่มเติมได้ตามที่กฎหมายกำหนด"}, {"id": 157, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "สงครามไซเบอร์ (Cyber Warfare) หมายถึงข้อใด", "c": ["การปฏิบัติการในไซเบอร์สเปซเพื่อทำลาย รบกวน หรือเจาะระบบข้อมูลของรัฐบาลหรือโครงสร้างพื้นฐานของฝ่ายตรงข้ามเพื่อวัตถุประสงค์ทางยุทธศาสตร์หรือการเมือง", "การเล่นเกมออนไลน์ประลองฝีมือ", "การแฮกเว็บไซต์โรงเรียน", "การซื้อขายสินค้าออนไลน์"], "a": 0, "e": "สงครามไซเบอร์คือปฏิบัติการในไซเบอร์สเปซที่มีเป้าหมายทำลาย รบกวน หรือเจาะระบบของฝ่ายตรงข้ามเพื่อผลประโยชน์ทางยุทธศาสตร์หรือการเมืองระดับรัฐ"}, {"id": 158, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "ข้อใดไม่ใช่ขีดความสามารถหลัก (Core Capabilities) ของปฏิบัติการสารสนเทศ (Information Operations - IO)", "c": ["Computer Network Operations (CNO)", "Electronic Warfare (EW)", "Physical Architecture Design (การออกแบบสถาปัตยกรรมทางกายภาพทั่วไป)", "Psychological Operations (PSYOP)"], "a": 2, "e": "Core Capabilities ของ IO ประกอบด้วย EW, NW/CNO, PSYOP, Military Deception (MILDEC) และ OPSEC"}, {"id": 159, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "การปฏิบัติการด้านการข่าวหรือการเจาะหาข่าวกรองในไซเบอร์สเปซเรียกว่าอะไร", "c": ["CND (Computer Network Defense)", "CNE (Computer Network Exploitation)", "CNA (Computer Network Attack)", "CPA (Computer Packet Analysis)"], "a": 1, "e": "CNE มุ่งเน้นการเจาะเข้าไปเพื่อสอดแนมและหาข่าวกรองโดยไม่ให้เป้าหมายรู้ตัว"}, {"id": 160, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "การปฏิบัติการป้องกันเครือข่ายเรียกว่าอะไร", "c": ["CNA", "CNE", "CND (Computer Network Defense)", "IO-Defense"], "a": 2, "e": "CND หรือ Computer Network Defense คือการปฏิบัติการเพื่อป้องกัน เฝ้าระวัง และตอบโต้การโจมตีเครือข่ายของฝ่ายตนเอง"}, {"id": 161, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "สงครามที่ใช้เครือข่ายเป็นศูนย์กลาง (Network-Centric Warfare) หมายถึงข้อใด", "c": ["การประยุกต์ใช้เทคโนโลยีสารสนเทศและการสื่อสารเชื่อมโยงกำลังพลและอาวุธให้รับรู้สถานการณ์ร่วมกันได้อย่างรวดเร็ว", "สงครามที่สู้กันผ่านอินเทอร์เน็ตอย่างเดียวโดยไม่มีทหาร", "การใช้โดรนบินรบ", "การทำสงครามอิเล็กทรอนิกส์ทางเรือ"], "a": 0, "e": "Network-Centric Warfare คือแนวคิดการใช้เทคโนโลยีสารสนเทศเชื่อมโยงหน่วยรบ กำลังพล และอาวุธ เพื่อให้รับรู้สถานการณ์ร่วมกันและตัดสินใจได้รวดเร็วขึ้น"}, {"id": 162, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "เครื่องมือหรือเทคนิคที่ใช้สำหรับการโจมตีจุดอ่อนของมนุษย์ในสมรภูมิไซเบอร์คือข้อใด", "c": ["Buffer Overflow", "DDoS Attack", "Port Scanning", "Social Engineering (เช่น Phishing, Spear Phishing)"], "a": 3, "e": "Social Engineering เช่น Phishing และ Spear Phishing เป็นเทคนิคที่มุ่งโจมตีจุดอ่อนทางจิตวิทยาและความไว้วางใจของมนุษย์ แทนที่จะโจมตีระบบโดยตรง"}, {"id": 163, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "เหตุการณ์สงครามไซเบอร์ครั้งใหญ่ระดับประเทศครั้งแรก (ที่โจมตีระบบโครงสร้างพื้นฐานของประเทศจนเป็นข่าวเด่นในประวัติศาสตร์) เกิดขึ้นที่ประเทศใด", "c": ["สหรัฐอเมริกา", "เอสโตเนีย (Estonia ปี ค.ศ. 2007)", "ยูเครน", "อิหร่าน"], "a": 1, "e": "ในปี 2007 ประเทศเอสโตเนียถูกโจมตีแบบ DDoS ครั้งใหญ่ใส่เว็บไซต์รัฐบาล ธนาคาร และสื่อมวลชน ซึ่งมักถูกบันทึกว่าเป็นตัวอย่างสงครามไซเบอร์ระดับชาติครั้งแรก"}, {"id": 164, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "มัลแวร์ประเภทใดที่มักถูกใช้ในการทำสงครามไซเบอร์แบบ \"ยืมมือคนอื่น\" หรือใช้ควบคุมเครื่องเหยื่อจำนวนมากโจมตีเป้าหมาย (DDoS)", "c": ["Botnet", "Macro Virus", "Boot Sector Virus", "Adware"], "a": 0, "e": "Botnet คือเครือข่ายของเครื่องคอมพิวเตอร์ที่ถูกแฮกเกอร์ควบคุมจำนวนมาก ซึ่งมักถูกใช้เป็นเครื่องมือในการโจมตีแบบ DDoS ต่อเป้าหมาย"}, {"id": 165, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "สำหรับบุคลากรด้านความปลอดภัยหรือนักรบไซเบอร์ ใบประกาศนียบัตรวิชาชีพ (Certificate) ด้านการเจาะระบบที่มีชื่อเสียงและนิยมอ้างอิงมากที่สุดคือข้อใด", "c": ["CISSP", "CISM", "CEH (Certified Ethical Hacker)", "CompTIA A+"], "a": 2, "e": "CEH (Certified Ethical Hacker) เป็นใบประกาศนียบัตรที่มีชื่อเสียงและเป็นที่ยอมรับอย่างกว้างขวางด้านการทดสอบเจาะระบบอย่างมีจรรยาบรรณ (ส่วน OSCP เป็นอีกใบที่นิยมในระดับปฏิบัติการเชิงลึก)"}, {"id": 166, "cat": "Cyber Warfare (สงครามไซเบอร์)", "q": "มัลแวร์ตัวใดที่มีชื่อเสียงโด่งดังในฐานะ \"อาวุธสงครามไซเบอร์\" ตัวแรกของโลกที่จงใจปล่อยไปทำลายโรงงานนิวเคลียร์ (เช่น ระบบ SCADA ของอิหร่าน)", "c": ["ILOVEYOU", "WannaCry", "SQL Slammer", "Stuxnet"], "a": 3, "e": "Stuxnet เป็นหนอนคอมพิวเตอร์ที่ถูกออกแบบมาเพื่อทำลายระบบควบคุมอุตสาหกรรม (ICS/SCADA) ของโรงงานนิวเคลียร์อิหร่านโดยเฉพาะ"}];
+const KEYS = ['ก','ข','ค','ง'];
+
+const S = {cats:new Set(), len:'all', mode:'instant', shuffle:true,
+           list:[], i:0, answers:[], locked:false};
+
+// ---------- setup UI ----------
+const catCounts = {};
+QUESTIONS.forEach(q => catCounts[q.cat] = (catCounts[q.cat]||0)+1);
+const catOpts = document.getElementById('catOpts');
+const allChip = mkChip('ทุกหมวด', 100, '__all__');
+allChip.classList.add('on');
+catOpts.appendChild(allChip);
+Object.keys(catCounts).forEach(c => catOpts.appendChild(mkChip(c, catCounts[c], c)));
+
+function mkChip(label, count, val){
+  const b = document.createElement('button');
+  b.className = 'chip';
+  b.innerHTML = label + '<span class="ct">' + count + '</span>';
+  b.dataset.cat = val;
+  b.onclick = () => toggleCat(b);
+  return b;
+}
+function toggleCat(b){
+  const v = b.dataset.cat;
+  const chips = [...catOpts.children];
+  if(v === '__all__'){
+    chips.forEach(c => c.classList.toggle('on', c === b));
+    S.cats.clear();
+  } else {
+    chips[0].classList.remove('on');
+    b.classList.toggle('on');
+    S.cats.has(v) ? S.cats.delete(v) : S.cats.add(v);
+    if(S.cats.size === 0) chips[0].classList.add('on');
+  }
+  renderLenOpts();
+}
+
+const lenOpts = document.getElementById('lenOpts');
+function pool(){
+  return S.cats.size ? QUESTIONS.filter(q => S.cats.has(q.cat)) : QUESTIONS.slice();
+}
+function renderLenOpts(){
+  const n = pool().length;
+  const choices = [10, 20, 50].filter(x => x < n);
+  choices.push(n);
+  lenOpts.innerHTML = '';
+  choices.forEach((c, idx) => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (idx === choices.length-1 ? ' on' : '');
+    b.textContent = (c === n ? 'ทั้งหมด ' + n + ' ข้อ' : c + ' ข้อ');
+    b.dataset.len = c;
+    b.onclick = () => { [...lenOpts.children].forEach(x=>x.classList.remove('on'));
+                        b.classList.add('on'); S.len = c; };
+    lenOpts.appendChild(b);
+  });
+  S.len = n;
+}
+renderLenOpts();
+
+document.getElementById('modeOpts').onclick = e => {
+  const b = e.target.closest('.chip'); if(!b) return;
+  [...b.parentNode.children].forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); S.mode = b.dataset.mode;
+};
+const shuffleChip = document.getElementById('shuffleChip');
+shuffleChip.onclick = () => { S.shuffle = !S.shuffle; shuffleChip.classList.toggle('on', S.shuffle); };
+
+// ---------- start ----------
+function shuffled(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+document.getElementById('startBtn').onclick = () => {
+  const p = shuffled(pool()).slice(0, S.len);
+  begin(p);
+};
+
+function begin(list){
+  S.list = list.map(q => {
+    let order = [0,1,2,3];
+    if(S.shuffle) order = shuffled(order);
+    return {...q, order};
+  });
+  S.i = 0; S.answers = new Array(S.list.length).fill(null);
+  show('quiz'); renderQ();
+}
+
+function show(id){
+  ['setup','quiz','result'].forEach(s =>
+    document.getElementById(s).classList.toggle('hidden', s !== id));
+  window.scrollTo({top:0});
+}
+
+// ---------- question rendering ----------
+function renderQ(){
+  const q = S.list[S.i];
+  S.locked = false;
+  document.getElementById('curNum').textContent = S.i + 1;
+  document.getElementById('totNum').textContent = S.list.length;
+  document.getElementById('barFill').style.width = ((S.i)/S.list.length*100) + '%';
+
+  const done = S.answers.filter(a => a !== null).length;
+  const right = S.answers.filter((a,idx) => a !== null && a === S.list[idx].a).length;
+  document.getElementById('liveScore').textContent =
+    (S.mode === 'instant' && done) ? ('ถูก ' + right + ' / ' + done) : '';
+
+  document.getElementById('qcat').textContent = q.cat;
+  document.getElementById('qtext').innerHTML = q.q;
+  document.getElementById('feedback').innerHTML = '';
+
+  const box = document.getElementById('choices');
+  box.innerHTML = '';
+  q.order.forEach((origIdx, pos) => {
+    const b = document.createElement('button');
+    b.className = 'choice';
+    b.innerHTML = '<span class="k">' + KEYS[pos] + '</span><span>' + q.c[origIdx] + '</span>';
+    b.onclick = () => answer(origIdx);
+    box.appendChild(b);
+  });
+
+  const nb = document.getElementById('nextBtn');
+  nb.disabled = true;
+  nb.textContent = (S.i === S.list.length - 1) ? 'ดูผลคะแนน' : 'ข้อถัดไป';
+}
+
+function answer(picked){
+  if(S.locked) return;
+  S.locked = true;
+  S.answers[S.i] = picked;
+  const q = S.list[S.i];
+  const correct = picked === q.a;
+  const btns = [...document.getElementById('choices').children];
+
+  if(S.mode === 'instant'){
+    q.order.forEach((origIdx, pos) => {
+      const b = btns[pos];
+      b.disabled = true;
+      if(origIdx === q.a) b.classList.add('correct');
+      else if(origIdx === picked) b.classList.add('wrong');
+      else b.classList.add('dim');
+      if(origIdx === picked) b.classList.add('picked');
+    });
+    const keyPos = q.order.indexOf(q.a);
+    document.getElementById('feedback').innerHTML =
+      '<div class="feedback ' + (correct ? 'ok' : 'bad') + '">' +
+      '<span class="verdict">' + (correct ? 'ถูกต้อง' : 'ยังไม่ใช่ — เฉลยคือข้อ ' + KEYS[keyPos]) + '</span>' +
+      '<p>' + q.e + '</p></div>';
+  } else {
+    btns.forEach(b => b.disabled = true);
+    q.order.forEach((origIdx, pos) => {
+      if(origIdx === picked) btns[pos].classList.add('picked','correct');
+    });
+  }
+
+  const done = S.answers.filter(a => a !== null).length;
+  const right = S.answers.filter((a,idx) => a !== null && a === S.list[idx].a).length;
+  document.getElementById('liveScore').textContent =
+    (S.mode === 'instant') ? ('ถูก ' + right + ' / ' + done) : (done + ' ข้อแล้ว');
+
+  document.getElementById('nextBtn').disabled = false;
+}
+
+document.getElementById('nextBtn').onclick = () => {
+  if(S.i === S.list.length - 1) finish();
+  else { S.i++; renderQ(); window.scrollTo({top:0,behavior:'smooth'}); }
+};
+document.getElementById('quitBtn').onclick = () => {
+  if(confirm('ออกจากข้อสอบชุดนี้? คะแนนที่ทำไว้จะหายไป')) show('setup');
+};
+
+// ---------- result ----------
+function finish(){
+  const total = S.list.length;
+  const right = S.answers.filter((a,i) => a === S.list[i].a).length;
+  const pct = right / total * 100;
+
+  document.getElementById('rScore').textContent = right;
+  document.getElementById('rTotal').textContent = total;
+
+  let grade, msg;
+  if(pct >= 90){ grade='🏆 พร้อมสอบมาก'; msg='แม่นทั้งตัวบทและตัวเลข รักษาระดับนี้ไว้'; }
+  else if(pct >= 80){ grade='🟢 ดีมาก'; msg='พื้นฐานแน่น เหลือเก็บรายละเอียดปลีกย่อยอีกนิด'; }
+  else if(pct >= 70){ grade='🟡 ผ่าน แต่ควรทบทวนตัวเลข'; msg='ระวังชุดวัน/ปี เช่น 30–60–90–120–180–240 วัน'; }
+  else if(pct >= 60){ grade='🟠 ต้องทบทวนอีกครั้ง'; msg='กลับไปอ่านหมวดที่คะแนนต่ำแล้วทำซ้ำอีกรอบ'; }
+  else { grade='🔴 แนะนำอ่านตัวบท + ทำข้อสอบซ้ำ'; msg='เริ่มจากแยกหน้าที่ 4 องค์กร: ชี้ – คน – อุทธรณ์ – ร้อง'; }
+  document.getElementById('rGrade').textContent = grade;
+  document.getElementById('rMsg').textContent = msg;
+
+  // by category
+  const agg = {};
+  S.list.forEach((q,i) => {
+    agg[q.cat] = agg[q.cat] || {r:0,t:0};
+    agg[q.cat].t++;
+    if(S.answers[i] === q.a) agg[q.cat].r++;
+  });
+  const bc = document.getElementById('byCat');
+  bc.innerHTML = '';
+  Object.keys(agg).sort((a,b)=> (agg[a].r/agg[a].t) - (agg[b].r/agg[b].t)).forEach(c => {
+    const {r,t} = agg[c];
+    const row = document.createElement('div');
+    row.className = 'bycat-row';
+    row.innerHTML = '<span class="nm">' + c + '</span>' +
+      '<span class="mini"><i style="width:' + (r/t*100) + '%"></i></span>' +
+      '<span class="sc">' + r + '/' + t + '</span>';
+    bc.appendChild(row);
+  });
+
+  // review wrong
+  const wrong = S.list.map((q,i)=>({q,i})).filter(({q,i}) => S.answers[i] !== q.a);
+  const rw = document.getElementById('reviewWrap');
+  const rbtn = document.getElementById('retryWrongBtn');
+  if(wrong.length === 0){
+    rw.classList.add('hidden'); rbtn.classList.add('hidden');
+  } else {
+    rw.classList.remove('hidden'); rbtn.classList.remove('hidden');
+    document.getElementById('wrongCount').textContent = 'ตอบผิด ' + wrong.length + ' ข้อ';
+    const rl = document.getElementById('reviewList');
+    rl.innerHTML = '';
+    wrong.forEach(({q,i}) => {
+      const picked = S.answers[i];
+      const d = document.createElement('div');
+      d.className = 'review-item';
+      d.innerHTML =
+        '<div class="rq">' + q.q + '</div>' +
+        (picked === null ? '' : '<div class="ra you">คุณตอบ: ' + q.c[picked] + '</div>') +
+        '<div class="ra right">เฉลย: ' + q.c[q.a] + '</div>' +
+        '<p class="re">' + q.e + '</p>';
+      rl.appendChild(d);
+    });
+  }
+  S.wrongList = wrong.map(w => w.q);
+  show('result');
+}
+
+document.getElementById('retryWrongBtn').onclick = () => begin(shuffled(S.wrongList));
+document.getElementById('againBtn').onclick = () => show('setup');
+</script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ติวสอบนายสิบตำรวจ อก.</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600&family=Sarabun:wght@400;500;600&display=swap">
+<style>
+/* Layout: single centered column, answer-sheet feel: lettered bubbles ก ข ค ง, thin ruled lines, navy ink on cool paper */
+:root {
+  --bg: #f1f4f9;
+  --surface: #ffffff;
+  --ink: #12213a;
+  --muted: #55627a;
+  --line: #d3dae6;
+  --accent: #1f3b73;
+  --on-accent: #ffffff;
+  --sel: #e5ebf8;
+  --gold: #9a6410;
+  --good: #1b7a45;
+  --good-bg: #e3f4ea;
+  --bad: #b3261e;
+  --bad-bg: #fbe5e3;
+  --font-display: "Prompt", "Noto Sans Thai", system-ui, sans-serif;
+  --font-body: "Sarabun", "Noto Sans Thai", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1526; --surface: #172039; --ink: #e8edf7; --muted: #9aa8c2; --line: #2a3757;
+    --accent: #8fb0ff; --on-accent: #0e1526; --sel: #1e2d52; --gold: #e0a93b;
+    --good: #5fd08d; --good-bg: #123022; --bad: #ff8a80; --bad-bg: #3a1b1b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1526; --surface: #172039; --ink: #e8edf7; --muted: #9aa8c2; --line: #2a3757;
+  --accent: #8fb0ff; --on-accent: #0e1526; --sel: #1e2d52; --gold: #e0a93b;
+  --good: #5fd08d; --good-bg: #123022; --bad: #ff8a80; --bad-bg: #3a1b1b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  padding-block: 20px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.3; margin: 0; text-wrap: balance; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.eyebrow { font-size: 14px; letter-spacing: .04em; color: var(--gold); font-weight: 600; }
+.muted { color: var(--muted); }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* home */
+.head { display: grid; gap: 8px; padding: 12px 0 20px; }
+.head h1 { font-size: clamp(26px, 6vw, 36px); }
+.head p { margin: 0; color: var(--muted); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 14px; margin-bottom: 14px; }
+.panel h2 { font-size: 18px; }
+.opts { display: grid; gap: 8px; }
+.row {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; min-height: 48px;
+}
+.row[aria-pressed="true"] { border-color: var(--accent); background: var(--sel); box-shadow: inset 0 0 0 1px var(--accent); }
+.row .grow { flex: 1; min-width: 0; }
+.row .count { color: var(--muted); font-size: 15px; white-space: nowrap; }
+.dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line); flex: none; }
+.row[aria-pressed="true"] .dot { border-color: var(--accent); background: radial-gradient(var(--accent) 45%, transparent 50%); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.seg .row { flex-direction: column; align-items: flex-start; gap: 2px; }
+.seg small { color: var(--muted); font-size: 14px; line-height: 1.4; }
+.check { display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+.check input { width: 20px; height: 20px; accent-color: var(--accent); }
+.btn {
+  background: var(--accent); color: var(--on-accent); border: 0; border-radius: 8px;
+  padding: 12px 20px; min-height: 48px; font-weight: 600;
+}
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn[disabled] { opacity: .4; cursor: not-allowed; }
+.btn.block { width: 100%; font-size: 18px; }
+.resume { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; border-color: var(--gold); }
+.resume > div { min-width: 0; }
+details.cheat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 4px 18px; }
+details.cheat summary { cursor: pointer; padding: 12px 0; font-weight: 600; min-height: 44px; }
+.tablewrap { overflow-x: auto; padding-bottom: 14px; }
+table { border-collapse: collapse; width: 100%; min-width: 360px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); font-size: 16px; vertical-align: top; }
+th { color: var(--muted); font-weight: 500; font-size: 14px; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+.note { font-size: 14px; color: var(--muted); margin-top: 14px; }
+
+/* quiz */
+.top { display: grid; gap: 10px; margin-bottom: 14px; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); padding: 8px 0 10px; z-index: 5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.topline strong { font-family: var(--font-display); font-weight: 600; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); }
+.link { background: none; border: 0; color: var(--accent); text-decoration: underline; padding: 8px 4px; min-height: 40px; }
+.qcard { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 18px; display: grid; gap: 16px; }
+.chip { justify-self: start; font-size: 14px; color: var(--gold); border: 1px solid currentColor; border-radius: 99px; padding: 1px 12px; font-weight: 600; }
+.qtext { font-size: 20px; line-height: 1.55; margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+.choices { display: grid; gap: 10px; }
+.choice {
+  display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; min-height: 52px;
+}
+.choice .bub {
+  flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--muted);
+  display: grid; place-items: center; font-weight: 600; font-size: 16px; color: var(--muted);
+}
+.choice .txt { padding-top: 3px; min-width: 0; overflow-wrap: anywhere; }
+.choice:hover:not([disabled]) { border-color: var(--accent); }
+.choice.sel { border-color: var(--accent); background: var(--sel); }
+.choice.sel .bub { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.choice.ok { border-color: var(--good); background: var(--good-bg); }
+.choice.ok .bub { background: var(--good); border-color: var(--good); color: var(--surface); }
+.choice.no { border-color: var(--bad); background: var(--bad-bg); }
+.choice.no .bub { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+.choice[disabled] { cursor: default; }
+.fb { margin: 0; padding: 10px 14px; border-radius: 8px; font-weight: 500; }
+.fb.ok { background: var(--good-bg); color: var(--good); }
+.fb.no { background: var(--bad-bg); color: var(--bad); }
+.navrow { display: flex; gap: 10px; margin-top: 14px; }
+.navrow .btn { flex: 1; }
+details.jump { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 4px 16px; }
+details.jump summary { cursor: pointer; padding: 10px 0; min-height: 44px; font-weight: 500; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px; padding-bottom: 14px; }
+.cell { min-height: 44px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); font-variant-numeric: tabular-nums; }
+.cell.cur { box-shadow: 0 0 0 2px var(--accent); }
+.cell.a { background: var(--sel); border-color: var(--accent); }
+.cell.ok { background: var(--good-bg); border-color: var(--good); }
+.cell.no { background: var(--bad-bg); border-color: var(--bad); }
+.confirm { border-color: var(--gold); }
+.confirm .navrow { margin-top: 0; }
+
+/* result */
+.score { display: grid; gap: 4px; justify-items: start; }
+.score .big { font-family: var(--font-display); font-weight: 600; font-size: 64px; line-height: 1; font-variant-numeric: tabular-nums; }
+.score .big small { font-size: 24px; color: var(--muted); font-weight: 500; }
+.cat { display: grid; gap: 6px; }
+.cat .l { display: flex; justify-content: space-between; gap: 12px; }
+.cat .l span:first-child { min-width: 0; }
+.cat .bar { height: 10px; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tab { border: 1px solid var(--line); background: var(--surface); border-radius: 99px; padding: 6px 16px; min-height: 40px; }
+.tab[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.rev { border-top: 1px solid var(--line); padding: 14px 0; display: grid; gap: 6px; }
+.rev:first-child { border-top: 0; }
+.rev p { margin: 0; overflow-wrap: anywhere; }
+.rev .no { color: var(--bad); }
+.rev .ok { color: var(--good); }
+.rev .n { font-family: var(--font-display); font-weight: 600; }
+.actions { display: grid; gap: 10px; }
+@media (min-width: 560px) { .actions { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 440px) { .seg { grid-template-columns: 1fr; } .qtext { font-size: 19px; } }
+@media (prefers-reduced-motion: no-preference) { .bar > i { transition: width .25s ease; } }
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script>
+const Q = [{"id": 1, "cat": 1, "q": "อุปกรณ์ใดเปรียบเสมือนสมองของคอมพิวเตอร์?", "o": ["RAM", "CPU", "Hard Disk", "Monitor"], "a": 1}, {"id": 2, "cat": 1, "q": "หน้าที่หลักของ CPU คือข้อใด?", "o": ["จัดเก็บข้อมูลถาวร", "แสดงผลภาพ", "ประมวลผลคำสั่งและควบคุมการทำงาน", "รับข้อมูลจากผู้ใช้"], "a": 2}, {"id": 3, "cat": 1, "q": "หน่วยความจำ RAM มีคุณสมบัติอย่างไร?", "o": ["เก็บข้อมูลได้ถาวร", "ข้อมูลหายเมื่อปิดเครื่อง", "ใช้เก็บข้อมูลสำหรับบูตเครื่องเท่านั้น", "ไม่สามารถเขียนข้อมูลได้"], "a": 1}, {"id": 4, "cat": 1, "q": "หน่วยความจำ ROM มีคุณสมบัติอย่างไร?", "o": ["ข้อมูลหายเมื่อปิดเครื่อง", "ใช้ประมวลผลคำสั่ง", "เป็นหน่วยความจำที่เก็บข้อมูลโดยไม่ต้องใช้ไฟเลี้ยงเพื่อรักษาข้อมูล", "ใช้แสดงผลภาพ"], "a": 2}, {"id": 5, "cat": 1, "q": "หน่วยความจำประเภทใดเรียกว่า Volatile Memory?", "o": ["ROM", "SSD", "RAM", "Flash Drive"], "a": 2}, {"id": 6, "cat": 1, "q": "ข้อใดเป็นหน่วยความจำแบบ Non-volatile?", "o": ["RAM", "Cache", "Register", "SSD"], "a": 3}, {"id": 7, "cat": 1, "q": "ข้อใดเป็นหน่วยความจำหลัก (Primary Memory)?", "o": ["RAM", "DVD", "Hard Disk", "Flash Drive"], "a": 0}, {"id": 8, "cat": 1, "q": "อุปกรณ์ใดจัดเป็นหน่วยความจำสำรอง?", "o": ["Register", "Cache", "RAM", "Hard Disk"], "a": 3}, {"id": 9, "cat": 1, "q": "อุปกรณ์ใดเป็นอุปกรณ์รับข้อมูล (Input Device)?", "o": ["Monitor", "Keyboard", "Printer", "Speaker"], "a": 1}, {"id": 10, "cat": 1, "q": "อุปกรณ์ใดเป็นอุปกรณ์แสดงผล (Output Device)?", "o": ["Mouse", "Scanner", "Monitor", "Keyboard"], "a": 2}, {"id": 11, "cat": 1, "q": "เครื่อง Scanner ทำหน้าที่ใด?", "o": ["พิมพ์เอกสาร", "สแกนเอกสารเข้าสู่คอมพิวเตอร์", "ประมวลผลข้อมูล", "จัดเก็บข้อมูลถาวร"], "a": 1}, {"id": 12, "cat": 1, "q": "เครื่องพิมพ์ชนิดใดใช้ผงหมึก (Toner)?", "o": ["Inkjet", "Dot Matrix", "Laser Printer", "Thermal Printer"], "a": 2}, {"id": 13, "cat": 1, "q": "เครื่องพิมพ์ชนิดใดเหมาะกับการพิมพ์สำเนาเอกสารหลายชั้น?", "o": ["Laser", "Inkjet", "Dot Matrix", "Thermal"], "a": 2}, {"id": 14, "cat": 1, "q": "เครื่องพิมพ์ Inkjet ใช้สิ่งใดในการพิมพ์?", "o": ["ผงหมึก", "น้ำหมึก", "แสงเลเซอร์อย่างเดียว", "ความร้อนบนกระดาษความร้อน"], "a": 1}, {"id": 15, "cat": 1, "q": "หน่วยข้อมูลที่เล็กที่สุดคือข้อใด?", "o": ["Byte", "Bit", "Kilobyte", "Megabyte"], "a": 1}, {"id": 16, "cat": 1, "q": "1 Byte มีจำนวนกี่ Bit?", "o": ["2", "4", "8", "16"], "a": 2}, {"id": 17, "cat": 1, "q": "ตามหลักการนับแบบฐานสอง 1 KB เท่ากับกี่ Byte?", "o": ["100", "512", "1,000", "1,024"], "a": 3}, {"id": 18, "cat": 1, "q": "หน่วยใดมีขนาดใหญ่ที่สุด?", "o": ["KB", "MB", "GB", "TB"], "a": 3}, {"id": 19, "cat": 1, "q": "อุปกรณ์ใดใช้เก็บข้อมูลแบบพกพา?", "o": ["CPU", "Flash Drive", "Monitor", "Keyboard"], "a": 1}, {"id": 20, "cat": 1, "q": "Cache Memory มีหน้าที่ใด?", "o": ["เก็บข้อมูลถาวร", "เพิ่มความเร็วในการเข้าถึงข้อมูลที่ใช้บ่อย", "แสดงภาพ", "พิมพ์เอกสาร"], "a": 1}, {"id": 21, "cat": 1, "q": "อุปกรณ์ใดทำหน้าที่จ่ายไฟให้ส่วนประกอบต่าง ๆ ของคอมพิวเตอร์?", "o": ["PSU", "CPU", "RAM", "GPU"], "a": 0}, {"id": 22, "cat": 1, "q": "เมนบอร์ด (Motherboard) มีหน้าที่ใด?", "o": ["แสดงผลภาพ", "เป็นแผงวงจรหลักเชื่อมต่ออุปกรณ์ต่าง ๆ", "พิมพ์เอกสาร", "เก็บข้อมูลสำรอง"], "a": 1}, {"id": 23, "cat": 1, "q": "GPU มีหน้าที่หลักเกี่ยวกับอะไร?", "o": ["ประมวลผลกราฟิก", "จัดเก็บไฟล์", "รับเสียง", "เชื่อมต่ออินเทอร์เน็ต"], "a": 0}, {"id": 24, "cat": 1, "q": "หากต้องการเพิ่มความเร็วในการเปิดโปรแกรมและบูตระบบ ควรเลือกอุปกรณ์ใดมาใช้แทน HDD?", "o": ["DVD", "SSD", "RAM", "ROM"], "a": 1}, {"id": 25, "cat": 1, "q": "ข้อใดเรียงลำดับหน่วยข้อมูลจากเล็กไปใหญ่ได้ถูกต้อง?", "o": ["MB → KB → GB → TB", "KB → MB → GB → TB", "GB → MB → KB → TB", "TB → GB → MB → KB"], "a": 1}, {"id": 26, "cat": 2, "q": "ซอฟต์แวร์ (Software) หมายถึงข้อใด?", "o": ["อุปกรณ์คอมพิวเตอร์", "ชุดคำสั่งหรือโปรแกรมที่ใช้สั่งงานคอมพิวเตอร์", "สายสัญญาณอินเทอร์เน็ต", "อุปกรณ์จัดเก็บข้อมูล"], "a": 1}, {"id": 27, "cat": 2, "q": "ข้อใดจัดเป็นซอฟต์แวร์ระบบ (System Software)?", "o": ["Microsoft Word", "Microsoft Excel", "Windows", "PowerPoint"], "a": 2}, {"id": 28, "cat": 2, "q": "ข้อใดจัดเป็นซอฟต์แวร์ประยุกต์ (Application Software)?", "o": ["Windows 11", "Linux", "macOS", "Microsoft Word"], "a": 3}, {"id": 29, "cat": 2, "q": "ระบบปฏิบัติการ (Operating System) มีหน้าที่หลักอย่างไร?", "o": ["ควบคุมและจัดการทรัพยากรของคอมพิวเตอร์", "พิมพ์เอกสารเท่านั้น", "ใช้สร้างภาพกราฟิกเท่านั้น", "ใช้เชื่อมต่อเครื่องพิมพ์เท่านั้น"], "a": 0}, {"id": 30, "cat": 2, "q": "ข้อใดเป็นระบบปฏิบัติการแบบ Open Source?", "o": ["Windows", "Linux", "macOS", "iOS"], "a": 1}, {"id": 31, "cat": 2, "q": "ไฟล์นามสกุลใดเป็นไฟล์เอกสาร Microsoft Word?", "o": [".xlsx", ".pptx", ".docx", ".jpg"], "a": 2}, {"id": 32, "cat": 2, "q": "ไฟล์นามสกุล .exe หมายถึงอะไร?", "o": ["ไฟล์รูปภาพ", "ไฟล์เสียง", "ไฟล์โปรแกรมที่สามารถเรียกทำงานได้", "ไฟล์เอกสาร"], "a": 2}, {"id": 33, "cat": 2, "q": "การลบไฟล์ใน Windows โดยกดปุ่ม Delete ปกติ ไฟล์จะไปอยู่ที่ใด?", "o": ["Control Panel", "Recycle Bin", "Task Manager", "Desktop"], "a": 1}, {"id": 34, "cat": 2, "q": "หากต้องการลบไฟล์โดยไม่ผ่าน Recycle Bin ควรกดปุ่มใดร่วมกับ Delete?", "o": ["Ctrl", "Alt", "Shift", "Tab"], "a": 2}, {"id": 35, "cat": 2, "q": "โปรแกรม File Explorer ใช้ทำอะไร?", "o": ["จัดการไฟล์และโฟลเดอร์", "คำนวณตัวเลข", "สร้างงานนำเสนอ", "ตัดต่อวิดีโอ"], "a": 0}, {"id": 36, "cat": 2, "q": "หากต้องการเปลี่ยนชื่อไฟล์ใน Windows ควรกดปุ่มใด?", "o": ["F1", "F2", "F5", "F12"], "a": 1}, {"id": 37, "cat": 2, "q": "ปุ่มลัดใดใช้เปิด Task Manager โดยตรง?", "o": ["Ctrl + Shift + Esc", "Ctrl + P", "Alt + F4", "Ctrl + S"], "a": 0}, {"id": 38, "cat": 2, "q": "การสำรองข้อมูล (Backup) มีวัตถุประสงค์ใด?", "o": ["เพิ่มความสว่างหน้าจอ", "ป้องกันการสูญหายของข้อมูล", "เพิ่มความเร็วอินเทอร์เน็ต", "ลดขนาดจอภาพ"], "a": 1}, {"id": 39, "cat": 2, "q": "ข้อใดเป็นหน้าที่ของ Antivirus?", "o": ["เพิ่มพื้นที่ RAM", "ป้องกันและตรวจจับมัลแวร์", "เพิ่มความเร็ว CPU", "จัดเรียงเอกสาร"], "a": 1}, {"id": 40, "cat": 2, "q": "Malware หมายถึงอะไร?", "o": ["โปรแกรมสำนักงาน", "โปรแกรมประสงค์ร้าย", "ระบบปฏิบัติการ", "โปรแกรมจัดการไฟล์"], "a": 1}, {"id": 41, "cat": 2, "q": "Ransomware คืออะไร?", "o": ["โปรแกรมบีบอัดไฟล์", "มัลแวร์ที่เข้ารหัสหรือล็อกข้อมูลเพื่อเรียกค่าไถ่", "โปรแกรมป้องกันไวรัส", "โปรแกรมจัดการฐานข้อมูล"], "a": 1}, {"id": 42, "cat": 2, "q": "หากคอมพิวเตอร์ทำงานช้าผิดปกติ ควรดำเนินการอย่างไรเป็นอันดับต้น ๆ?", "o": ["ลบไฟล์ระบบทั้งหมด", "ตรวจสอบโปรแกรมที่ทำงานและสแกนมัลแวร์", "ปิดเครื่องโดยถอดปลั๊กทันที", "ลบระบบปฏิบัติการ"], "a": 1}, {"id": 43, "cat": 2, "q": "ข้อใดเป็นประโยชน์ของการอัปเดต Windows?", "o": ["เพิ่มความเสี่ยงด้านความปลอดภัย", "แก้ไขข้อบกพร่องและอุดช่องโหว่ด้านความปลอดภัย", "ทำให้ไฟล์ทั้งหมดหายไป", "ปิดระบบป้องกันไวรัส"], "a": 1}, {"id": 44, "cat": 2, "q": "Folder มีหน้าที่ใด?", "o": ["ใช้ประมวลผลข้อมูล", "ใช้จัดเก็บและจัดหมวดหมู่ไฟล์", "ใช้แสดงผลภาพ", "ใช้เชื่อมต่ออินเทอร์เน็ต"], "a": 1}, {"id": 45, "cat": 2, "q": "ข้อใดเป็นการตั้งชื่อไฟล์ที่เหมาะสมที่สุด?", "o": ["ตั้งชื่อให้สื่อความหมายและค้นหาได้ง่าย", "ใช้ชื่อเดียวกันทุกไฟล์", "ตั้งชื่อเป็นอักขระสุ่มทั้งหมด", "ไม่จำเป็นต้องตั้งชื่อไฟล์"], "a": 0}, {"id": 46, "cat": 3, "q": "Microsoft Word ใช้สำหรับงานประเภทใด?", "o": ["คำนวณทางคณิตศาสตร์", "จัดทำเอกสารและประมวลผลคำ", "สร้างฐานข้อมูล", "ตัดต่อวิดีโอ"], "a": 1}, {"id": 47, "cat": 3, "q": "Microsoft Excel เหมาะกับงานประเภทใด?", "o": ["สร้างงานนำเสนอ", "จัดการตารางและคำนวณข้อมูล", "วาดภาพสามมิติ", "ตัดต่อเสียง"], "a": 1}, {"id": 48, "cat": 3, "q": "Microsoft PowerPoint ใช้สำหรับอะไร?", "o": ["สร้างงานนำเสนอ", "จัดเก็บไฟล์ระบบ", "คำนวณเงินเดือนเท่านั้น", "เขียนโปรแกรมระบบปฏิบัติการ"], "a": 0}, {"id": 49, "cat": 3, "q": "คำสั่ง Ctrl + C ใช้ทำอะไร?", "o": ["วางข้อมูล", "คัดลอกข้อมูล", "ตัดข้อมูล", "บันทึกข้อมูล"], "a": 1}, {"id": 50, "cat": 3, "q": "คำสั่ง Ctrl + V ใช้ทำอะไร?", "o": ["วางข้อมูล", "คัดลอกข้อมูล", "ตัดข้อมูล", "พิมพ์เอกสาร"], "a": 0}, {"id": 51, "cat": 3, "q": "คำสั่ง Ctrl + X ใช้ทำอะไร?", "o": ["บันทึก", "วาง", "ตัด", "คัดลอก"], "a": 2}, {"id": 52, "cat": 3, "q": "คำสั่ง Ctrl + Z ใช้ทำอะไร?", "o": ["ทำซ้ำ", "ยกเลิกการกระทำล่าสุด", "บันทึกไฟล์", "เปิดไฟล์"], "a": 1}, {"id": 53, "cat": 3, "q": "คำสั่ง Ctrl + S ใช้ทำอะไร?", "o": ["ค้นหา", "บันทึกไฟล์", "พิมพ์เอกสาร", "ปิดโปรแกรม"], "a": 1}, {"id": 54, "cat": 3, "q": "คำสั่ง Ctrl + P ใช้ทำอะไร?", "o": ["เปิดไฟล์", "บันทึกไฟล์", "สั่งพิมพ์เอกสาร", "คัดลอกข้อความ"], "a": 2}, {"id": 55, "cat": 3, "q": "คำสั่ง Ctrl + A ใช้ทำอะไร?", "o": ["เลือกข้อความทั้งหมด", "ลบข้อความทั้งหมด", "บันทึกเอกสาร", "ปิดโปรแกรม"], "a": 0}, {"id": 56, "cat": 3, "q": "คำสั่ง Ctrl + B ใน Microsoft Word ใช้ทำอะไร?", "o": ["ขีดเส้นใต้", "ทำตัวหนา", "ทำตัวเอียง", "เปลี่ยนสีตัวอักษร"], "a": 1}, {"id": 57, "cat": 3, "q": "คำสั่ง Ctrl + I ใช้ทำอะไร?", "o": ["ทำตัวหนา", "ขีดเส้นใต้", "ทำตัวเอียง", "จัดกึ่งกลาง"], "a": 2}, {"id": 58, "cat": 3, "q": "คำสั่ง Ctrl + U ใช้ทำอะไร?", "o": ["ขีดเส้นใต้ข้อความ", "ทำตัวหนา", "ทำตัวเอียง", "คัดลอกข้อความ"], "a": 0}, {"id": 59, "cat": 3, "q": "ใน Microsoft Word หากต้องการจัดข้อความให้อยู่กึ่งกลาง ใช้ปุ่มลัดใด?", "o": ["Ctrl + L", "Ctrl + E", "Ctrl + R", "Ctrl + J"], "a": 1}, {"id": 60, "cat": 3, "q": "ใน Microsoft Word คำสั่ง Ctrl + J หมายถึงอะไร?", "o": ["จัดชิดซ้าย", "จัดกึ่งกลาง", "จัดชิดขวา", "จัดข้อความเต็มบรรทัดทั้งสองด้าน"], "a": 3}, {"id": 61, "cat": 3, "q": "ใน Microsoft Excel จุดตัดระหว่างแถวและคอลัมน์เรียกว่าอะไร?", "o": ["Worksheet", "Cell", "Workbook", "Chart"], "a": 1}, {"id": 62, "cat": 3, "q": "ใน Excel คอลัมน์ใช้สัญลักษณ์ใดแทน?", "o": ["ตัวเลข", "ตัวอักษร", "เครื่องหมายพิเศษ", "สี"], "a": 1}, {"id": 63, "cat": 3, "q": "ใน Excel แถว (Row) ใช้สัญลักษณ์ใดแทน?", "o": ["ตัวอักษร", "ตัวเลข", "เครื่องหมายเปอร์เซ็นต์", "เครื่องหมายดอลลาร์"], "a": 1}, {"id": 64, "cat": 3, "q": "สูตรใน Excel ต้องเริ่มต้นด้วยเครื่องหมายใด?", "o": ["+", "#", "=", "@"], "a": 2}, {"id": 65, "cat": 3, "q": "สูตร =SUM(A1:A5) มีความหมายอย่างไร?", "o": ["หาค่าเฉลี่ย A1 ถึง A5", "หาผลรวม A1 ถึง A5", "หาค่าสูงสุด A1 ถึง A5", "หาค่าต่ำสุด A1 ถึง A5"], "a": 1}, {"id": 66, "cat": 3, "q": "สูตรใดใช้หาค่าเฉลี่ย?", "o": ["SUM", "MAX", "MIN", "AVERAGE"], "a": 3}, {"id": 67, "cat": 3, "q": "สูตร =MAX(A1:A10) ใช้ทำอะไร?", "o": ["หาค่าน้อยที่สุด", "หาค่ามากที่สุด", "หาผลรวม", "หาค่าเฉลี่ย"], "a": 1}, {"id": 68, "cat": 3, "q": "สูตร =MIN(A1:A10) ใช้ทำอะไร?", "o": ["หาค่ามากที่สุด", "หาผลรวม", "หาค่าน้อยที่สุด", "นับจำนวนตัวอักษร"], "a": 2}, {"id": 69, "cat": 3, "q": "สูตร =COUNT(A1:A10) ใช้ทำอะไร?", "o": ["นับจำนวนเซลล์ที่มีข้อมูลตัวเลข", "หาผลรวม", "หาค่าเฉลี่ย", "หาค่ามากที่สุด"], "a": 0}, {"id": 70, "cat": 3, "q": "หากต้องการคำนวณผลรวมของเซลล์ A1 และ B1 สูตรใดถูกต้อง?", "o": ["=SUM(A1+B1)", "=A1+B1", "=A1-B1", "ถูกทั้ง ก. และ ข."], "a": 3}, {"id": 71, "cat": 3, "q": "ใน Excel เครื่องหมาย $ ในสูตร เช่น $A$1 หมายถึงอะไร?", "o": ["การอ้างอิงเซลล์แบบสัมพัทธ์", "การอ้างอิงเซลล์แบบสัมบูรณ์", "การลบเซลล์", "การซ่อนเซลล์"], "a": 1}, {"id": 72, "cat": 3, "q": "ไฟล์ Excel รุ่นปัจจุบันโดยทั่วไปมีนามสกุลใด?", "o": [".docx", ".pptx", ".xlsx", ".txt"], "a": 2}, {"id": 73, "cat": 3, "q": "ใน PowerPoint การเพิ่มสไลด์ใหม่โดยทั่วไปใช้ปุ่มลัดใด?", "o": ["Ctrl + N", "Ctrl + M", "Ctrl + S", "Ctrl + P"], "a": 1}, {"id": 74, "cat": 3, "q": "ปุ่ม F5 ใน PowerPoint ใช้ทำอะไร?", "o": ["บันทึกงาน", "เริ่มนำเสนอตั้งแต่สไลด์แรก", "ลบสไลด์", "เพิ่มสไลด์ใหม่"], "a": 1}, {"id": 75, "cat": 3, "q": "หากต้องการออกจากโหมดนำเสนอ PowerPoint ควรกดปุ่มใด?", "o": ["Enter", "Tab", "Esc", "Shift"], "a": 2}, {"id": 76, "cat": 4, "q": "เครือข่ายคอมพิวเตอร์ (Computer Network) หมายถึงอะไร?", "o": ["การเชื่อมต่อคอมพิวเตอร์ตั้งแต่สองเครื่องขึ้นไปเพื่อแลกเปลี่ยนข้อมูล", "การติดตั้งโปรแกรมในคอมพิวเตอร์", "การพิมพ์เอกสาร", "การจัดเก็บข้อมูลใน RAM"], "a": 0}, {"id": 77, "cat": 4, "q": "LAN ย่อมาจากอะไร?", "o": ["Large Area Network", "Local Area Network", "Long Access Network", "Limited Area Network"], "a": 1}, {"id": 78, "cat": 4, "q": "เครือข่าย WAN มีลักษณะอย่างไร?", "o": ["เครือข่ายภายในห้อง", "เครือข่ายที่ครอบคลุมพื้นที่กว้าง เช่น ระหว่างเมืองหรือประเทศ", "เครือข่ายภายในเครื่องเดียว", "เครือข่ายเฉพาะเครื่องพิมพ์"], "a": 1}, {"id": 79, "cat": 4, "q": "เครือข่าย MAN ครอบคลุมพื้นที่ใด?", "o": ["ภายในห้องเดียว", "ภายในบ้าน", "ระดับเมืองหรือเขตมหานคร", "ทั่วโลกเท่านั้น"], "a": 2}, {"id": 80, "cat": 4, "q": "Topology หมายถึงอะไร?", "o": ["รูปแบบการเชื่อมต่ออุปกรณ์ในเครือข่าย", "ความเร็วของ CPU", "ระบบปฏิบัติการ", "โปรแกรมสำนักงาน"], "a": 0}, {"id": 81, "cat": 4, "q": "เครือข่ายแบบ Star Topology มีลักษณะอย่างไร?", "o": ["เชื่อมต่อเป็นวงแหวน", "เชื่อมต่อทุกเครื่องผ่านอุปกรณ์ศูนย์กลาง", "เชื่อมต่อเป็นเส้นตรงเส้นเดียว", "ทุกเครื่องเชื่อมต่อกันโดยตรงทั้งหมด"], "a": 1}, {"id": 82, "cat": 4, "q": "ข้อดีของ Star Topology คือข้อใด?", "o": ["หากสายของเครื่องหนึ่งเสีย จะทำให้ทุกเครื่องหยุดทำงานเสมอ", "สามารถตรวจสอบและแก้ไขปัญหาแต่ละจุดได้ง่าย", "ไม่ต้องใช้อุปกรณ์ศูนย์กลาง", "ไม่ต้องใช้สายสัญญาณ"], "a": 1}, {"id": 83, "cat": 4, "q": "Bus Topology มีลักษณะอย่างไร?", "o": ["ทุกเครื่องเชื่อมต่อกับสายสื่อสารหลักเส้นเดียว", "ทุกเครื่องเชื่อมต่อกับศูนย์กลาง", "เชื่อมต่อเป็นวงกลม", "ทุกเครื่องเชื่อมต่อกับทุกเครื่อง"], "a": 0}, {"id": 84, "cat": 4, "q": "Ring Topology มีลักษณะอย่างไร?", "o": ["เชื่อมต่อแบบดาว", "เชื่อมต่อแบบวงแหวน", "เชื่อมต่อแบบต้นไม้เท่านั้น", "เชื่อมต่อแบบเส้นตรง"], "a": 1}, {"id": 85, "cat": 4, "q": "อุปกรณ์ Router ทำหน้าที่ใด?", "o": ["พิมพ์เอกสาร", "เชื่อมต่อและกำหนดเส้นทางการส่งข้อมูลระหว่างเครือข่าย", "แสดงภาพ", "จัดเก็บข้อมูล"], "a": 1}, {"id": 86, "cat": 4, "q": "Switch มีหน้าที่ใด?", "o": ["เชื่อมต่ออุปกรณ์ภายในเครือข่าย LAN และส่งต่อข้อมูลไปยังพอร์ตที่เหมาะสม", "แปลงข้อมูลเป็นภาพ", "จัดเก็บข้อมูลถาวร", "ป้องกันไฟฟ้าดับ"], "a": 0}, {"id": 87, "cat": 4, "q": "Modem มีหน้าที่ใด?", "o": ["แปลงสัญญาณเพื่อให้สามารถรับส่งข้อมูลผ่านสื่อสื่อสารได้", "ประมวลผลข้อมูล", "แสดงผลข้อมูล", "พิมพ์เอกสาร"], "a": 0}, {"id": 88, "cat": 4, "q": "IP Address ใช้สำหรับอะไร?", "o": ["ระบุอุปกรณ์บนเครือข่ายด้วยหมายเลข IP", "ระบุชนิดของเครื่องพิมพ์", "ระบุชื่อไฟล์", "ระบุรุ่น CPU"], "a": 0}, {"id": 89, "cat": 4, "q": "IPv4 มีขนาดกี่บิต?", "o": ["16 บิต", "32 บิต", "64 บิต", "128 บิต"], "a": 1}, {"id": 90, "cat": 4, "q": "IPv6 มีขนาดกี่บิต?", "o": ["32 บิต", "64 บิต", "128 บิต", "256 บิต"], "a": 2}, {"id": 91, "cat": 4, "q": "DNS มีหน้าที่ใด?", "o": ["แปลงชื่อโดเมนเป็นหมายเลข IP ที่เกี่ยวข้อง", "ป้องกันไฟฟ้าดับ", "สแกนไวรัส", "เพิ่มความเร็ว CPU"], "a": 0}, {"id": 92, "cat": 4, "q": "HTTP ใช้สำหรับอะไร?", "o": ["รับส่งข้อมูลบนเว็บ", "พิมพ์เอกสาร", "จัดการหน่วยความจำ", "สแกนไวรัส"], "a": 0}, {"id": 93, "cat": 4, "q": "HTTPS แตกต่างจาก HTTP อย่างไร?", "o": ["ใช้ได้เฉพาะโทรศัพท์", "มีการเข้ารหัสการสื่อสารด้วย TLS เพื่อเพิ่มความปลอดภัย", "ไม่สามารถรับส่งข้อมูลได้", "ใช้ได้เฉพาะระบบ Windows"], "a": 1}, {"id": 94, "cat": 4, "q": "โปรแกรมใดเป็น Web Browser?", "o": ["Microsoft Excel", "Google Chrome", "Microsoft Word", "Windows Defender"], "a": 1}, {"id": 95, "cat": 4, "q": "Search Engine หมายถึงอะไร?", "o": ["โปรแกรมจัดการไฟล์", "เครื่องมือค้นหาข้อมูลบนอินเทอร์เน็ต", "โปรแกรมพิมพ์งาน", "ระบบปฏิบัติการ"], "a": 1}, {"id": 96, "cat": 4, "q": "ข้อใดเป็นตัวอย่างของ Search Engine?", "o": ["Google", "Microsoft Word", "PowerPoint", "Paint"], "a": 0}, {"id": 97, "cat": 4, "q": "Phishing คืออะไร?", "o": ["การเพิ่มความเร็วอินเทอร์เน็ต", "การหลอกลวงเพื่อขโมยข้อมูล เช่น รหัสผ่านหรือข้อมูลทางการเงิน", "การสำรองข้อมูล", "การอัปเดตระบบปฏิบัติการ"], "a": 1}, {"id": 98, "cat": 4, "q": "หากได้รับอีเมลแจ้งให้คลิกลิงก์เพื่อยืนยันรหัสผ่านจากแหล่งที่ไม่น่าเชื่อถือ ควรทำอย่างไร?", "o": ["คลิกทันที", "ส่งต่อให้เพื่อน", "ไม่คลิกลิงก์และตรวจสอบกับหน่วยงานผ่านช่องทางทางการ", "กรอกรหัสผ่านเพื่อทดสอบ"], "a": 2}, {"id": 99, "cat": 4, "q": "ข้อใดเป็นแนวทางการตั้งรหัสผ่านที่ปลอดภัย?", "o": ["ใช้วันเดือนปีเกิด", "ใช้เลข 123456", "ใช้รหัสผ่านที่ยาว คาดเดายาก และไม่ซ้ำกับบริการอื่น", "ใช้ชื่อเล่นของตนเอง"], "a": 2}, {"id": 100, "cat": 4, "q": "การยืนยันตัวตนแบบสองปัจจัย (2FA) มีประโยชน์อย่างไร?", "o": ["ทำให้ไม่ต้องใช้รหัสผ่าน", "เพิ่มชั้นความปลอดภัยในการเข้าสู่ระบบ", "เพิ่มพื้นที่จัดเก็บข้อมูล", "ทำให้คอมพิวเตอร์ทำงานเร็วขึ้น"], "a": 1}];
+const CATS = [
+  { id: 1, name: "ฮาร์ดแวร์และหน่วยความจำ" },
+  { id: 2, name: "ซอฟต์แวร์และระบบปฏิบัติการ" },
+  { id: 3, name: "โปรแกรมสำนักงาน Microsoft Office" },
+  { id: 4, name: "เครือข่ายและอินเทอร์เน็ต" }
+];
+const CHEAT = [
+  ["CPU","ประมวลผลและควบคุม"],["RAM","หน่วยความจำชั่วคราว (ปิดเครื่องแล้วหาย)"],["ROM","หน่วยความจำไม่ลบเลือน"],
+  ["1 Byte","8 Bit"],["1 KB","1,024 Byte"],["Windows","ระบบปฏิบัติการ"],["Word","ประมวลผลคำ"],
+  ["Excel","ตารางคำนวณ"],["PowerPoint","งานนำเสนอ"],["SUM","ผลรวม"],["AVERAGE","ค่าเฉลี่ย"],
+  ["MAX / MIN","ค่าสูงสุด / ต่ำสุด"],["LAN / MAN / WAN","เครือข่ายตามขอบเขตพื้นที่"],["Router","กำหนดเส้นทางข้อมูล"],
+  ["Switch","เชื่อมต่ออุปกรณ์ใน LAN"],["DNS","แปลงชื่อโดเมนเป็น IP"],["HTTPS","สื่อสารบนเว็บโดยเข้ารหัส TLS"],
+  ["Phishing","หลอกขโมยข้อมูล"],["2FA","ยืนยันตัวตนสองปัจจัย"]
+];
+const LET = ["ก", "ข", "ค", "ง"];
+const KEY = "nst-ak-quiz-v1";
+const byId = {}; Q.forEach(q => byId[q.id] = q);
+const app = document.getElementById("app");
+let S = null, view = "home", cfg = { scope: "all", mode: "practice", shuffle: false }, confirming = false, filter = "all";
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function load() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function drop() { try { localStorage.removeItem(KEY); } catch (e) {} }
+function scopeIds(scope) { return Q.filter(q => scope === "all" || q.cat === scope).map(q => q.id); }
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function scopeName(s) { return s === "all" ? "ทุกหมวด" : s === "retry" ? "ทบทวนข้อที่พลาด" : CATS[s - 1].name; }
+
+function start(ids, scope) {
+  S = { order: cfg.shuffle ? shuffle(ids) : ids, ans: {}, idx: 0, mode: cfg.mode, scope, done: false };
+  confirming = false; view = "quiz"; save(); render();
+}
+
+function render() {
+  if (view === "home") home(); else if (view === "quiz") quiz(); else result();
+  window.scrollTo(0, 0);
+}
+
+function home() {
+  const saved = load();
+  let resume = "";
+  if (saved && !saved.done && saved.order) {
+    const n = Object.keys(saved.ans).length;
+    resume = `<div class="panel resume"><div><strong>ทำค้างไว้</strong><div class="muted">${esc(scopeName(saved.scope))} · ตอบแล้ว ${n} จาก ${saved.order.length} ข้อ</div></div><button class="btn" id="resume">ทำต่อ</button></div>`;
+  }
+  const scopes = [["all", "ทุกหมวด", Q.length]].concat(CATS.map(c => [c.id, `หมวด ${c.id} ${c.name}`, Q.filter(q => q.cat === c.id).length]));
+  app.innerHTML = `
+    <header class="head">
+      <div class="eyebrow">สำนักงานตำรวจแห่งชาติ · สายอำนวยการ (อก.)</div>
+      <h1>ข้อสอบนายสิบตำรวจ ความรู้คอมพิวเตอร์และ IT</h1>
+      <p>${Q.length} ข้อ ข้อละ 1 คะแนน ตัวเลือก ก. ข. ค. ง.</p>
+    </header>
+    ${resume}
+    <section class="panel">
+      <h2>เลือกชุดที่จะทำ</h2>
+      <div class="opts">${scopes.map(s => `<button class="row" data-scope="${s[0]}" aria-pressed="${String(cfg.scope) === String(s[0])}"><span class="dot"></span><span class="grow">${esc(s[1])}</span><span class="count tnum">${s[2]} ข้อ</span></button>`).join("")}</div>
+    </section>
+    <section class="panel">
+      <h2>รูปแบบการทำ</h2>
+      <div class="seg">
+        <button class="row" data-mode="practice" aria-pressed="${cfg.mode === "practice"}"><strong>ฝึกทำ</strong><small>ตอบแล้วรู้เฉลยทันที</small></button>
+        <button class="row" data-mode="exam" aria-pressed="${cfg.mode === "exam"}"><strong>จำลองสอบ</strong><small>เปลี่ยนคำตอบได้ ดูเฉลยตอนส่ง</small></button>
+      </div>
+      <label class="check"><input type="checkbox" id="shuf" ${cfg.shuffle ? "checked" : ""}> สลับลำดับข้อ</label>
+    </section>
+    <button class="btn block" id="go">เริ่มทำข้อสอบ</button>
+    <details class="cheat" style="margin-top:14px">
+      <summary>สรุปหัวข้อที่ควรจำก่อนสอบ</summary>
+      <div class="tablewrap"><table><thead><tr><th>หัวข้อ</th><th>สิ่งที่ต้องจำ</th></tr></thead><tbody>
+        ${CHEAT.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join("")}
+      </tbody></table></div>
+    </details>
+    <p class="note">ชุดนี้เป็นข้อสอบจำลองที่จัดทำตามหัวข้อที่กำหนด ไม่ใช่ข้อสอบจริง และไม่ได้ยืนยันว่าเคยออกสอบของสำนักงานตำรวจแห่งชาติ</p>`;
+  app.querySelectorAll("[data-scope]").forEach(b => b.onclick = () => { const v = b.dataset.scope; cfg.scope = v === "all" ? "all" : +v; home(); });
+  app.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { cfg.mode = b.dataset.mode; home(); });
+  document.getElementById("shuf").onchange = e => { cfg.shuffle = e.target.checked; };
+  document.getElementById("go").onclick = () => start(scopeIds(cfg.scope), cfg.scope);
+  const r = document.getElementById("resume");
+  if (r) r.onclick = () => { S = saved; confirming = false; view = "quiz"; render(); };
+}
+
+function quiz() {
+  const total = S.order.length, q = byId[S.order[S.idx]], a = S.ans[q.id];
+  const practice = S.mode === "practice", locked = practice && a !== undefined;
+  const answered = Object.keys(S.ans).length;
+  const last = S.idx === total - 1;
+  const opts = q.o.map((t, i) => {
+    let cls = "choice";
+    if (locked) { if (i === q.a) cls += " ok"; else if (i === a) cls += " no"; }
+    else if (a === i) cls += " sel";
+    return `<button class="${cls}" data-i="${i}" ${locked ? "disabled" : ""}><span class="bub">${LET[i]}</span><span class="txt">${esc(t)}</span></button>`;
+  }).join("");
+  const fb = locked ? (a === q.a
+    ? `<p class="fb ok" role="status">ถูกต้อง</p>`
+    : `<p class="fb no" role="status">ตอบผิด เฉลยคือ ${LET[q.a]}. ${esc(q.o[q.a])}</p>`) : "";
+  const cells = S.order.map((id, k) => {
+    const x = S.ans[id]; let c = "cell";
+    if (x !== undefined) c += practice ? (x === byId[id].a ? " ok" : " no") : " a";
+    if (k === S.idx) c += " cur";
+    return `<button class="${c}" data-k="${k}" aria-label="ข้อ ${k + 1}">${k + 1}</button>`;
+  }).join("");
+  const unans = total - answered;
+  const conf = confirming ? `
+    <div class="panel confirm" role="alertdialog" aria-label="ยืนยันการส่ง">
+      <strong>${unans > 0 ? `ยังไม่ได้ตอบ ${unans} ข้อ ข้อที่ไม่ตอบจะไม่ได้คะแนน` : "ตอบครบทุกข้อแล้ว"}</strong>
+      <div class="navrow"><button class="btn ghost" id="back">กลับไปทำต่อ</button><button class="btn" id="submit">ส่งและดูผล</button></div>
+    </div>` : "";
+  app.innerHTML = `
+    <div class="top">
+      <div class="topline"><strong class="tnum">ข้อ ${S.idx + 1} / ${total}</strong><span class="muted tnum">ตอบแล้ว ${answered}</span><button class="link" id="quit">กลับหน้าแรก</button></div>
+      <div class="bar" aria-hidden="true"><i style="width:${(answered / total) * 100}%"></i></div>
+    </div>
+    <article class="qcard">
+      <span class="chip">หมวด ${q.cat} ${esc(CATS[q.cat - 1].name)}</span>
+      <p class="qtext">${esc(q.q)}</p>
+      <div class="choices">${opts}</div>
+      ${fb}
+    </article>
+    <div class="navrow">
+      <button class="btn ghost" id="prev" ${S.idx === 0 ? "disabled" : ""}>ข้อก่อนหน้า</button>
+      ${last ? `<button class="btn" id="fin">ส่งข้อสอบ</button>` : `<button class="btn" id="next">ข้อถัดไป</button>`}
+    </div>
+    ${conf}
+    <details class="jump"><summary>ไปยังข้อที่ต้องการ</summary><div class="grid">${cells}</div></details>`;
+  app.querySelectorAll(".choice").forEach(b => b.onclick = () => { if (locked) return; S.ans[q.id] = +b.dataset.i; save(); const y = window.scrollY; quiz(); window.scrollTo(0, y); });
+  app.querySelectorAll(".cell").forEach(b => b.onclick = () => { S.idx = +b.dataset.k; confirming = false; save(); quiz(); });
+  const go = d => { S.idx += d; confirming = false; save(); quiz(); };
+  const p = document.getElementById("prev"), n = document.getElementById("next"), f = document.getElementById("fin");
+  if (p) p.onclick = () => go(-1);
+  if (n) n.onclick = () => go(1);
+  if (f) f.onclick = () => { confirming = true; quiz(); window.scrollTo(0, document.body.scrollHeight); };
+  document.getElementById("quit").onclick = () => { save(); view = "home"; render(); };
+  const bk = document.getElementById("back"), sb = document.getElementById("submit");
+  if (bk) bk.onclick = () => { confirming = false; quiz(); };
+  if (sb) sb.onclick = () => { S.done = true; save(); filter = "all"; view = "result"; render(); };
+}
+
+function result() {
+  const total = S.order.length;
+  const rows = S.order.map((id, k) => { const q = byId[id], a = S.ans[id]; return { k, q, a, st: a === undefined ? "skip" : a === q.a ? "ok" : "no" }; });
+  const right = rows.filter(r => r.st === "ok").length;
+  const pct = Math.round((right / total) * 100);
+  const msg = pct >= 80 ? "พร้อมสอบ ทบทวนข้อที่พลาดอีกรอบแล้วไปต่อได้" : pct >= 60 ? "ใกล้เป้าหมาย ทบทวนข้อที่พลาดแล้วลองทำซ้ำ" : "ควรอ่านทบทวนเนื้อหาแล้วทำใหม่อีกครั้ง";
+  const cats = CATS.map(c => {
+    const rs = rows.filter(r => r.q.cat === c.id); if (!rs.length) return "";
+    const ok = rs.filter(r => r.st === "ok").length;
+    return `<div class="cat"><div class="l"><span>หมวด ${c.id} ${esc(c.name)}</span><strong class="tnum">${ok}/${rs.length}</strong></div><div class="bar"><i style="width:${(ok / rs.length) * 100}%"></i></div></div>`;
+  }).join("");
+  const miss = rows.filter(r => r.st !== "ok");
+  const list = rows.filter(r => filter === "all" || (filter === "no" && r.st === "no") || (filter === "skip" && r.st === "skip"));
+  const nNo = rows.filter(r => r.st === "no").length, nSkip = rows.filter(r => r.st === "skip").length;
+  app.innerHTML = `
+    <header class="head"><div class="eyebrow">ผลการทำข้อสอบ · ${esc(scopeName(S.scope))}</div></header>
+    <section class="panel">
+      <div class="score"><div class="big">${right}<small> / ${total}</small></div><div class="muted tnum">คิดเป็น ${pct}%</div></div>
+      <p style="margin:0">${msg}</p>
+      ${cats}
+    </section>
+    <div class="actions">
+      <button class="btn" id="retry" ${miss.length ? "" : "disabled"}>ทำเฉพาะข้อที่พลาด (${miss.length})</button>
+      <button class="btn ghost" id="home">กลับหน้าแรก</button>
+    </div>
+    <section class="panel" style="margin-top:14px">
+      <h2>ทบทวนรายข้อ</h2>
+      <div class="tabs">
+        <button class="tab" data-f="all" aria-pressed="${filter === "all"}">ทั้งหมด ${total}</button>
+        <button class="tab" data-f="no" aria-pressed="${filter === "no"}">ตอบผิด ${nNo}</button>
+        <button class="tab" data-f="skip" aria-pressed="${filter === "skip"}">ไม่ได้ตอบ ${nSkip}</button>
+      </div>
+      <div>${list.length ? list.map(r => `
+        <div class="rev">
+          <p><span class="n tnum">ข้อ ${r.k + 1}</span> ${esc(r.q.q)}</p>
+          <p class="${r.st === "ok" ? "ok" : "no"}">${r.st === "skip" ? "ไม่ได้ตอบ" : `คำตอบของคุณ ${LET[r.a]}. ${esc(r.q.o[r.a])}`}</p>
+          ${r.st === "ok" ? "" : `<p class="ok">เฉลย ${LET[r.q.a]}. ${esc(r.q.o[r.q.a])}</p>`}
+        </div>`).join("") : `<p class="muted">ไม่มีข้อในรายการนี้</p>`}</div>
+    </section>`;
+  app.querySelectorAll(".tab").forEach(b => b.onclick = () => { filter = b.dataset.f; const y = window.scrollY; result(); window.scrollTo(0, y); });
+  document.getElementById("home").onclick = () => { drop(); view = "home"; render(); };
+  document.getElementById("retry").onclick = () => { cfg.mode = S.mode; start(miss.map(r => r.q.id), "retry"); };
+}
+
+document.addEventListener("keydown", e => {
+  if (view !== "quiz" || !S || e.target.tagName === "INPUT") return;
+  const q = byId[S.order[S.idx]];
+  if (e.key >= "1" && e.key <= "4") { const b = app.querySelector(`.choice[data-i="${+e.key - 1}"]`); if (b) b.click(); }
+  else if (e.key === "ArrowRight") { const b = document.getElementById("next"); if (b) b.click(); }
+  else if (e.key === "ArrowLeft") { const b = document.getElementById("prev"); if (b && !b.disabled) b.click(); }
+});
+
+render();
+</script>
+
+</body></html>

@@ -1,0 +1,538 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>พิชิตกฎการลา 2555</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: briefing-room HUD. One column of mission cards on a quiet olive field; gold is reserved for rank, score and medals. Single dark look by choice. */
+:root{--bg:#0a1511;--panel:#112119;--panel2:#173022;--navy:#102a4c;--navy2:#1a4378;--line:#2b4b37;--ink:#e9efe6;--mute:#a3b7a8;--gold:#d9aa3c;--gold2:#f2d27f;--ok:#5fcf86;--bad:#ff8077;--fd:'Chakra Petch','Sarabun',sans-serif;--fb:'Sarabun','Noto Sans Thai',sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:17px;line-height:1.6;padding-block:0 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:900px;margin:0 auto;min-width:0}
+.stripe{height:6px;background:linear-gradient(90deg,#3f6b3a 0 40%,var(--navy2) 40% 75%,var(--gold) 75%);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)))}
+h1,h2,h3,.fd{font-family:var(--fd);letter-spacing:.02em;margin:0}
+h1{font-size:clamp(1.9rem,6vw,3rem);line-height:1.15;text-wrap:balance}
+h2{font-size:1.35rem}h3{font-size:1.1rem}
+.tag{font-family:var(--fd);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.hero{padding:28px 0 8px;display:grid;gap:12px}
+.hero p{margin:0;color:var(--mute);max-width:60ch}
+.note{border:1px solid var(--gold);background:rgba(217,170,60,.08);padding:12px 14px;border-radius:6px;font-size:.95rem;color:var(--gold2)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px}
+.stat b{display:block;font-family:var(--fd);font-size:1.7rem;color:var(--gold2);font-variant-numeric:tabular-nums}
+.stat span{font-size:.85rem;color:var(--mute)}
+.grid{display:grid;gap:12px}
+.mc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;grid-template-columns:auto 1fr auto;gap:6px 16px;align-items:center}
+.mc.lock{opacity:.55}
+.num{font-family:var(--fd);font-weight:700;font-size:1.6rem;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--navy);border:2px solid var(--navy2);color:var(--gold2)}
+.mc .d{color:var(--mute);font-size:.92rem;margin:0}
+.bar{height:8px;background:#0a1511;border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#3f6b3a,var(--ok));transition:width .3s}
+.medal{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-1px;margin-right:6px}
+.m-gold{background:var(--gold)}.m-silver{background:#c9d1d8}.m-bronze{background:#b4753b}.m-none{background:transparent;border:1px dashed var(--mute)}
+.btn{font-family:var(--fd);font-weight:600;font-size:1rem;border-radius:6px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);padding:10px 18px;cursor:pointer;min-height:44px}
+.btn:hover{border-color:var(--gold)}
+.btn:focus-visible,.opt:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.btn.pri{background:var(--gold);color:#1b1503;border-color:var(--gold)}
+.btn.pri:hover{background:var(--gold2)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.hud{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between;padding:14px 0 6px}
+.hud .fd{font-size:1rem}
+.pill{font-family:var(--fd);font-size:.9rem;background:var(--navy);border:1px solid var(--navy2);border-radius:99px;padding:2px 12px;font-variant-numeric:tabular-nums}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;margin-top:12px;display:grid;gap:14px;min-width:0}
+.chip{font-family:var(--fd);font-size:.8rem;color:var(--gold2);letter-spacing:.06em}
+.prompt{font-size:1.15rem;font-weight:500;white-space:pre-line}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;font:inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:11px 14px;cursor:pointer;min-height:44px}
+.opt:hover{border-color:var(--gold)}
+.opt.sel{border-color:var(--gold);background:var(--navy)}
+.opt.ok,.good{border-color:var(--ok)!important;background:rgba(95,207,134,.14)}
+.opt.bad,.wrong{border-color:var(--bad)!important;background:rgba(255,128,119,.12)}
+.opt.off{opacity:.35;text-decoration:line-through}
+.fl{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.fl label{color:var(--mute);flex:1 1 100%;font-size:.95rem}
+input,select{font:inherit;font-size:16px;color:var(--ink);background:#0a1511;border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-height:44px;max-width:100%}
+input.n{width:6rem}input.t{flex:1 1 14rem;min-width:0}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle}
+th{background:var(--navy);font-family:var(--fd);font-weight:600;font-size:.85rem}
+td input.t{width:100%;min-width:12rem}
+.fb{border-radius:6px;padding:12px 14px;border:1px solid var(--line);font-size:.97rem;white-space:pre-line}
+.fb.ok{border-color:var(--ok);background:rgba(95,207,134,.1)}
+.fb.bad{border-color:var(--bad);background:rgba(255,128,119,.08)}
+.fb b{font-family:var(--fd)}
+.ref{color:var(--gold2);font-size:.88rem}
+.hint{color:var(--gold2);font-size:.95rem}
+.list{display:grid;gap:10px}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.item p{margin:4px 0}
+.tb{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;margin:6px 0}
+.big{font-family:var(--fd);font-size:clamp(2.2rem,9vw,3.6rem);color:var(--gold2);line-height:1}
+.ovl{position:fixed;inset:0;background:rgba(0,0,0,.72);display:grid;place-items:center;padding:20px;z-index:20}
+.dlg{background:var(--panel);border:1px solid var(--gold);border-radius:8px;padding:22px;max-width:520px;display:grid;gap:14px}
+.mut{color:var(--mute)}
+@media(max-width:520px){.mc{grid-template-columns:auto 1fr}.mc .btn{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="stripe"></div>
+<div class="wrap" id="app"></div>
+<script>
+'use strict';
+/* ===== helpers ===== */
+const LS='leave2555-v1';
+const rnd=n=>Math.floor(Math.random()*n);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=(a,n)=>shuffle(a).slice(0,n);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s==null?'':s).replace(/[๐-๙]/g,c=>'๐๑๒๓๔๕๖๗๘๙'.indexOf(c)).replace(/[\s.,​]/g,'').toLowerCase();
+const T_TYPE='ประเภทการลา',T_DAYS='จำนวนวันลา',T_AUTH='ผู้มีอำนาจอนุญาต',T_RULE='หลักเกณฑ์และเงื่อนไข';
+const TOPICS=[T_TYPE,T_DAYS,T_AUTH,T_RULE];
+const TBL_REF='ตารางกำหนดอำนาจให้ลา (ท้ายข้อบังคับ) ประกอบข้อ 15, 26, 41';
+
+/* ===== data: leave types (ข้อบังคับ กห. ว่าด้วยการลา พ.ศ. 2555) ===== */
+const TYPES=[
+{id:'sick',name:'ลาป่วย',core:['ป่วย'],ref:'ข้อ 12',mean:'ลาเมื่อเจ็บป่วยจนไม่สามารถปฏิบัติราชการได้',scn:'นายทหารเจ็บป่วย แพทย์ให้พักรักษาตัว จึงยื่นใบลา'},
+{id:'birth',name:'ลาคลอดบุตร',core:['คลอดบุตร'],ref:'ข้อ 17',mean:'ข้าราชการทหารหญิงลาก่อนหรือหลังคลอดบุตร รวมไม่เกิน 90 วัน',scn:'ข้าราชการทหารหญิงใกล้คลอด ขอหยุดก่อนและหลังคลอดรวมไม่เกิน 90 วัน'},
+{id:'help',name:'ลาไปช่วยเหลือภริยาที่คลอดบุตร',core:['ไปช่วยเหลือภริยาที่คลอดบุตร','ช่วยเหลือภริยาที่คลอดบุตร','ช่วยเหลือภริยา'],ref:'ข้อ 19',mean:'ข้าราชการทหารชายลาไปดูแลภริยาที่เพิ่งคลอดบุตร',scn:'ข้าราชการทหารชายต้องการหยุดไปดูแลภริยาที่เพิ่งคลอดบุตร'},
+{id:'biz',name:'ลากิจ',core:['กิจ'],ref:'ข้อ 20',mean:'ลาเพื่อไปทำธุระส่วนตัวที่จำเป็น',scn:'ข้าราชการทหารมีธุระส่วนตัวที่จำเป็นต้องหยุดไปจัดการ'},
+{id:'vac',name:'ลาพักผ่อนประจำปี',core:['พักผ่อน','พักผ่อนประจำปี'],ref:'ข้อ 28',mean:'ลาพักผ่อนตามสิทธิรายปี ปีละ 10 วันทำการ',scn:'ข้าราชการทหารต้องการหยุดพักผ่อนตามสิทธิประจำปี'},
+{id:'ord',name:'ลาอุปสมบท',core:['อุปสมบท'],ref:'ข้อ 30',mean:'ลาเพื่อบวชเป็นพระภิกษุ',scn:'ข้าราชการทหารที่ยังไม่เคยบวชต้องการบวชเป็นพระภิกษุ'},
+{id:'haj',name:'ลาไปประกอบพิธีฮัจย์',core:['ไปประกอบพิธีฮัจย์','ประกอบพิธีฮัจย์','ฮัจย์'],ref:'ข้อ 33',mean:'ลาเพื่อไปประกอบพิธีฮัจย์ตามหลักศาสนาอิสลาม',scn:'ข้าราชการทหารที่นับถือศาสนาอิสลามจะไปประกอบพิธีทางศาสนาที่นครเมกกะ'},
+{id:'sp',name:'ลาติดตามคู่สมรสไปต่างประเทศ',core:['ติดตามคู่สมรสไปต่างประเทศ','ติดตามคู่สมรส'],ref:'ข้อ 36',mean:'ลาไปอยู่กับสามีหรือภริยาที่ไปปฏิบัติงานต่างประเทศตั้งแต่ 1 ปีขึ้นไป',scn:'ภริยาของข้าราชการทหารไปปฏิบัติงานต่างประเทศนาน 2 ปี ข้าราชการต้องการตามไปอยู่ด้วย'},
+{id:'intl',name:'ลาไปปฏิบัติงานในองค์การระหว่างประเทศ',core:['ไปปฏิบัติงานในองค์การระหว่างประเทศ','ปฏิบัติงานในองค์การระหว่างประเทศ','องค์การระหว่างประเทศ'],ref:'ข้อ 38',mean:'ลาไปทำงานกับองค์การระหว่างประเทศ ตามหลักเกณฑ์ในพระราชกฤษฎีกาที่เกี่ยวข้อง',scn:'ข้าราชการทหารได้รับคัดเลือกไปปฏิบัติงานที่องค์การสหประชาชาติ'},
+{id:'rehab',name:'ลาไปฟื้นฟูสมรรถภาพด้านอาชีพ',core:['ไปฟื้นฟูสมรรถภาพด้านอาชีพ','ฟื้นฟูสมรรถภาพด้านอาชีพ','ฟื้นฟูสมรรถภาพ'],ref:'ข้อ 40',mean:'ลาไปเข้ารับการฝึกอาชีพตามหลักสูตรเพื่อฟื้นฟูสมรรถภาพ (ไม่เกิน 12 เดือน)',scn:'ข้าราชการทหารที่ทุพพลภาพจากการปฏิบัติราชการต้องไปเรียนหลักสูตรฝึกอาชีพ'}
+];
+
+/* ===== data: durations ===== */
+const DUR=[
+{t:'sick',l:'ลาป่วยในปีหนึ่ง (กรณีทั่วไป)',v:90,u:'วัน',ref:'ข้อ 12',ex:'ปีหนึ่งลาป่วยได้ไม่เกิน 90 วัน เว้นแต่กรณีตามข้อ 12'},
+{t:'birth',l:'ลาคลอดบุตร',v:90,u:'วัน',ref:'ข้อ 17',ex:'ลาก่อนหรือหลังคลอดรวมไม่เกิน 90 วัน'},
+{t:'help',l:'ลาไปช่วยเหลือภริยาที่คลอดบุตร',v:15,u:'วันทำการ',ref:'ข้อ 19',ex:'ไม่เกิน 15 วันทำการ และต้องใช้สิทธิภายใน 90 วันนับแต่วันคลอด'},
+{t:'biz',l:'ลากิจ (ปีละ)',v:45,u:'วันทำการ',ref:'ข้อ 20',ex:'ลากิจปีละไม่เกิน 45 วันทำการ'},
+{t:'biz',l:'ลากิจของทหารกองประจำการ',v:23,u:'วันทำการ',ref:'ข้อ 20',ex:'ทหารกองประจำการลากิจได้ไม่เกิน 23 วันทำการ'},
+{t:'biz',l:'ลากิจเพื่อเลี้ยงดูบุตร (ไม่ได้รับเงินเดือนระหว่างลา)',v:150,u:'วันทำการ',ref:'ข้อ 21',ex:'ลาต่อจากลาคลอดได้ไม่เกิน 150 วันทำการ ไม่ได้รับเงินเดือน'},
+{t:'vac',l:'ลาพักผ่อนประจำปี (สิทธิต่อปี)',v:10,u:'วันทำการ',ref:'ข้อ 28',ex:'ปีละ 10 วันทำการ'},
+{t:'vac',l:'ลาพักผ่อนสะสม (รวมกับปีปัจจุบันไม่เกิน)',v:20,u:'วันทำการ',ref:'ข้อ 29',ex:'สะสมได้ แต่รวมกับปีปัจจุบันไม่เกิน 20 วันทำการ'},
+{t:'vac',l:'ลาพักผ่อนสะสมเมื่อรับราชการติดต่อกันไม่น้อยกว่า 10 ปี (รวมกับปีปัจจุบันไม่เกิน)',v:30,u:'วันทำการ',ref:'ข้อ 29',ex:'รับราชการติดต่อกันไม่น้อยกว่า 10 ปี สะสมรวมไม่เกิน 30 วันทำการ'},
+{t:'ord',l:'ลาอุปสมบท',v:120,u:'วัน',ref:'ข้อ 30',ex:'ไม่เกิน 120 วัน'},
+{t:'haj',l:'ลาไปประกอบพิธีฮัจย์',v:120,u:'วัน',ref:'ข้อ 33',ex:'ไม่เกิน 120 วัน'},
+{t:'sp',l:'ลาติดตามคู่สมรสไปต่างประเทศ (ครั้งแรก)',v:2,u:'ปี',ref:'ข้อ 36',ex:'ไม่เกิน 2 ปี และต่อได้อีกไม่เกิน 2 ปี รวมไม่เกิน 4 ปี'},
+{t:'sp',l:'ลาติดตามคู่สมรสไปต่างประเทศ (รวมทั้งที่ต่อ)',v:4,u:'ปี',ref:'ข้อ 36',ex:'ครั้งแรกไม่เกิน 2 ปี ต่ออีกไม่เกิน 2 ปี รวมไม่เกิน 4 ปี'},
+{t:'rehab',l:'ลาไปฟื้นฟูสมรรถภาพด้านอาชีพ (ตามหลักสูตร แต่ไม่เกิน)',v:12,u:'เดือน',ref:'ข้อ 40',ex:'ตามระยะเวลาของหลักสูตร แต่ไม่เกิน 12 เดือน'},
+{t:'sick',l:'ลาป่วยเพราะเจ็บป่วยจากการไปราชการในที่กันดารหรือประสบอันตรายจากการปฏิบัติราชการ (รวมทั้งสิ้นไม่เกิน)',v:180,u:'วัน',ref:'ข้อ 12.1',ex:'ลาป่วยต่อได้อีก 90 วัน รวมเป็น 180 วัน'},
+{t:'sick',l:'ลาป่วยเพราะเจ็บป่วยจากไอพิษ วัตถุธาตุที่เป็นพิษ วัตถุระเบิด หรือเชื้อโรคติดต่ออย่างร้ายแรง (รวมทั้งสิ้นไม่เกิน)',v:270,u:'วัน',ref:'ข้อ 12.2',ex:'ลาป่วยต่อได้อีก 180 วัน รวมเป็น 270 วัน'},
+{t:'sick',l:'ลาป่วยของผู้ปฏิบัติหน้าที่ในอากาศ ใต้น้ำ ใต้ดิน หรือหน้าที่พิเศษตามที่กำหนด (ไม่เกิน)',v:365,u:'วัน',ref:'ข้อ 12',ex:'กรณีหน้าที่พิเศษตามที่กำหนดในข้อ 12 ลาได้ไม่เกิน 365 วัน'},
+{t:'sick',l:'ลาเพื่อฟื้นฟูสมรรถภาพร่างกายต่อ หลังแพทย์ไม่น้อยกว่า 3 นายรับรอง (ตามข้อ 12.4 หรือ 12.5 ต่อได้อีกไม่เกิน)',v:365,u:'วัน',ref:'ข้อ 12',ex:'แพทย์ไม่น้อยกว่า 3 นายรับรองว่าจำเป็นต้องฟื้นฟูสมรรถภาพร่างกาย ต่อได้อีกไม่เกิน 365 วัน'}
+];
+const UNITS=['วัน','วันทำการ','ปี','เดือน'];
+const NUMPOOL=[2,3,4,7,10,12,15,20,21,23,30,45,60,90,120,150,180,270,365];
+
+/* ===== data: authority table (ตารางกำหนดอำนาจให้ลา) ===== */
+const KH='ตามที่เห็นควร';
+const RANKS=[
+{id:0,full:'รัฐมนตรีว่าการกระทรวงกลาโหม',al:['รัฐมนตรีว่าการกระทรวงกลาโหม','รมว.กห.','รมว.กลาโหม','รัฐมนตรีกลาโหม','รัฐมนตรีว่าการ'],sick:365,pers:null,rehab:null},
+{id:1,full:'ปลัดกระทรวงกลาโหม / สมุหราชองครักษ์ / ผบ.ทสส. / ผบ.ทบ. / ผบ.ทร. / ผบ.ทอ.',al:['ปลัดกระทรวงกลาโหม','ปลัดกห.','ปลัดกลาโหม','สมุหราชองครักษ์','ผบ.ทสส.','ผบ.ทท.','ผู้บัญชาการทหารสูงสุด','ผบ.ทบ.','ผู้บัญชาการทหารบก','ผบ.ทร.','ผู้บัญชาการทหารเรือ','ผบ.ทอ.','ผู้บัญชาการทหารอากาศ'],sick:180,pers:null,rehab:null},
+{id:2,full:'แม่ทัพ',al:['แม่ทัพ','แม่ทัพภาค'],sick:90,pers:60,rehab:null},
+{id:3,full:'ผู้บัญชาการกองพล / ผู้บัญชาการกองเรือ / ผู้บัญชาการกองพลบิน',al:['ผู้บัญชาการกองพล','ผบ.พล.','ผบ.กองพล','ผู้บัญชาการกองเรือ','ผบ.กองเรือ','ผู้บัญชาการกองพลบิน','ผบ.กองพลบิน'],sick:60,pers:45,rehab:365},
+{id:4,full:'ผู้บังคับการกรม / ผู้บังคับหมวดเรือ / ผู้บังคับการกองบิน',al:['ผู้บังคับการกรม','ผบ.กรม','ผู้บังคับหมวดเรือ','ผบ.หมวดเรือ','ผู้บังคับการกองบิน','ผบ.กองบิน'],sick:45,pers:30,rehab:180},
+{id:5,full:'ผู้บังคับกองพัน / ผู้บังคับการเรือชั้น 1 / ผู้บังคับฝูงบิน',al:['ผู้บังคับกองพัน','ผบ.พัน','ผบ.กองพัน','ผู้บังคับการเรือชั้น 1','ผบ.เรือชั้น 1','ผู้บังคับฝูงบิน','ผบ.ฝูงบิน'],sick:21,pers:15,rehab:null},
+{id:6,full:'ผู้บังคับการเรือชั้น 2 / ต้นเรือชั้น 1 / ผู้บังคับหมวดบินชั้น 1',al:['ผู้บังคับการเรือชั้น 2','ผบ.เรือชั้น 2','ต้นเรือชั้น 1','ผู้บังคับหมวดบินชั้น 1','ผบ.หมวดบินชั้น 1'],sick:15,pers:7,rehab:null},
+{id:7,full:'ผู้บังคับกองร้อย / ผู้บังคับการเรือชั้น 3 / ต้นเรือชั้น 2 / ผู้บังคับหมวดบินชั้น 2',al:['ผู้บังคับกองร้อย','ผบ.ร้อย','ผบ.กองร้อย','ผู้บังคับการเรือชั้น 3','ผบ.เรือชั้น 3','ต้นเรือชั้น 2','ผู้บังคับหมวดบินชั้น 2','ผบ.หมวดบินชั้น 2'],sick:7,pers:3,rehab:null},
+{id:8,full:'ผู้บังคับหมวด / ต้นเรือชั้น 3 / ผู้บังคับหมวดบินชั้น 3',al:['ผู้บังคับหมวด','ผบ.หมวด','ต้นเรือชั้น 3','ผู้บังคับหมวดบินชั้น 3','ผบ.หมวดบินชั้น 3'],sick:3,pers:1,rehab:null}
+];
+const KIND={sick:{n:'ลาป่วย',u:'วัน'},pers:{n:'ลากิจ',u:'วันทำการ'},rehab:{n:'ลาไปฟื้นฟูสมรรถภาพด้านอาชีพ',u:'วัน'}};
+
+/* ===== data: rules (หลักเกณฑ์และเงื่อนไข) ===== */
+const RULES=[
+{q:'การลาคลอดบุตร ผู้มีอำนาจอนุญาตต้องเป็นผู้บังคับบัญชาตั้งแต่ระดับใดขึ้นไป',c:'ผู้บังคับการกรม / ผู้บังคับหมวดเรือ / ผู้บังคับการกองบิน',w:['ผู้บังคับกองพัน / ผู้บังคับการเรือชั้น 1 / ผู้บังคับฝูงบิน','แม่ทัพ','ผู้บังคับกองร้อย / ผู้บังคับการเรือชั้น 3'],ex:'ผู้อนุญาตการลาคลอดบุตรคือผู้บังคับการกรม ผู้บังคับหมวดเรือ หรือผู้บังคับการกองบินขึ้นไป',ref:'ข้อ 18'},
+{q:'การลาไปช่วยเหลือภริยาที่คลอดบุตร ผู้มีอำนาจอนุญาตต้องเป็นผู้บังคับบัญชาตั้งแต่ระดับใดขึ้นไป',c:'ผู้บังคับกองพัน / ผู้บังคับการเรือชั้น 1 / ผู้บังคับฝูงบิน',w:['ผู้บังคับการกรม / ผู้บังคับหมวดเรือ / ผู้บังคับการกองบิน','ผู้บังคับกองร้อย / ผู้บังคับการเรือชั้น 3','ผู้บังคับหมวด / ต้นเรือชั้น 3'],ex:'ผู้อนุญาตคือผู้บังคับกองพัน ผู้บังคับการเรือชั้น 1 หรือผู้บังคับฝูงบินขึ้นไป',ref:'ข้อ 19'},
+{q:'การลาพักผ่อน ผู้มีอำนาจอนุญาตต้องเป็นผู้บังคับบัญชาตั้งแต่ระดับใดขึ้นไป',c:'ผู้บังคับการกรม / ผู้บังคับหมวดเรือ / ผู้บังคับการกองบิน',w:['ผู้บังคับกองพัน / ผู้บังคับการเรือชั้น 1 / ผู้บังคับฝูงบิน','ผู้บัญชาการกองพล / ผู้บัญชาการกองเรือ','รัฐมนตรีว่าการกระทรวงกลาโหม'],ex:'ผู้อนุญาตการลาพักผ่อนคือผู้บังคับการกรมขึ้นไป',ref:'ข้อ 29'},
+{q:'ผู้ที่เคยอุปสมบทแล้ว จะลาอุปสมบทอีกได้หรือไม่',c:'ไม่ได้',w:['ได้ ไม่เกิน 120 วัน','ได้ ไม่เกิน 60 วัน','ได้ เมื่อผ่านไป 10 ปี'],ex:'ผู้เคยอุปสมบทแล้วลาอุปสมบทอีกไม่ได้',ref:'ข้อ 30'},
+{q:'ผู้ที่เคยไปประกอบพิธีฮัจย์แล้ว จะลาไปประกอบพิธีฮัจย์อีกได้หรือไม่',c:'ไม่ได้',w:['ได้ ไม่เกิน 120 วัน','ได้ ไม่เกิน 90 วัน','ได้ เมื่อผ่านไป 5 ปี'],ex:'ผู้เคยไปประกอบพิธีฮัจย์แล้วลาอีกไม่ได้',ref:'ข้อ 33'},
+{q:'การลาไปประกอบพิธีฮัจย์ ผู้ใดเป็นผู้อนุญาต',c:'รัฐมนตรีว่าการกระทรวงกลาโหม',w:['ผู้บังคับการกรม','แม่ทัพ','ปลัดกระทรวงกลาโหม'],ex:'การลาไปประกอบพิธีฮัจย์ รัฐมนตรีเป็นผู้อนุญาต',ref:'ข้อ 34'},
+{q:'การลาติดตามคู่สมรสไปต่างประเทศ ผู้ใดเป็นผู้อนุญาต',c:'รัฐมนตรีว่าการกระทรวงกลาโหม',w:['ผู้บัญชาการกองพล','ผู้บังคับการกรม','ผบ.ทบ.'],ex:'รัฐมนตรีเป็นผู้อนุญาตการลาติดตามคู่สมรสไปต่างประเทศ',ref:'ข้อ 36'},
+{q:'ผู้ลาอุปสมบทต้องอุปสมบทภายในกี่วันนับจากวันเริ่มลา',c:'10 วัน',w:['5 วัน','15 วัน','30 วัน'],ex:'ต้องอุปสมบทภายใน 10 วันนับจากวันเริ่มลา',ref:'ข้อ 31'},
+{q:'เมื่อลาสิกขาแล้ว ต้องรายงานตัวและเข้าปฏิบัติราชการภายในกี่วัน',c:'5 วัน',w:['3 วัน','10 วัน','15 วัน'],ex:'เมื่อลาสิกขาต้องรายงานและเข้าปฏิบัติราชการภายใน 5 วัน',ref:'ข้อ 32'},
+{q:'ลาคลอดบุตรหรือลากิจ ข้อใดกล่าวถึงการนับวันลาได้ถูกต้อง',c:'ลากิจและลาไปช่วยเหลือภริยานับเฉพาะวันทำการ ส่วนลาคลอดบุตรนับรวมวันหยุดคั่น',w:['ทุกประเภทนับเฉพาะวันทำการ','ทุกประเภทนับรวมวันหยุด','ลากิจนับรวมวันหยุดคั่น'],ex:'วันหยุดที่คั่นระหว่างวันลาประเภทเดียวกันนับเป็นวันลา ยกเว้นลาช่วยภริยา ลากิจ และลาพักผ่อนที่นับเฉพาะวันทำการ',ref:'ข้อ 10'},
+{q:'การลาไปปฏิบัติงานในองค์การระหว่างประเทศ ต้องเสนอถึงผู้ใดเพื่ออนุญาต',c:'รัฐมนตรีว่าการกระทรวงกลาโหม',w:['ผู้บัญชาการกองพล','ปลัดกระทรวงกลาโหม','ผู้บังคับการกรม'],ex:'เสนอถึงรัฐมนตรีเพื่ออนุญาต ตามหลักเกณฑ์ในพระราชกฤษฎีกาที่เกี่ยวข้อง',ref:'ข้อ 38'},
+{q:'ใบลาที่ผู้ลายื่น ต้องเสนออย่างไร',c:'เสนอตามลำดับชั้นจนถึงผู้มีอำนาจอนุญาต',w:['ยื่นตรงต่อผู้มีอำนาจอนุญาตเท่านั้น','ยื่นต่อเสมียนเท่านั้น','ไม่ต้องทำใบลา ทุกกรณี'],ex:'ใบลาต้องเสนอตามลำดับชั้นจนถึงผู้มีอำนาจอนุญาต (ผู้รับใบลากับผู้อนุญาตอาจเป็นคนละระดับ)',ref:'ข้อ 6'}
+];
+/* ===== question builders ===== */
+function mkChoice(topic,prompt,correct,wrongs,explain,ref){
+  const w=[...new Set(wrongs)].filter(x=>x!==correct);
+  const opts=shuffle([correct,...pick(w,3)]);
+  return {kind:'choice',topic,prompt,options:opts,correct:opts.indexOf(correct),explain,ref};
+}
+const numField=(label,v,u,askUnit)=>({type:'num',label,pre:'ไม่เกิน',answers:[String(v)],unit:u,askUnit:!!askUnit,show:'ไม่เกิน '+v+' '+u});
+const nameField=(label,r,show)=>({type:'text',label,pre:'',answers:r.al,show:show||r.full,ph:'พิมพ์ชื่อผู้บังคับบัญชา เช่น ผบ.กรม'});
+const khField=label=>({type:'text',label,pre:'',answers:[KH,'ตามเห็นควร','ตามที่เห็นสมควร','ตามที่สมควร'],show:KH,ph:'พิมพ์ข้อความ'});
+const typeByName=t=>TYPES.find(x=>x.id===t);
+
+/* mission 1 */
+function qScenario(){
+  const t=pick(TYPES,1)[0];
+  return mkChoice(T_TYPE,'สถานการณ์: '+t.scn+'\nควรยื่นใบลาประเภทใด?',t.name,TYPES.map(x=>x.name),'สถานการณ์นี้ตรงกับ '+t.name+' ('+t.mean+')',t.ref);
+}
+function qDef(){
+  const t=pick(TYPES,1)[0];
+  return mkChoice(T_TYPE,'ข้อใดตรงกับความหมายต่อไปนี้\n“'+t.mean+'”',t.name,TYPES.map(x=>x.name),t.name+': '+t.mean,t.ref);
+}
+function qTypeFill(){
+  const t=pick(TYPES,1)[0];
+  return {kind:'fill',topic:T_TYPE,prompt:'เติมชื่อประเภทการลาให้ถูกต้อง\n“'+t.mean+'”',
+    fields:[{type:'text',label:'ประเภทการลา',pre:'การลา',answers:[...t.core,t.name,t.name.replace(/^ลา/,'')],show:t.name,ph:'พิมพ์ชื่อประเภทการลา'}],
+    explain:'ประเภทการลาที่ถูกต้องคือ '+t.name+' ('+t.mean+')',ref:t.ref};
+}
+function qMatchTypes(){
+  const ts=pick(TYPES,4);
+  return {kind:'match',topic:T_TYPE,prompt:'จับคู่ความหมายกับประเภทการลาให้ถูกต้อง',pairs:ts.map(t=>({left:t.mean,right:t.name})),rights:shuffle(ts.map(t=>t.name)),
+    explain:ts.map(t=>t.name+' = '+t.mean).join('\n'),ref:ts.map(t=>t.ref).join(', ')};
+}
+function mission1(){return shuffle([qScenario(),qScenario(),qScenario(),qDef(),qDef(),qDef(),qTypeFill(),qTypeFill(),qMatchTypes(),qMatchTypes()])}
+
+/* mission 2 */
+function numChoice(d,topic){
+  const o=pick(NUMPOOL.filter(n=>n!==d.v),3).map(n=>n+' '+d.u);
+  return mkChoice(topic||T_DAYS,d.l+' ลาได้ไม่เกินกี่ '+d.u+'?',d.v+' '+d.u,o,d.ex+' (หน่วยคือ '+d.u+')',d.ref);
+}
+function durFill(d,topic){
+  return {kind:'fill',topic:topic||T_DAYS,prompt:d.l+'\nเติมจำนวนและหน่วยให้ถูกต้อง',fields:[numField('จำนวนที่ลาได้',d.v,d.u,true)],explain:d.ex+' (หน่วยคือ '+d.u+')',ref:d.ref};
+}
+function durMatch(){
+  const ds=pick(DUR.filter(d=>['help','biz','vac','ord','haj','birth','sp','rehab'].includes(d.t)),4);
+  const rs=ds.map(d=>d.v+' '+d.u);
+  if(new Set(rs).size<4) return durMatch();
+  return {kind:'match',topic:T_DAYS,prompt:'จับคู่การลากับจำนวนวัน/หน่วยที่ลาได้ไม่เกิน',pairs:ds.map(d=>({left:d.l,right:d.v+' '+d.u})),rights:shuffle(rs),explain:ds.map(d=>d.l+' = ไม่เกิน '+d.v+' '+d.u+' ('+d.ref+')').join('\n'),ref:[...new Set(ds.map(d=>d.ref))].join(', ')};
+}
+function sickExc(){
+  const items=[
+    {c:'180 วัน',p:'เจ็บป่วยจากการไปราชการในที่กันดารหรือประสบอันตรายจากการปฏิบัติราชการ ลาป่วยได้รวมทั้งสิ้นกี่วัน',ex:'ปกติ 90 วัน ลาต่อได้อีก 90 วัน รวม 180 วัน',ref:'ข้อ 12.1'},
+    {c:'270 วัน',p:'เจ็บป่วยจากไอพิษ วัตถุธาตุที่เป็นพิษ วัตถุระเบิด หรือเชื้อโรคติดต่ออย่างร้ายแรง ลาป่วยได้รวมทั้งสิ้นกี่วัน',ex:'ปกติ 90 วัน ลาต่อได้อีก 180 วัน รวม 270 วัน',ref:'ข้อ 12.2'},
+    {c:'365 วัน',p:'ผู้ปฏิบัติหน้าที่ในอากาศ ใต้น้ำ ใต้ดิน หรือหน้าที่พิเศษตามที่กำหนด ลาป่วยได้กี่วัน',ex:'กรณีหน้าที่พิเศษตามข้อ 12 ลาได้ 365 วัน',ref:'ข้อ 12'},
+    {c:'ไม่เกิน 365 วัน',p:'กรณีตามข้อ 12.4 หรือ 12.5 และแพทย์ไม่น้อยกว่า 3 นายรับรองว่าจำเป็นต้องฟื้นฟูสมรรถภาพร่างกาย ลาเพื่อฟื้นฟูต่อได้อีกเท่าใด',ex:'ลาเพื่อฟื้นฟูต่อได้อีกไม่เกิน 365 วัน',ref:'ข้อ 12'}
+  ];
+  const it=pick(items,1)[0];
+  return mkChoice(T_DAYS,it.p,it.c,['60 วัน','90 วัน','120 วัน','180 วัน','270 วัน','365 วัน','ไม่เกิน 180 วัน'],it.ex,it.ref);
+}
+function mission2(){
+  const base=pick(DUR.filter(d=>d.ref!=='ข้อ 12.1'&&d.ref!=='ข้อ 12.2'),5).map(d=>durFill(d));
+  const ch=pick(DUR,3).map(d=>numChoice(d));
+  return shuffle([...base,...ch,durMatch(),sickExc(),sickExc(),durFill(DUR[6])]);
+}
+
+/* mission 3: authority table */
+function rankFill(){
+  const r=pick(RANKS,1)[0];
+  const f=[];
+  f.push(numField('อนุญาตลาป่วยได้ครั้งหนึ่ง',r.sick,'วัน',Math.random()<.5));
+  f.push(r.pers==null?khField('อนุญาตลากิจได้ (พิมพ์ข้อความ)'):numField('อนุญาตลากิจได้ครั้งหนึ่ง',r.pers,'วันทำการ',Math.random()<.5));
+  if(r.rehab) f.push(numField('อนุญาตลาไปฟื้นฟูสมรรถภาพด้านอาชีพได้ครั้งหนึ่ง',r.rehab,'วัน',Math.random()<.5));
+  return {kind:'fill',topic:T_AUTH,prompt:'ผู้บังคับบัญชา: '+r.full+'\nเติมอำนาจอนุญาตให้ลาในช่องว่าง',fields:f,
+    explain:r.full+'\nลาป่วย ไม่เกิน '+r.sick+' วัน | ลากิจ '+(r.pers==null?KH:'ไม่เกิน '+r.pers+' วันทำการ')+(r.rehab?' | ฟื้นฟูฯ ไม่เกิน '+r.rehab+' วัน':''),ref:TBL_REF};
+}
+function rankByLimit(){
+  const k=pick(['sick','pers','rehab'],1)[0];
+  const rs=RANKS.filter(r=>r[k]!=null);
+  const r=pick(rs,1)[0];
+  return {kind:'fill',topic:T_AUTH,prompt:'ผู้บังคับบัญชาชั้นใดสามารถอนุญาต'+KIND[k].n+'ได้ครั้งหนึ่งไม่เกิน '+r[k]+' '+KIND[k].u,
+    fields:[nameField('ตอบ (พิมพ์ชื่อตำแหน่งใดตำแหน่งหนึ่งในระดับนั้นได้)',r)],
+    explain:'ผู้ที่อนุญาต'+KIND[k].n+'ได้ครั้งหนึ่งไม่เกิน '+r[k]+' '+KIND[k].u+' คือ '+r.full,ref:TBL_REF};
+}
+function rankChoice(){
+  const k=pick(['sick','pers'],1)[0];
+  const r=pick(RANKS.filter(x=>x[k]!=null),1)[0];
+  return mkChoice(T_AUTH,'ผู้บังคับบัญชาชั้นใดอนุญาต'+KIND[k].n+'ได้ครั้งหนึ่งไม่เกิน '+r[k]+' '+KIND[k].u+'?',r.full,RANKS.map(x=>x.full),r.full+' อนุญาต'+KIND[k].n+'ได้ไม่เกิน '+r[k]+' '+KIND[k].u,TBL_REF);
+}
+function tableQ(mode){
+  const start=rnd(RANKS.length-3), rows=RANKS.slice(start,start+4);
+  const fields=[], cells=[];
+  const numCols=[['sick','วัน'],['pers','วันทำการ'],['rehab','วัน']];
+  const nameRows=new Set(), numRows=new Set();
+  if(mode!=='num') pick([0,1,2,3],mode==='name'?3:2).forEach(i=>nameRows.add(i));
+  rows.forEach((r,i)=>{ if(mode==='num'||(mode==='both'&&!nameRows.has(i))||(mode==='name'&&false)) numRows.add(i); });
+  rows.forEach((r,i)=>{
+    const row=[];
+    if(nameRows.has(i)){fields.push(nameField('',r));row.push({f:fields.length-1});}
+    else row.push({t:r.full});
+    numCols.forEach(([k,u])=>{
+      const v=r[k];
+      if(v==null){row.push({t:k==='pers'?KH:'-'});return;}
+      const hide=numRows.has(i)&&Math.random()<(mode==='num'?.55:.7);
+      if(hide){fields.push(numField('',v,u,false));row.push({f:fields.length-1});}
+      else row.push({t:String(v)});
+    });
+    cells.push(row);
+  });
+  if(!fields.some(f=>f.type==='num')&&mode!=='name'){const rr=cells.find(c=>c[0].t&&c[1].t&&!isNaN(+c[1].t));if(rr){const r=rows[cells.indexOf(rr)];fields.push(numField('',r.sick,'วัน',false));rr[1]={f:fields.length-1};}}
+  return {kind:'table',topic:T_AUTH,prompt:'เติมตารางอำนาจอนุญาตให้ลา (ครั้งหนึ่งไม่เกิน) ให้ครบทุกช่องว่าง\nสังเกตหน่วย: “วัน” กับ “วันทำการ” ไม่เหมือนกัน',
+    head:['ผู้บังคับบัญชา','ลาป่วย (วัน)','ลากิจ (วันทำการ)','ฟื้นฟูสมรรถภาพด้านอาชีพ (วัน)'],cells,fields,
+    explain:rows.map(r=>r.full+' | ป่วย '+r.sick+' วัน | กิจ '+(r.pers==null?KH:r.pers+' วันทำการ')+' | ฟื้นฟูฯ '+(r.rehab==null?'-':r.rehab+' วัน')).join('\n'),ref:TBL_REF};
+}
+function mission3(){
+  return shuffle([rankFill(),rankFill(),rankFill(),rankFill(),rankByLimit(),rankByLimit(),rankChoice(),rankChoice(),tableQ('num'),tableQ('name'),tableQ('both'),tableQ('both')]);
+}
+
+/* mission 4: who has authority */
+function lowestRank(k,d){
+  if(k==='pers'&&d>60) return RANKS[1];
+  const ok=RANKS.filter(r=>r[k]!=null&&r[k]>=d);
+  return ok[ok.length-1];
+}
+function authScenario(k,d,who){
+  const r=lowestRank(k,d), unit=KIND[k].u;
+  const others=RANKS.filter(x=>x.id!==r.id&&(x[k]!=null||k==='pers'));
+  const lower=RANKS.filter(x=>x.id>r.id), higher=RANKS.filter(x=>x.id<r.id);
+  const w=[...(lower.length?[pick(lower,1)[0].full]:[]),...(higher.length?pick(higher,2).map(x=>x.full):[]),...others.map(x=>x.full)];
+  const lim=r[k]==null?KH:'ไม่เกิน '+r[k]+' '+unit;
+  return mkChoice(T_AUTH,(who||'ข้าราชการทหาร')+'ขอ'+KIND[k].n+' '+d+' '+unit+'\nผู้บังคับบัญชาระดับต่ำที่สุดที่มีอำนาจอนุญาตในครั้งเดียวคือใคร?',r.full,w,
+    r.full+' อนุญาต'+KIND[k].n+'ได้ '+lim+' ซึ่งครอบคลุม '+d+' '+unit+' และเป็นระดับต่ำที่สุดที่ทำได้'+(k==='pers'&&d>60?' (เกิน 60 วันทำการ ต้องเสนอผู้ที่อนุญาตได้ตามที่เห็นควร)':''),TBL_REF);
+}
+function mission4(){
+  const fixed=[['sick',20],['pers',10],['sick',50],['pers',40],['rehab',200]];
+  const randoms=[];
+  const pool={sick:[2,5,10,18,30,45,50,80,100,150,200,300],pers:[1,2,5,12,20,30,40,50,60,90],rehab:[100,180,200,300]};
+  while(randoms.length<5){const k=pick(['sick','pers','rehab'],1)[0];randoms.push([k,pick(pool[k],1)[0]]);}
+  return shuffle([...fixed,...randoms].map(([k,d])=>authScenario(k,d)));
+}
+
+/* mission 5: mock exam 30 (6 type, 8 days, 10 authority, 6 rules) */
+function ruleQ(r){return mkChoice(T_RULE,r.q,r.c,r.w,r.ex,r.ref);}
+function exam(){
+  const t=[qScenario(),qDef(),qTypeFill(),qMatchTypes(),qScenario(),qDef()];
+  const d=[durFill(pick(DUR,1)[0]),durFill(pick(DUR,1)[0]),numChoice(pick(DUR,1)[0]),numChoice(pick(DUR,1)[0]),durMatch(),sickExc(),durFill(pick(DUR,1)[0]),numChoice(pick(DUR,1)[0])];
+  const a=[rankFill(),rankFill(),rankByLimit(),rankByLimit(),tableQ('both'),tableQ('num'),authScenario('sick',pick([4,10,25,50,100],1)[0]),authScenario('pers',pick([2,6,10,20,40,70],1)[0]),authScenario('rehab',pick([120,200],1)[0]),rankChoice()];
+  const r=pick(RULES,6).map(ruleQ);
+  return shuffle([...t,...d,...a,...r]);
+}
+const MISSIONS=[
+{n:1,t:'จำประเภทการลา',d:'ประเภทการลาทั้ง 10 ประเภท: จับคู่ เลือกตามสถานการณ์ และเติมคำ (10 ข้อ)',make:mission1},
+{n:2,t:'จำจำนวนวันลา',d:'จำนวนวัน/หน่วย ของการลาแต่ละประเภท รวมข้อยกเว้นการลาป่วย (12 ข้อ)',make:mission2},
+{n:3,t:'ผู้มีอำนาจอนุญาตให้ลา',d:'ภารกิจหลัก: เติมตารางอำนาจอนุญาตจากความจำ (12 ข้อ)',make:mission3},
+{n:4,t:'ใครมีอำนาจอนุญาต?',d:'สถานการณ์จำลอง: เลือกผู้บังคับบัญชาระดับต่ำที่สุดที่อนุญาตได้ (10 ข้อ)',make:mission4},
+{n:5,t:'สนามสอบจำลอง',d:'ข้อสอบ 30 ข้อ จับเวลา 20 นาที เฉลยหลังส่งข้อสอบ',make:exam}
+];
+/* ===== state ===== */
+const fresh=()=>({v:1,best:0,totalCorrect:0,m:{},wrong:{},topics:{}});
+function load(){try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.v===1)return s}catch(e){}return fresh()}
+function save(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
+let S=load(),G=null,acked=false,timer=null;
+const app=document.getElementById('app');
+const $=s=>document.getElementById(s);
+const medalOf=p=>p>=90?'gold':p>=80?'silver':p>=60?'bronze':'none';
+const medalName={gold:'เหรียญทอง',silver:'เหรียญเงิน',bronze:'เหรียญทองแดง',none:'ยังไม่ได้เหรียญ'};
+const rankTitle=p=>p>=90?'ผู้เชี่ยวชาญกฎการลา':p>=80?'ผู้ชำนาญ':p>=60?'กำลังพัฒนา':'ต้องฝึกเพิ่มเติม';
+const unlocked=n=>n===1||!!(S.m[n-1]&&S.m[n-1].done);
+const qkey=q=>q.kind+'|'+q.prompt+'|'+(q.fields?q.fields.map(f=>f.answers[0]).join(','):q.pairs?q.pairs.map(p=>p.right).join(','):q.correct);
+const stopTimer=()=>{if(timer){clearInterval(timer);timer=null}};
+
+/* ===== home ===== */
+function home(){
+  stopTimer();G=null;
+  const wc=Object.keys(S.wrong).length;
+  app.innerHTML=`<header class="hero"><div class="tag">Operation · Leave Regulations 2555</div>
+  <h1>MISSION: พิชิตกฎการลา 2555</h1>
+  <p>ภารกิจฝึกจำข้อบังคับกระทรวงกลาโหมว่าด้วยการลา พ.ศ. 2555 ผ่าน 5 ด่าน: ประเภทการลา จำนวนวันลา ตารางผู้มีอำนาจอนุญาต สถานการณ์จำลอง และสนามสอบ ผ่านด่านด้วยคะแนนตั้งแต่ 60% เพื่อปลดล็อกด่านถัดไป</p>
+  <div class="note">เกมนี้จัดทำขึ้นเพื่อทบทวนความรู้ตามข้อบังคับกระทรวงกลาโหมว่าด้วยการลา พ.ศ. 2555 ผู้เล่นควรตรวจสอบข้อบังคับฉบับเต็มประกอบการศึกษา</div></header>
+  <section class="stats"><div class="stat"><b>${S.best}</b><span>คะแนนสูงสุด (ต่อรอบ)</span></div>
+  <div class="stat"><b>${S.totalCorrect}</b><span>ตอบถูกสะสม (ข้อ)</span></div>
+  <div class="stat"><b>${Object.values(S.m).filter(m=>m.done).length}/5</b><span>ภารกิจที่ผ่านแล้ว</span></div></section>
+  <section class="grid">${MISSIONS.map(m=>{const s=S.m[m.n]||{best:0,medal:'none',att:0};const u=unlocked(m.n);
+   return `<div class="mc ${u?'':'lock'}"><div class="num">${m.n}</div><div><h2>${esc(m.t)}</h2><p class="d">${esc(m.d)}</p>
+   <div class="bar" aria-hidden="true"><i style="width:${Math.round(s.best||0)}%"></i></div>
+   <p class="d"><span class="medal m-${s.medal||'none'}"></span>${medalName[s.medal||'none']} · คะแนนดีที่สุด ${Math.round(s.best||0)}% · เล่นแล้ว ${s.att||0} ครั้ง</p></div>
+   <button class="btn pri" data-act="start" data-n="${m.n}" ${u?'':'disabled'}>${u?(s.att?'เล่นอีกครั้ง':'เริ่มภารกิจ'):'ล็อก'}</button></div>`}).join('')}</section>
+  <div class="row" style="margin-top:18px"><button class="btn" data-act="notebook">สมุดบันทึกข้อผิดพลาด (${wc})</button>
+  <button class="btn" data-act="reset">ล้างความคืบหน้า</button></div>`;
+}
+
+/* ===== disclaimer gate ===== */
+function gate(n){
+  const d=document.createElement('div');d.className='ovl';d.id='gate';
+  d.innerHTML=`<div class="dlg" role="dialog" aria-modal="true"><div class="tag">ก่อนเริ่มภารกิจ</div>
+  <p>เกมนี้จัดทำขึ้นเพื่อทบทวนความรู้ตามข้อบังคับกระทรวงกลาโหมว่าด้วยการลา พ.ศ. 2555 ผู้เล่นควรตรวจสอบข้อบังคับฉบับเต็มประกอบการศึกษา</p>
+  <button class="btn pri" data-act="ack" data-n="${n}">รับทราบ เริ่มภารกิจ</button></div>`;
+  document.body.appendChild(d);d.querySelector('button').focus();
+}
+
+/* ===== run control ===== */
+function begin(n,opts){
+  stopTimer();opts=opts||{};
+  let qs,title;
+  if(opts.review){qs=shuffle(Object.values(S.wrong).map(w=>w.q)).slice(0,10);title='ฝึกข้อที่เคยตอบผิด'}
+  else if(opts.reexam){qs=shuffle(Object.values(S.wrong).map(w=>w.q)).slice(0,10);title='ข้อสอบซ้ำจากข้อที่เคยผิด'}
+  else{const m=MISSIONS[n-1];qs=m.make();title='ภารกิจที่ '+n+': '+m.t}
+  if(!qs.length){home();return}
+  const isExam=!!opts.reexam||(n===5&&!opts.review);
+  G={n:n,title,qs,i:0,score:0,correct:0,streak:0,hint:false,done:false,sel:null,log:[],exam:isExam,review:!!opts.review,reexam:!!opts.reexam,left:isExam?(opts.reexam?qs.length*60:1200):0,opts};
+  if(isExam)timer=setInterval(tick,1000);
+  play();
+}
+function tick(){
+  if(!G||!G.exam){stopTimer();return}
+  G.left--;const e=$('tm');
+  if(e)e.textContent=fmt(G.left);
+  if(G.left<=0){stopTimer();timeUp()}
+}
+const fmt=s=>String(Math.floor(Math.max(s,0)/60)).padStart(2,'0')+':'+String(Math.max(s,0)%60).padStart(2,'0');
+function topicStat(t,ok){const o=S.topics[t]||(S.topics[t]={r:0,w:0});ok?o.r++:o.w++}
+function noteWrong(q){const k=qkey(q);const o=S.wrong[k];S.wrong[k]={q:q,n:(o?o.n:0)+1}}
+
+/* ===== render question ===== */
+function play(){
+  const q=G.qs[G.i],tot=G.qs.length;G.done=false;G.sel=null;G.hint=false;
+  let body='';
+  if(q.kind==='choice'){
+    body='<div class="opts">'+q.options.map((o,i)=>`<button class="opt" data-act="pick" data-i="${i}">${esc(o)}</button>`).join('')+'</div>';
+  }else if(q.kind==='match'){
+    body='<div class="list">'+q.pairs.map((p,i)=>`<div class="fl"><label for="m${i}">${esc(p.left)}</label><select id="m${i}"><option value="">เลือกคำตอบ</option>${q.rights.map(r=>`<option>${esc(r)}</option>`).join('')}</select></div>`).join('')+'</div>';
+  }else if(q.kind==='fill'){
+    body='<div class="list">'+q.fields.map((f,i)=>`<div class="fl"><label for="f${i}">${esc(f.label)}</label>${f.pre?`<span>${esc(f.pre)}</span>`:''}${fieldIn(f,i)}${unitIn(f,i)}</div>`).join('')+'</div>';
+  }else{
+    body='<div class="tw"><table><thead><tr>'+q.head.map(h=>`<th>${esc(h)}</th>`).join('')+'</tr></thead><tbody>'+q.cells.map(r=>'<tr>'+r.map(c=>c.f!=null?`<td>${fieldIn(q.fields[c.f],c.f)}</td>`:`<td>${esc(c.t)}</td>`).join('')+'</tr>').join('')+'</tbody></table></div>';
+  }
+  const ex=G.exam;
+  app.innerHTML=`<div class="hud"><span class="fd">${esc(G.title)}</span><span class="row"><span class="pill">ข้อ ${G.i+1}/${tot}</span>${ex?`<span class="pill" aria-label="เวลาที่เหลือ" id="tm">${fmt(G.left)}</span>`:`<span class="pill">คะแนน ${G.score}</span><span class="pill">ติดต่อกัน ${G.streak}</span>`}</span></div>
+  <div class="bar"><i style="width:${Math.round(G.i/tot*100)}%"></i></div>
+  <div class="q"><div class="chip">${esc(q.topic)}</div><div class="prompt">${esc(q.prompt)}</div>${body}
+  <div id="hint" class="hint" hidden></div><div id="fb"></div>
+  <div class="row" id="ctl">${ex?`<button class="btn pri" data-act="examNext">${G.i+1<tot?'ยืนยันคำตอบ และไปข้อต่อไป':'ยืนยันคำตอบ และส่งข้อสอบ'}</button>`:`<button class="btn pri" data-act="check">ตรวจคำตอบ</button><button class="btn" data-act="hint">แสดงคำใบ้</button><button class="btn" data-act="reveal">เฉลย</button>`}
+  <button class="btn" data-act="restart">เริ่มใหม่</button><button class="btn" data-act="home">กลับหน้าแรก</button></div></div>`;
+}
+const fieldIn=(f,i)=>f.type==='num'?`<input class="n" id="f${i}" inputmode="numeric" autocomplete="off" aria-label="${esc(f.label||'คำตอบ')}">`:`<input class="t" id="f${i}" autocomplete="off" placeholder="${esc(f.ph||'')}" aria-label="${esc(f.label||'คำตอบ')}">`;
+const unitIn=(f,i)=>f.unit?(f.askUnit?`<select id="u${i}" aria-label="หน่วย"><option value="">เลือกหน่วย</option>${UNITS.slice(0,2).concat(UNITS.slice(2)).map(u=>`<option>${u}</option>`).join('')}</select>`:`<span>${esc(f.unit)}</span>`):'';
+
+/* ===== check logic ===== */
+function collect(q){
+  if(q.kind==='choice')return G.sel;
+  if(q.kind==='match')return q.pairs.map((p,i)=>$('m'+i).value);
+  return q.fields.map((f,i)=>({v:$('f'+i).value,u:f.askUnit?$('u'+i).value:null}));
+}
+function fieldOk(f,x){
+  if(!x||!String(x.v).trim())return false;
+  const parts=f.type==='text'?x.v.split(/[\/;|\n]|และ/):[x.v];
+  const okV=parts.some(p=>{const n=norm(p);if(!n)return false;
+    if(f.type==='num'){return /^\d+$/.test(n)&&Number(n)===Number(f.answers[0])}
+    return f.answers.some(a=>norm(a)===n)});
+  return okV&&(!f.askUnit||x.u===f.unit);
+}
+function judge(q,r){
+  if(q.kind==='choice')return{ok:r===q.correct,per:null};
+  if(q.kind==='match'){const per=q.pairs.map((p,i)=>r[i]===p.right);return{ok:per.every(Boolean),per}}
+  const per=q.fields.map((f,i)=>fieldOk(f,r[i]));return{ok:per.every(Boolean),per};
+}
+function ansText(q){
+  if(q.kind==='choice')return q.options[q.correct];
+  if(q.kind==='match')return q.pairs.map(p=>p.left+' → '+p.right).join('\n');
+  return q.fields.map(f=>(f.label?f.label+': ':'')+f.show).join('\n');
+}
+function mark(q,j,r){
+  document.querySelectorAll('#app input,#app select,#app .opt').forEach(e=>e.disabled=true);
+  if(q.kind==='choice'){document.querySelectorAll('.opt').forEach((b,i)=>{if(i===q.correct)b.classList.add('ok');else if(i===r)b.classList.add('bad')})}
+  else if(j.per){j.per.forEach((ok,i)=>{const e=$(q.kind==='match'?'m'+i:'f'+i);if(e)e.classList.add(ok?'good':'wrong');const u=$('u'+i);if(u)u.classList.add(ok?'good':'wrong')})}
+}
+function settle(q,j,r,revealed){
+  if(G.done)return;G.done=true;
+  const ok=j.ok&&!revealed;let msg='';
+  if(ok){
+    let pts=10;if(!G.hint)pts+=5;G.streak++;G.correct++;S.totalCorrect++;
+    let bonus='';if(G.streak%5===0){pts+=20;bonus=' โบนัสตอบถูกติดต่อกัน 5 ข้อ +20'}
+    G.score+=pts;msg=`<div class="fb ok"><b>ยอดเยี่ยม! ภารกิจสำเร็จ</b>\n+${pts} คะแนน${G.hint?'':' (รวมโบนัสไม่ใช้คำใบ้ +5)'}${bonus}\n${esc(q.explain)}\n<span class="ref">อ้างอิง: ${esc(q.ref)}</span></div>`;
+    if(G.review)delete S.wrong[qkey(q)];
+  }else{
+    G.streak=0;noteWrong(q);
+    msg=`<div class="fb bad"><b>${revealed?'เฉลย':'ยังไม่ถูกต้อง'}</b>\nคำตอบที่ถูกต้อง:\n${esc(ansText(q))}\n\n${esc(q.explain)}\n<span class="ref">อ้างอิง: ${esc(q.ref)}</span></div>`;
+  }
+  topicStat(q.topic,ok);G.log.push({q,ok,r});save();
+  mark(q,j,r);$('fb').innerHTML=msg;
+  $('ctl').innerHTML=`<button class="btn pri" data-act="next">${G.i+1<G.qs.length?'ข้อต่อไป':'ดูผลภารกิจ'}</button><button class="btn" data-act="restart">เริ่มใหม่</button><button class="btn" data-act="home">กลับหน้าแรก</button>`;
+  const hb=document.querySelector('.hud .row');if(hb&&!G.exam)hb.innerHTML=`<span class="pill">ข้อ ${G.i+1}/${G.qs.length}</span><span class="pill">คะแนน ${G.score}</span><span class="pill">ติดต่อกัน ${G.streak}</span>`;
+}
+/* ===== exam flow, results ===== */
+function recordExam(q){
+  const r=collect(q),j=judge(q,r);
+  topicStat(q.topic,j.ok);
+  if(j.ok){G.correct++;G.score+=10;S.totalCorrect++;if(G.reexam)delete S.wrong[qkey(q)]}else noteWrong(q);
+  G.log.push({q,ok:j.ok,r});
+}
+function timeUp(){
+  if(!G||G.finished)return;
+  if(document.getElementById('fb')&&!G.done&&G.i<G.qs.length){try{recordExam(G.qs[G.i])}catch(e){G.log.push({q:G.qs[G.i],ok:false});noteWrong(G.qs[G.i])}}
+  for(let k=G.log.length;k<G.qs.length;k++){const q=G.qs[k];topicStat(q.topic,false);noteWrong(q);G.log.push({q,ok:false,r:null,skipped:true})}
+  results(true);
+}
+function results(timeout){
+  stopTimer();G.finished=true;
+  const tot=G.qs.length,ok=G.correct,pct=ok/tot*100;
+  const track=!G.review&&!G.reexam;
+  if(track){
+    const s=S.m[G.n]||(S.m[G.n]={best:0,done:false,att:0,medal:'none'});
+    s.att++;s.best=Math.max(s.best||0,pct);if(pct>=60)s.done=true;s.medal=medalOf(s.best);
+  }
+  S.best=Math.max(S.best,G.score);save();
+  const wr=G.log.filter(x=>!x.ok);
+  const bad={};wr.forEach(x=>{bad[x.q.topic]=(bad[x.q.topic]||0)+1});
+  const pass=pct>=60;
+  const nextOk=track&&G.n<5&&pass;
+  app.innerHTML=`<div class="hero"><div class="tag">${esc(G.title)}${timeout?' · หมดเวลา':''}</div>
+  <div class="big">${Math.round(pct)}%</div><h2>${rankTitle(pct)}</h2>
+  <p class="mut">${track?(pass?'ผ่านภารกิจ ได้รับ'+medalName[medalOf(pct)]+(G.n<5?' และปลดล็อกด่านถัดไป':''):'ยังไม่ผ่านเกณฑ์ 60% ลองอีกครั้ง'):'โหมดฝึกข้อที่เคยผิด'}</p></div>
+  <div class="stats"><div class="stat"><b>${G.score}</b><span>คะแนนรวม</span></div><div class="stat"><b>${ok}</b><span>ตอบถูก (ข้อ)</span></div><div class="stat"><b>${tot-ok}</b><span>ตอบผิด (ข้อ)</span></div></div>
+  ${G.exam?'<p class="mut">ข้อสอบจำลองให้ 10 คะแนนต่อข้อที่ถูก ไม่มีโบนัส</p>':''}
+  ${Object.keys(bad).length?`<h3>หัวข้อที่ควรกลับไปทบทวน</h3><p>${Object.keys(bad).map(t=>esc(t)+' ('+bad[t]+' ข้อ)').join(' · ')}</p>`:'<p>ไม่มีข้อผิดในรอบนี้ ยอดเยี่ยม</p>'}
+  ${wr.length?`<h3 style="margin-top:14px">ข้อที่ตอบผิด พร้อมเฉลย</h3><div class="list">${wr.map(x=>wrongItem(x.q,x.skipped)).join('')}</div>`:''}
+  <div class="row" style="margin:18px 0"><button class="btn pri" data-act="again">เล่นอีกครั้ง</button>${nextOk?`<button class="btn pri" data-act="start" data-n="${G.n+1}">ภารกิจถัดไป</button>`:''}<button class="btn" data-act="notebook">สมุดบันทึกข้อผิดพลาด</button><button class="btn" data-act="home">กลับหน้าแรก</button></div>`;
+}
+const wrongItem=(q,skipped)=>`<div class="item"><div class="chip">${esc(q.topic)}${skipped?' · ไม่ได้ตอบ':''}</div><p class="prompt" style="font-size:1rem">${esc(q.prompt)}</p><p><b>เฉลย:</b> <span style="white-space:pre-line">${esc(ansText(q))}</span></p><p class="mut" style="white-space:pre-line">${esc(q.explain)}</p><p class="ref">อ้างอิง: ${esc(q.ref)}</p></div>`;
+
+/* ===== notebook ===== */
+function notebook(){
+  stopTimer();G=null;
+  const ws=Object.values(S.wrong);
+  const tb=TOPICS.map(t=>{const o=S.topics[t]||{r:0,w:0},n=o.r+o.w,p=n?Math.round(o.r/n*100):0;
+    const st=!n?'ยังไม่มีข้อมูล':p>=80?'จำได้ดี':p>=60?'พอใช้':'ยังสับสน';
+    return `<div class="tb"><span>${esc(t)} <span class="mut">(${o.r}/${n})</span></span><b class="fd">${n?p+'%':'-'} · ${st}</b><div class="bar" style="grid-column:1/-1"><i style="width:${p}%"></i></div></div>`}).join('');
+  app.innerHTML=`<div class="hero"><div class="tag">Field Notebook</div><h1>สมุดบันทึกข้อผิดพลาด</h1></div>
+  <div class="row" style="margin:12px 0"><button class="btn pri" data-act="review" ${ws.length?'':'disabled'}>ฝึกเฉพาะข้อที่เคยตอบผิด</button><button class="btn" data-act="reexam" ${ws.length?'':'disabled'}>สุ่มทำข้อสอบซ้ำ (จับเวลา)</button><button class="btn" data-act="home">กลับหน้าแรก</button></div>
+  <h3>สถิติการจำแยกตามหัวข้อ</h3><div class="item">${tb}</div>
+  <h3 style="margin-top:16px">ข้อที่เคยตอบผิด (${ws.length})</h3>
+  <div class="list">${ws.length?ws.map(w=>wrongItem(w.q)+'').join(''):'<div class="item">ยังไม่มีข้อที่ตอบผิด</div>'}</div>`;
+}
+
+/* ===== hint ===== */
+function hintText(q){
+  if(q.kind==='match'){const p=q.pairs[0];return 'คู่แรก: '+p.left+' → '+p.right}
+  const hs=q.fields.map((f,i)=>{
+    if(f.type==='num')return (f.label||'ช่อง '+(i+1))+': ตัวเลขมี '+f.answers[0].length+' หลัก ขึ้นต้นด้วย '+f.answers[0][0]+(f.unit?' หน่วย'+(f.askUnit?'เป็น “'+f.unit.slice(0,2)+'…”':f.unit):'');
+    const s=String(f.show);return (f.label||'ช่อง '+(i+1))+': ขึ้นต้นด้วย “'+s.slice(0,Math.min(6,s.length))+'…”'});
+  return hs.slice(0,4).join('\n');
+}
+
+/* ===== actions ===== */
+const ACT={
+  start:d=>{const n=+d.n;if(!acked){gate(n);return}begin(n)},
+  ack:d=>{acked=true;const g=$('gate');if(g)g.remove();begin(+d.n)},
+  pick:d=>{if(G.done)return;G.sel=+d.i;document.querySelectorAll('.opt').forEach((b,i)=>b.classList.toggle('sel',i===+d.i))},
+  check:()=>{const q=G.qs[G.i];const r=collect(q);if(q.kind==='choice'&&r==null){$('fb').innerHTML='<div class="fb">เลือกคำตอบก่อนกดตรวจ</div>';return}settle(q,judge(q,r),r,false)},
+  hint:()=>{const q=G.qs[G.i];if(G.done)return;G.hint=true;
+    if(q.kind==='choice'){const wrong=q.options.map((o,i)=>i).filter(i=>i!==q.correct);pick(wrong,2).forEach(i=>{const b=document.querySelectorAll('.opt')[i];b.classList.add('off');b.disabled=true});$('hint').hidden=false;$('hint').textContent='ตัดตัวเลือกที่ผิดออก 2 ข้อแล้ว (ไม่ได้รับโบนัสไม่ใช้คำใบ้)'}
+    else{$('hint').hidden=false;$('hint').style.whiteSpace='pre-line';$('hint').textContent='คำใบ้ (ไม่ได้รับโบนัสไม่ใช้คำใบ้)\n'+hintText(q)}},
+  reveal:()=>{const q=G.qs[G.i];if(G.done)return;const r=collect(q);settle(q,judge(q,r),r,true)},
+  next:()=>{if(G.i+1<G.qs.length){G.i++;play()}else results(false)},
+  examNext:()=>{const q=G.qs[G.i];recordExam(q);save();if(G.i+1<G.qs.length){G.i++;play()}else{G.done=true;results(false)}},
+  restart:(d,b)=>{if(!b.dataset.sure){b.dataset.sure='1';b.textContent='กดอีกครั้งเพื่อยืนยันเริ่มใหม่';return}begin(G.n,G.opts)},
+  again:()=>{begin(G.n,G.opts)},
+  home:(d,b)=>{if(G&&!G.finished&&G.log.length&&!b.dataset.sure){b.dataset.sure='1';b.textContent='กดอีกครั้งเพื่อออก (ความคืบหน้ารอบนี้จะหาย)';return}home()},
+  notebook:()=>notebook(),
+  review:()=>begin(0,{review:true}),
+  reexam:()=>begin(0,{reexam:true}),
+  reset:(d,b)=>{if(!b.dataset.sure){b.dataset.sure='1';b.textContent='กดอีกครั้งเพื่อล้างทั้งหมด';return}S=fresh();save();home()}
+};
+app.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b&&!b.disabled)ACT[b.dataset.act](b.dataset,b)});
+document.addEventListener('click',e=>{const b=e.target.closest('#gate [data-act]');if(b)ACT[b.dataset.act](b.dataset,b)});
+home();
+</script>
+
+</body></html>
